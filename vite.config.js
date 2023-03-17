@@ -1,5 +1,8 @@
 export default {
   server: {
-    port: 4444
+    port: 8888,
+    host: 'local.dev',
+    https: true
+
   }
 }

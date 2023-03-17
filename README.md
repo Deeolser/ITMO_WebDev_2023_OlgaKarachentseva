@@ -1,1 +1,3 @@
-#ITMO WebDew 2023 Olga Karachetseva
+# ITMO WebDew 2023 Olga Karachetseva
+- 
+- IDE Webstorm and Visio Studio Code
