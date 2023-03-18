@@ -1,5 +1,5 @@
-import {defineConfig} from'vite'
-import mkcert from'vite-plugin-mkcert'
+import { defineConfig } from 'vite';
+import mkcert from 'vite-plugin-mkcert';
 
 export default {
   server: {
@@ -8,4 +8,7 @@ export default {
     https: true,
   },
   plugins: [mkcert()],
+  build: {
+    minify: true,
+  },
 };
