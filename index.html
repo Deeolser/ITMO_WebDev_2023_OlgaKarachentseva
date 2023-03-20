@@ -1,75 +1,139 @@
 <!DOCTYPE html>
-<html lang='en'>
-<head>
-  <meta charset='UTF-8'>
-  <link rel='icon' type='image/svg+xml' href='/vite.svg' />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Welcome App</title>
-  <style>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+    <title>Frontend Mentor | Product preview card component</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet рџ‘Ќ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Montserrat:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
       @import 'public/reset.css';
       html {
-          font-size: 12px;
-          background-color: #cccccc;
+        display: flex;
+        background-color: hsl(30, 38%, 92%);
+        justify-content: center;
       }
-      .card {
-          width: 144px;
-          margin: 0 auto;
-          text-align: center;
-          border: 1px solid #222;
+      header {
+        height: 150px;
       }
-      .card >h1 {
-          font-size: 2rem;
-          line-height: 1.25;
-          font-weight: bold;
+      section {
+        display: flex;
+        width: 1440px;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 25px;
       }
-      card img {
-          margin-bottom: 0.5rem;
+      article {
+        width: 720px;
       }
-      .card > .price{
-          color: #666;
-          font-size: 0.75rem;
-          font-weight: bold;
+      img {
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
       }
-      .card.text {
-
+      .category {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        color: hsl(228, 12%, 48%);
+        margin: 4rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
       }
-      p:not(:last-child) {
-        margin-bottom: 1rem;
+      .title {
+        font-family: 'Fraunces', serif;
+        font-size: 90px;
+        color: hsl(212, 21%, 14%);
+        margin: 4rem;
+        overflow: hidden;
+      }
+      .description {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 35px;
+        color: hsl(228, 12%, 48%);
+        margin: 4rem;
+        overflow: hidden;
+        line-height: 50px;
+      }
+      .price {
+        display: flex;
+        margin: 4rem;
+      }
+      .new-price {
+        font-family: 'Fraunces', serif;
+        font-size: 80px;
+        color: hsl(158, 36%, 37%);
+      }
+      .old-price {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 35px;
+        margin: 2rem;
+        color: hsl(228, 12%, 48%);
+        text-decoration: line-through;
       }
       button {
-          border: none;
-          width: 100%;
-          background-color: black;
-          color: white;
-          padding: 0.5rem 0;
+        width: 600px;
+        height: 100px;
+        display: inline-block;
+        vertical-align: middle;
+        justify-content: center;
+        margin-left: 4rem;
+        border: 0;
+        border-radius: 25px;
+        background: hsl(158, 36%, 37%);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 35px;
+        color: white;
+        text-align: center;
       }
-      button:hover {
-
+      button img {
+        width: 35px;
+        height: 35px;
+        margin-right: 1rem;
       }
-  </style>
-</head>
-<body>
-<header>Header</header>
-  <div class="card">
-    <img src="public/img.png" alt="Denim Jeans" style="width:100%">
-    <h1>Tailored Jeans</h1>
-    <p class="price">$19.99</p>
-    <p>Some text about the jeans..</p>
-    <p><button>Add to Cart</button></p>
-  </div>
-<div class="card">
-  <img src="public/img.png" alt="Denim Jeans" style="width:100%">
-  <h1>Tailored Jeans</h1>
-  <p class="price">$19.99</p>
-  <p>Some text about the jeans..</p>
-  <p><button>Add to Cart</button></p>
-</div>
-<div style='width: 100px; height: 200px; background-color: red; position: absolute' >
-
-</div>
-</main>
-</body>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <header></header>
+    <section class="card-desktop">
+      <article class="img-desktop">
+        <img id="desktop-img" src="images/image-product-desktop.jpg" style="width: 720px" />
+      </article>
+      <article class="content-desktop">
+        <p class="category">Perfume</p>
+        <p class="title">Gabrielle Essence Eau De Parfum</p>
+        <p class="description">
+          A floral, solar and voluptuous interpretation composed by Olivier Polge, Perfumer-Creator
+          for the House of CHANEL.
+        </p>
+        <div class="price">
+          <p class="new-price">$149.99</p>
+          <p class="old-price">$169.99</p>
+        </div>
+        <button class="cart-button">
+          <img class="icon" src="images/icon-cart.svg" />
+          Add to Cart
+        </button>
+      </article>
+    </section>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </body>
 </html>
-
-
-
