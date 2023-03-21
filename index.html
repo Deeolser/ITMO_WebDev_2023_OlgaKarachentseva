@@ -3,167 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
-
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-
-    <title>Frontend Mentor | Product preview card component</title>
-
-    <!-- Feel free to remove these styles or customise in your own stylesheet рџ‘Ќ -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Montserrat:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
+    <title></title>
     <style>
-      @import 'public/reset.css';
-      * {
-        box-sizing: border-box;
-      }
       body {
-        display: flex;
-        background-color: hsl(30, 38%, 92%);
-        align-items: center;
-        height: 100%;
-        width: 100%;
-        margin: 0 auto;
-        /*justify-content: center;*/
+        display: grid;
+        height: 100vh;
+        grid-template-areas:
+          'header header header'
+          'nav section aside'
+          'footer footer footer';
+        grid-gap: 8px;
+        grid-template-columns: 30% 1fr 2fr;
+        grid-auto-rows: 50% 2fr 1fr;
       }
 
-      .card {
-        display: flex;
-        flex-direction: row;
-        max-width: 1440px;
-        background-color: hsl(0, 0%, 100%);
-        border-radius: 25px;
-        margin: 0 auto;
-        align-items: center;
-        overflow: hidden;
+      header {
+        grid-area: header;
       }
-
+      nav {
+        grid-area: nav;
+      }
       section {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        margin: 0 auto;
-        /*justify-content: center;*/
+        grid-area: section;
       }
-
-      .img-desktop {
-        max-width: 720px;
+      aside {
+        grid-area: aside;
       }
-      .content-desktop {
-        max-width: 720px;
+      footer {
+        grid-area: footer;
       }
-      .category {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 20px;
-        color: hsl(228, 12%, 48%);
-        margin-left: 4rem;
-        margin-bottom: 2rem;
-        letter-spacing: 5px;
-        text-transform: uppercase;
+      @media (max-width: 720px) {
+        body {
+          height: 100vh;
+          grid-template-areas:
+            'header header'
+            'nav section'
+            'aside aside'
+            'footer footer';
+          grid-gap: 8px;
+          grid-template-columns: 30% 1fr 2fr;
+          grid-auto-rows: 50% 2fr 1fr;
+        }
       }
-
-      .title {
-        font-family: 'Fraunces', serif;
-        font-size: 90px;
-        color: hsl(212, 21%, 14%);
-        margin-left: 4rem;
-        margin-bottom: 2rem;
-        overflow: hidden;
-      }
-
-      .description {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 35px;
-        color: hsl(228, 12%, 48%);
-        margin-left: 4rem;
-        margin-bottom: 2rem;
-        margin-right: 4rem;
-        overflow: hidden;
-        line-height: 50px;
-      }
-
-      .price {
-        display: flex;
-        margin-left: 4rem;
-        margin-bottom: 2rem;
-      }
-
-      .new-price {
-        font-family: 'Fraunces', serif;
-        font-size: 80px;
-        color: hsl(158, 36%, 37%);
-      }
-
-      .old-price {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 35px;
-        margin: 25px;
-        color: hsl(228, 12%, 48%);
-        text-decoration: line-through;
-      }
-
-      button {
-        width: 600px;
-        height: 100px;
-        display: inline-block;
-        vertical-align: middle;
-        justify-content: center;
-        margin-left: 4rem;
-        border: 0;
-        border-radius: 25px;
-        background: hsl(158, 36%, 37%);
-        font-family: 'Montserrat', sans-serif;
-        font-size: 35px;
-        color: white;
-        text-align: center;
-      }
-
-      button > img {
-        width: 35px;
-        height: 35px;
-        margin-right: 1rem;
-      }
-      @media (max-width: 750px) {
-        .card {
-          display: block;
+      @media (max-width: 480px) {
+        body {
+          height: 100vh;
+          grid-template-areas:
+            'header'
+            'nav'
+            'section'
+            'aside '
+            'footer';
+          grid-gap: 8px;
+          grid-template-columns: 30% 5fr 2fr;
+          grid-auto-rows: 10% 2fr 1fr;
         }
       }
     </style>
   </head>
   <body>
-    <section>
-      <div class="card">
-        <div class="pic-desktop">
-          <picture>
-            <img class="img-desktop" src="images/image-product-desktop.jpg" />
-          </picture>
-        </div>
-
-        <div class="content-desktop">
-          <div class="category">Perfume</div>
-          <div class="title">Gabrielle Essence Eau De Parfum</div>
-          <div class="description">
-            A floral, solar and voluptuous interpretation composed by Olivier Polge,
-            Perfumer-Creator for the House of CHANEL.
-          </div>
-          <div class="price">
-            <span class="new-price">$149.99</span>
-            <span class="old-price">$169.99</span>
-          </div>
-          <button class="cart-button">
-            <img class="icon" src="images/icon-cart.svg" />
-            <span>Add to Cart</span>
-          </button>
-        </div>
-      </div>
-    </section>
+    <header style="background-color: #f001">header</header>
+    <nav style="background-color: #ff01">nav</nav>
+    <section style="background-color: #f0f1">section</section>
+    <aside style="background-color: #0ff1">aside</aside>
+    <footer style="background-color: #f001">footer</footer>
   </body>
 </html>
