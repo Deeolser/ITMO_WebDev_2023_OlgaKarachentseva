@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,38 +18,54 @@
     />
     <style>
       @import 'public/reset.css';
-
-      html {
+      * {
+        box-sizing: border-box;
+      }
+      body {
         display: flex;
         background-color: hsl(30, 38%, 92%);
-        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+        /*justify-content: center;*/
       }
 
-      header {
-        height: 150px;
+      .card {
+        display: flex;
+        max-width: 1440px;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 25px;
+        margin: 0 auto;
+        align-items: center;
       }
 
       section {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
         display: flex;
-        width: 1440px;
-        background-color: hsl(0, 0%, 100%);
-        border-radius: 25px;
+        align-items: center;
+        margin: 0 auto;
+        /*justify-content: center;*/
       }
 
-      article {
-        width: 720px;
-      }
-
-      img {
+      .img-desktop {
+        max-width: 720px;
         border-top-left-radius: 25px;
         border-bottom-left-radius: 25px;
       }
-
+      .content-desktop {
+        max-width: 720px;
+      }
       .category {
         font-family: 'Montserrat', sans-serif;
         font-size: 20px;
         color: hsl(228, 12%, 48%);
-        margin: 4rem;
+        margin-left: 4rem;
+        margin-bottom: 2rem;
         letter-spacing: 5px;
         text-transform: uppercase;
       }
@@ -58,7 +74,8 @@
         font-family: 'Fraunces', serif;
         font-size: 90px;
         color: hsl(212, 21%, 14%);
-        margin: 4rem;
+        margin-left: 4rem;
+        margin-bottom: 2rem;
         overflow: hidden;
       }
 
@@ -66,14 +83,17 @@
         font-family: 'Montserrat', sans-serif;
         font-size: 35px;
         color: hsl(228, 12%, 48%);
-        margin: 4rem;
+        margin-left: 4rem;
+        margin-bottom: 2rem;
+        margin-right: 4rem;
         overflow: hidden;
         line-height: 50px;
       }
 
       .price {
         display: flex;
-        margin: 4rem;
+        margin-left: 4rem;
+        margin-bottom: 2rem;
       }
 
       .new-price {
@@ -85,7 +105,7 @@
       .old-price {
         font-family: 'Montserrat', sans-serif;
         font-size: 35px;
-        margin: 2rem;
+        margin: 25px;
         color: hsl(228, 12%, 48%);
         text-decoration: line-through;
       }
@@ -106,49 +126,41 @@
         text-align: center;
       }
 
-      button img {
+      button > img {
         width: 35px;
         height: 35px;
         margin-right: 1rem;
       }
-
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-
-      .attribution a {
-        color: hsl(228, 45%, 44%);
+      @media (max-width: 750px) {
+        .card {
+          display: block;
+        }
       }
     </style>
   </head>
   <body>
-    <header></header>
-    <section class="card-desktop">
-      <article class="img-desktop">
-        <img id="desktop-img" src="images/image-product-desktop.jpg" style="width: 720px" />
-      </article>
-      <article class="content-desktop">
-        <p class="category">Perfume</p>
-        <p class="title">Gabrielle Essence Eau De Parfum</p>
-        <p class="description">
-          A floral, solar and voluptuous interpretation composed by Olivier Polge, Perfumer-Creator
-          for the House of CHANEL.
-        </p>
-        <div class="price">
-          <p class="new-price">$149.99</p>
-          <p class="old-price">$169.99</p>
+    <section>
+      <div class="card">
+        <div class="pic-desktop">
+          <img class="img-desktop" src="images/image-product-desktop.jpg" />
         </div>
-        <button class="cart-button">
-          <img class="icon" src="images/icon-cart.svg" />
-          Add to Cart
-        </button>
-      </article>
+        <div class="content-desktop">
+          <div class="category">Perfume</div>
+          <div class="title">Gabrielle Essence Eau De Parfum</div>
+          <div class="description">
+            A floral, solar and voluptuous interpretation composed by Olivier Polge,
+            Perfumer-Creator for the House of CHANEL.
+          </div>
+          <div class="price">
+            <span class="new-price">$149.99</span>
+            <span class="old-price">$169.99</span>
+          </div>
+          <button class="cart-button">
+            <img class="icon" src="images/icon-cart.svg" />
+            <span>Add to Cart</span>
+          </button>
+        </div>
+      </div>
     </section>
-    <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-      Coded by <a href="#">Olga Karachentseva</a>.
-    </div>
   </body>
 </html>
