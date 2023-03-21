@@ -33,11 +33,13 @@
 
       .card {
         display: flex;
+        flex-direction: row;
         max-width: 1440px;
         background-color: hsl(0, 0%, 100%);
         border-radius: 25px;
         margin: 0 auto;
         align-items: center;
+        overflow: hidden;
       }
 
       section {
@@ -54,8 +56,6 @@
 
       .img-desktop {
         max-width: 720px;
-        border-top-left-radius: 25px;
-        border-bottom-left-radius: 25px;
       }
       .content-desktop {
         max-width: 720px;
@@ -142,8 +142,11 @@
     <section>
       <div class="card">
         <div class="pic-desktop">
-          <img class="img-desktop" src="images/image-product-desktop.jpg" />
+          <picture>
+            <img class="img-desktop" src="images/image-product-desktop.jpg" />
+          </picture>
         </div>
+
         <div class="content-desktop">
           <div class="category">Perfume</div>
           <div class="title">Gabrielle Essence Eau De Parfum</div>
