@@ -1,123 +1,213 @@
 <!DOCTYPE html>
-<html lang='en'>
-<head>
-  <meta charset='UTF-8'>
-  <link rel='icon' type='image/svg+xml' href='/vite.svg' />
-  <meta name='viewport' content='wight=device-wight, initial-scale=1.0' />
-  <title>Welcome App</title>
-</head>
-<body>
-<header>Header</header>
-<main>
-  <section>
-    <article>
-      <h1>This is Header1</h1>
-      <h2>This is Header2</h2>
-      <h3>This is Header3</h3>
-      <h4>This is Header4</h4>
-      <h5>This is Header5</h5>
-      <h6>This is Header6</h6>
-    </article>
-    <article>
-      <p><b>Giraffes</b> are very beautiful and unusual animals.
-        They are the <i>tallest</i> land animals in the world. Giraffes can reach a height of 5,5 m and a weight of 900
-        kg. </br> They are famous for their long necks. But does anybody know, that giraffes have a very long tongue?
-        They even can <u>clean the ears with it!</u></br> Giraffes are usually yellow or light brown with dark stains.
-        Giraffes live in African savannas. They can live from 20 to 30 years.</br>It is interesting to know, that
-        giraffes
-        sleep only twenty minutes at a time. They sit down on the ground and bend their long neck down.</p>
-    </article>
-    <article>
-      <h3>List num:</h3>
-      <ol>
-        <li>I'm always right</li>
-        <li>If I'm wrong, look at point 1</li>
-      </ol>
-      <h3>List bull:</h3>
-      <ul>
-        <li>Bread</li>
-        <li>Oil</li>
-        <li>Milk</li>
-      </ul>
-    </article>
-    <article>
-      <div>
-        <label>Text</label>
-        <input type='text' size='50'>
-      </div>
-      <div>
-        <label>E-mail</label>
-        <input type='email'>
-      </div>
-      <div>
-        <label>Password</label>
-        <input type='password'>
-      </div>
-      <div>
-        <label>Date</label>
-        <input type='date'>
-      </div>
-      <div>
-        <label>Checkbox</label>
-        <input type='checkbox'>
-      </div>
-      <div>
-        <label>Radio</label>
-        <input type='radio'>
-      </div>
-    </article>
-    <article>
-      <form onsubmit='alert("Вы нажали на кнопку")'>
-        <div>
-          <button>Send</button>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+    <title>Frontend Mentor | Product preview card component</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet рџ‘Ќ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Montserrat:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import 'public/reset.css';
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        background-color: hsl(30, 38%, 92%);
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        margin: 0 auto;
+      }
+      section {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+      }
+      .card {
+        display: flex;
+        flex-direction: row;
+        max-width: 1440px;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 25px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+
+      picture {
+        max-width: 720px;
+      }
+
+      .card-content {
+        padding-left: 4rem;
+        padding-right: 4rem;
+        margin: 0 auto;
+      }
+
+      .category {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        color: hsl(228, 12%, 48%);
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+      }
+
+      .title {
+        font-family: 'Fraunces', serif;
+        font-size: 90px;
+        color: hsl(212, 21%, 14%);
+        margin-bottom: 2rem;
+      }
+
+      .description {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 36px;
+        color: hsl(228, 12%, 48%);
+        margin-bottom: 4rem;
+        line-height: 50px;
+      }
+
+      .price {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 4rem;
+        align-items: center;
+      }
+
+      .new-price {
+        font-family: 'Fraunces', serif;
+        font-size: 80px;
+        color: hsl(158, 36%, 37%);
+      }
+
+      .old-price {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 36px;
+        color: hsl(228, 12%, 48%);
+        text-decoration: line-through;
+        padding-left: 4rem;
+      }
+
+      .cart-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 100px;
+        border: 0;
+        border-radius: 25px;
+        background: hsl(158, 36%, 37%);
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 35px;
+        color: white;
+        margin-bottom: 4rem;
+      }
+
+      button > img {
+        width: 35px;
+        height: 35px;
+        margin-right: 1rem;
+      }
+      @media (max-width: 750px) {
+        .card {
+          display: flex;
+          flex-direction: column;
+          max-width: 375px;
+          border-radius: 10px;
+        }
+        .card-content {
+          max-width: 375px;
+          padding-left: 2rem;
+          padding-right: 2rem;
+          margin: 0 auto;
+        }
+        .category {
+          margin-top: 2rem;
+          font-size: 12px;
+          margin-bottom: 1rem;
+        }
+        .title {
+          font-size: 30px;
+          margin-bottom: 1rem;
+        }
+        .description {
+          font-size: 16px;
+          margin-bottom: 1rem;
+          line-height: 25px;
+        }
+        .price {
+          margin-bottom: 2rem;
+        }
+        .new-price {
+          font-size: 35px;
+        }
+        .old-price {
+          font-size: 16px;
+          padding-left: 2rem;
+        }
+        .cart-button {
+          font-size: 16px;
+          height: 50px;
+          border-radius: 10px;
+          margin-bottom: 2rem;
+        }
+        button > img {
+          width: 16px;
+          height: 16px;
+          margin-right: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="card">
+        <div class="card-pic"></div>
+        <picture>
+          <source
+            srcset="images/image-product-mobile.jpg"
+            width="375px"
+            media="(max-width: 750px)"
+          />
+          <source srcset="images/image-product-desktop.jpg" width="720px" />
+          <img src="images/image-product-desktop.jpg" />
+        </picture>
+
+        <div class="card-content">
+          <div class="category">Perfume</div>
+          <div class="title">Gabrielle Essence Eau De Parfum</div>
+          <div class="description">
+            A floral, solar and voluptuous interpretation composed by Olivier Polge,
+            Perfumer-Creator for the House of CHANEL.
+          </div>
+          <div class="price">
+            <div class="new-price">$149.99</div>
+            <div class="old-price">$169.99</div>
+          </div>
+          <button class="cart-button">
+            <img class="icon" src="images/icon-cart.svg" />
+            <div>Add to Cart</div>
+          </button>
         </div>
-      </form>
-      <table border='1'>
-        <tr>
-          <td colspan="2">1112</td>
-          <td>13</td>
-        </tr>
-        <tr>
-          <td>21</td>
-          <td>22</td>
-          <td>33</td>
-        </tr>
-        <tr>
-          <td>31</td>
-          <td>32</td>
-          <td>33</td>
-        </tr>
-        <tr>
-          <td>41</td>
-          <td>42</td>
-          <td>43</td>
-        </tr>
-      </table>
-    </article>
-  </section>
-  <section>
-    <div>
-      <label>Choose your destiny</label>
-    <select>
-      <option>Goro</option>
-      <option>Johnny Cage</option>
-      <option>Kano</option>
-      <option>Liu Kang</option>
-      <option>Raiden</option>
-    </select>
-    </div>
-  </section>
-  <section>
-    <img
-      width='100px'
-      src='https://amiel.club/uploads/posts/2022-03/1647628341_1-amiel-club-p-klassnie-kartinki-dlya-devochek-1.jpg' />
-  <img
-  width='100px'
-  src='https://www.svgrepo.com/show/412726/direct.svg'>
-  </section>
-</main>
-</body>
+      </div>
+    </section>
+  </body>
 </html>
-
-
-
