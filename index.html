@@ -9,35 +9,42 @@
       @import './index.css';
     </style>
   </head>
-  <body
-    class="flex h-screen grid place-content-center bg-gray-300 flex-row justify-center items-center br-red-100/90"
-  >
-    <div class="w-56 p-4 bg-white rounded-3xl">
-      <div class="flex flex-col">
-        <div class="flex flex-row justify-between align-middle">
-          <div
-            class="icon-youtube"
-            style="
-              content: url('https://api.iconify.design/simple-icons/youtube.svg?width=50&color=red');
-            "
-          ></div>
-          <div class="bg-emerald-900 rounded-xl w-10 h-12 text-center text-amber-50">
-            <span class="inline-block align-middle">Free</span>
-          </div>
+  <body class="bg-gray-100 h-screen grid place-content-center rotate-12">
+    <div class="flex flex-col w-72 bg-white rounded-2xl p-5 rotate-12">
+      <div class="flex flex-row justify-between items-center">
+        <img class="w-9" src="public/youtube.svg" alt="Icon Youtube" />
+        <div class="text-white text-sm bg-green-600 rounded-2xl px-3 py-0.5">
+          Free
         </div>
       </div>
-      <div class="flex flex-row">
-        <div class="flex flex-col">
-          <div>Video</div>
-          <div>YouTube</div>
+      <div class="flex flex-row pt-8">
+        <div class="flex flex-col gap-y-1">
+          <div class="font-normal">Videos</div>
+          <div class="font-bold text-3xl">Youtube</div>
         </div>
       </div>
-      <div class="flex flex-row justify-between">
-        <div>Raring 4.5</div>
-        <div>Size 246</div>
-        <div>Download 5m</div>
+      <div class="flex flex-row justify-between pt-6">
+        <div class="flex flex-col gap-y-1">
+          <div class="font-light text-sm">Rating</div>
+          <div class="font-bold text-sm text-lg">5.0</div>
+        </div>
+        <div class="flex flex-col gap-y-1">
+          <div class="font-light text-sm">Size</div>
+          <div class="font-bold text-sm text-lg">85.5mb</div>
+        </div>
+        <div class="flex flex-col gap-y-1">
+          <div class="font-light text-sm">Download</div>
+          <div class="font-bold text-sm text-lg">8.5m</div>
+        </div>
       </div>
-      <div class="flex flex-row">icon 30 Mb / Sec</div>
+      <div class="flex flex-row justify-start pt-6 items-center gap-x-4">
+        <img
+          class="w-9"
+          src="public/download-for-offline-rounded.svg"
+          alt="Icon Youtube"
+        />
+        <div class="font-normal text-sm">30 Mb/Sec</div>
+      </div>
     </div>
   </body>
 </html>
