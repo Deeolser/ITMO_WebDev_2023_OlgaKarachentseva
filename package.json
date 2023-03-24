@@ -10,7 +10,6 @@
   },
   "devDependencies": {
     "prettier": "^2.8.4",
-    "vite": "^4.2.0",
-    "vite-plugin-mkcert": "^1.13.3"
+    "vite": "^4.2.0"
   }
 }

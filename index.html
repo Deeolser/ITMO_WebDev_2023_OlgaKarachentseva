@@ -28,20 +28,7 @@
         height: 100%;
         width: 100%;
         margin: 0 auto;
-        /*justify-content: center;*/
       }
-
-      .card {
-        display: flex;
-        flex-direction: row;
-        max-width: 1440px;
-        background-color: hsl(0, 0%, 100%);
-        border-radius: 25px;
-        margin: 0 auto;
-        align-items: center;
-        overflow: hidden;
-      }
-
       section {
         position: absolute;
         left: 0;
@@ -51,20 +38,32 @@
         display: flex;
         align-items: center;
         margin: 0 auto;
-        /*justify-content: center;*/
+      }
+      .card {
+        display: flex;
+        flex-direction: row;
+        max-width: 1440px;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 25px;
+        margin: 0 auto;
+        overflow: hidden;
       }
 
-      .img-desktop {
+      picture {
         max-width: 720px;
       }
-      .content-desktop {
-        max-width: 720px;
+
+      .card-content {
+        padding-left: 4rem;
+        padding-right: 4rem;
+        margin: 0 auto;
       }
+
       .category {
         font-family: 'Montserrat', sans-serif;
         font-size: 20px;
         color: hsl(228, 12%, 48%);
-        margin-left: 4rem;
+        margin-top: 4rem;
         margin-bottom: 2rem;
         letter-spacing: 5px;
         text-transform: uppercase;
@@ -74,26 +73,22 @@
         font-family: 'Fraunces', serif;
         font-size: 90px;
         color: hsl(212, 21%, 14%);
-        margin-left: 4rem;
         margin-bottom: 2rem;
-        overflow: hidden;
       }
 
       .description {
         font-family: 'Montserrat', sans-serif;
-        font-size: 35px;
+        font-size: 36px;
         color: hsl(228, 12%, 48%);
-        margin-left: 4rem;
-        margin-bottom: 2rem;
-        margin-right: 4rem;
-        overflow: hidden;
+        margin-bottom: 4rem;
         line-height: 50px;
       }
 
       .price {
         display: flex;
-        margin-left: 4rem;
-        margin-bottom: 2rem;
+        flex-direction: row;
+        margin-bottom: 4rem;
+        align-items: center;
       }
 
       .new-price {
@@ -104,26 +99,26 @@
 
       .old-price {
         font-family: 'Montserrat', sans-serif;
-        font-size: 35px;
-        margin: 25px;
+        font-size: 36px;
         color: hsl(228, 12%, 48%);
         text-decoration: line-through;
+        padding-left: 4rem;
       }
 
-      button {
-        width: 600px;
-        height: 100px;
-        display: inline-block;
-        vertical-align: middle;
+      .cart-button {
+        display: flex;
+        flex-direction: row;
         justify-content: center;
-        margin-left: 4rem;
+        width: 100%;
+        height: 100px;
         border: 0;
         border-radius: 25px;
         background: hsl(158, 36%, 37%);
+        align-items: center;
         font-family: 'Montserrat', sans-serif;
         font-size: 35px;
         color: white;
-        text-align: center;
+        margin-bottom: 4rem;
       }
 
       button > img {
@@ -133,7 +128,51 @@
       }
       @media (max-width: 750px) {
         .card {
-          display: block;
+          display: flex;
+          flex-direction: column;
+          max-width: 375px;
+          border-radius: 10px;
+        }
+        .card-content {
+          max-width: 375px;
+          padding-left: 2rem;
+          padding-right: 2rem;
+          margin: 0 auto;
+        }
+        .category {
+          margin-top: 2rem;
+          font-size: 12px;
+          margin-bottom: 1rem;
+        }
+        .title {
+          font-size: 30px;
+          margin-bottom: 1rem;
+        }
+        .description {
+          font-size: 16px;
+          margin-bottom: 1rem;
+          line-height: 25px;
+        }
+        .price {
+          margin-bottom: 2rem;
+        }
+        .new-price {
+          font-size: 35px;
+        }
+        .old-price {
+          font-size: 16px;
+          padding-left: 2rem;
+        }
+        .cart-button {
+          font-size: 16px;
+          height: 50px;
+          border-radius: 10px;
+          margin-bottom: 2rem;
+        }
+        button > img {
+          width: 16px;
+          height: 16px;
+          margin-right: 1rem;
         }
       }
     </style>
@@ -141,13 +180,18 @@
   <body>
     <section>
       <div class="card">
-        <div class="pic-desktop">
-          <picture>
-            <img class="img-desktop" src="images/image-product-desktop.jpg" />
-          </picture>
-        </div>
+        <div class="card-pic"></div>
+        <picture>
+          <source
+            srcset="images/image-product-mobile.jpg"
+            width="375px"
+            media="(max-width: 750px)"
+          />
+          <source srcset="images/image-product-desktop.jpg" width="720px" />
+          <img src="images/image-product-desktop.jpg" />
+        </picture>
 
-        <div class="content-desktop">
+        <div class="card-content">
           <div class="category">Perfume</div>
           <div class="title">Gabrielle Essence Eau De Parfum</div>
           <div class="description">
@@ -155,12 +199,12 @@
             Perfumer-Creator for the House of CHANEL.
           </div>
           <div class="price">
-            <span class="new-price">$149.99</span>
-            <span class="old-price">$169.99</span>
+            <div class="new-price">$149.99</div>
+            <div class="old-price">$169.99</div>
           </div>
           <button class="cart-button">
             <img class="icon" src="images/icon-cart.svg" />
-            <span>Add to Cart</span>
+            <div>Add to Cart</div>
           </button>
         </div>
       </div>
