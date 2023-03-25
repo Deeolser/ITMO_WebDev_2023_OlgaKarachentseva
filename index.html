@@ -1,50 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru_RU">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Youtube Card</title>
+    <link rel="icon" type="image/png" sizes="32x32"  />
+    <title>Frontend Mentor | Intro section with dropdown navigation</title>
     <style>
-      @import './index.css';
+      @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap');
+
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+
+      body * {
+        font-family: 'Epilogue', sans-serif;
+      }
+
+      @layer components {
+        .btn-register {
+          @apply border-2 border-gray-500 rounded-lg px-3 py-1.5 hover:text-black;
+        }
+          .btn-learnmore{
+              @apply bg-black text-white px-3 py-3 rounded-lg;
+          }
+      }
     </style>
   </head>
-  <body class="bg-gray-100 h-screen grid place-content-center rotate-12">
-    <div class="flex flex-col w-72 bg-white rounded-2xl p-5 rotate-12">
-      <div class="flex flex-row justify-between items-center">
-        <img class="w-9" src="public/youtube.svg" alt="Icon Youtube" />
-        <div class="text-white text-sm bg-green-600 rounded-2xl px-3 py-0.5">
-          Free
+  <body class="flex flex-col h-screen bg-white">
+    <header
+      class="flex flex-row justify-between items-center px-6 py-4 font-bold text-neutral-500
+    "
+    >
+      <div class="flex flex-row gap-x-8">
+        <img src="public/logo.svg" />
+        <nav class="flex flex-row items-center gap-x-6">
+          <div class="flex flex-row gap-x-2 items-center hover:text-black">
+            <div>Features</div>
+            <img src="./public/icon-arrow-down.svg" />
+          </div>
+          <div class="hover:text-black">Company</div>
+          <div class="hover:text-black">Careers</div>
+          <div class="hover:text-black">About</div>
+        </nav>
+      </div>
+      <div class="flex flex-row gap-x-4 items-center">
+        <div class="hover:text-black">Login</div>
+        <div class="btn-register">Register</div>
+      </div>
+    </header>
+    <main class=" container m-0 md:mx-auto flex h-full flex-row">
+      <div class="flex flex-col w-1/2 justify-between">
+        <div class='flex flex-row h-full'>
+          <div class='flex flex-col justify-center gap-y-6 items-start' >
+            <div class='text-6xl font-bold'>Make remote work</div>
+            <div class='text-2xl text-neutral-500'>
+              Get your team in sync, no matter your location. Streamline processes, create team
+              rituals, and watch productivity soar.
+            </div>
+            <div class='btn-learnmore'>Learn more</div>
+          </div>
+        </div>
+        <div class='flex flex-row w-full flex-wrap justify-start gap-y-4 gap-x-4'>
+          <IMG class='h-6' src='public/client-databiz.svg' />
+          <IMG class='h-6' src='public/client-audiophile.svg' />
+          <IMG class='h-6' src='public/client-maker.svg' />
+          <IMG class='h-6' src='public/client-meet.svg' />
         </div>
       </div>
-      <div class="flex flex-row pt-8">
-        <div class="flex flex-col gap-y-1">
-          <div class="font-normal">Videos</div>
-          <div class="font-bold text-3xl">Youtube</div>
-        </div>
       </div>
-      <div class="flex flex-row justify-between pt-6">
-        <div class="flex flex-col gap-y-1">
-          <div class="font-light text-sm">Rating</div>
-          <div class="font-bold text-sm text-lg">5.0</div>
-        </div>
-        <div class="flex flex-col gap-y-1">
-          <div class="font-light text-sm">Size</div>
-          <div class="font-bold text-sm text-lg">85.5mb</div>
-        </div>
-        <div class="flex flex-col gap-y-1">
-          <div class="font-light text-sm">Download</div>
-          <div class="font-bold text-sm text-lg">8.5m</div>
-        </div>
+      <div class="flex flex-col w-1/2 h-full justify-center overflow-hidden items-stretch">
+          <img class='w-full h-full object-contain' src='./public/image-hero-desktop.png' />
       </div>
-      <div class="flex flex-row justify-start pt-6 items-center gap-x-4">
-        <img
-          class="w-9"
-          src="public/download-for-offline-rounded.svg"
-          alt="Icon Youtube"
-        />
-        <div class="font-normal text-sm">30 Mb/Sec</div>
-      </div>
-    </div>
+    </main>
   </body>
 </html>
