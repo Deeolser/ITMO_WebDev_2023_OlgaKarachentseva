@@ -33,7 +33,7 @@
     >
       <div class="flex flex-row gap-x-8">
         <img src="public/logo.svg" />
-        <nav class="flex flex-row items-center gap-x-6">
+        <nav class="hidden sm:flex flex-row items-center gap-x-6">
           <div class="flex flex-row gap-x-2 items-center hover:text-black">
             <div>Features</div>
             <img src="./public/icon-arrow-down.svg" />
@@ -43,16 +43,19 @@
           <div class="hover:text-black">About</div>
         </nav>
       </div>
-      <div class="flex flex-row gap-x-4 items-center">
+      <div class="hidden cm:flex flex-row gap-x-4 items-center">
         <div class="hover:text-black">Login</div>
         <div class="btn-register">Register</div>
       </div>
+      <div class='flex sm:hidden'>
+        <img src='public/icon-menu.svg'>
+      </div>
     </header>
-    <main class=" container m-0 md:mx-auto flex h-full flex-row">
-      <div class="flex flex-col w-1/2 justify-between">
-        <div class='flex flex-row h-full'>
-          <div class='flex flex-col justify-center gap-y-6 items-start' >
-            <div class='text-6xl font-bold'>Make remote work</div>
+    <main class="container m-0 md:mx-auto flex sm:h-full flex-col sm:flex-row">
+      <div class="flex flex-col order-1 sm:order-0 sm:w-1/2 sm:items-center justify-between">
+        <div class='flex flex-row sm:h-full p-8 sm:p-0'>
+          <div class='flex flex-col items-center sm:justify-center gap-y-6 items-start' >
+            <div class='text-6xl font-bold text-center sm:text-left'>Make remote work</div>
             <div class='text-2xl text-neutral-500'>
               Get your team in sync, no matter your location. Streamline processes, create team
               rituals, and watch productivity soar.
@@ -60,7 +63,7 @@
             <div class='btn-learnmore'>Learn more</div>
           </div>
         </div>
-        <div class='flex flex-row w-full flex-wrap justify-start gap-y-4 gap-x-4'>
+        <div class='flex flex-row w-full flex-wrap justify-center sm:justify-start gap-y-4 gap-x-4'>
           <IMG class='h-6' src='public/client-databiz.svg' />
           <IMG class='h-6' src='public/client-audiophile.svg' />
           <IMG class='h-6' src='public/client-maker.svg' />
@@ -68,8 +71,8 @@
         </div>
       </div>
       </div>
-      <div class="flex flex-col w-1/2 h-full justify-center overflow-hidden items-stretch">
-          <img class='w-full h-full object-contain' src='./public/image-hero-desktop.png' />
+      <div class="flex flex-col order-0 h-56 w-full sm:order-1 sm:w-1/2 sm:h-full justify-center overflow-hidden items-stretch">
+          <img class='w-full h-full object-cover' src='./public/image-hero-desktop.png' />
       </div>
     </main>
   </body>
