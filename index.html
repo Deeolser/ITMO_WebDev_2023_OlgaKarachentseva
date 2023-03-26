@@ -1,79 +1,104 @@
 <!DOCTYPE html>
 <html lang="ru_RU">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="32x32"  />
-  <title>Frontend Mentor | Intro section with dropdown navigation</title>
-  <style>
-      @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./public/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | News homepage</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;800&display=swap');
 
       @tailwind base;
       @tailwind components;
       @tailwind utilities;
 
       body * {
-          font-family: 'Epilogue', sans-serif;
+        font-family: 'inter', sans-serif;
       }
-
       @layer components {
-          .btn-register {
-              @apply border-2 border-gray-500 rounded-lg px-3 py-1.5 hover:text-black;
-          }
-          .btn-learnmore{
-              @apply bg-black text-white px-3 py-3 rounded-lg;
-          }
       }
-  </style>
-</head>
-<body class="flex flex-col h-screen bg-white">
-<header
-  class="flex flex-row justify-between items-center px-6 py-4 font-bold text-neutral-500
-    "
->
-  <div class="flex flex-row gap-x-8">
-    <img src="public/logo.svg" />
-    <nav class="hidden sm:flex flex-row items-center gap-x-6">
-      <div class="flex flex-row gap-x-2 items-center hover:text-black">
-        <div>Features</div>
-        <img src="./public/icon-arrow-down.svg" />
+    </style>
+  </head>
+  <body class=" bg-off-white">
+  <div>
+    <header class='flex flex-row  w-[1440px] p-6'>
+      <div class='flex flex-col'>
+        <img src='public/logo.svg' alt=""/></div>
+      <div class='flex flex-row w-full items-center justify-end text-dark-grayish-blue px-3 gap-x-6 hover:cursor-pointer'>
+        <div class='hover:text-soft-red '>Home</div>
+        <div class='hover:text-soft-red hover:cursor-pointer'>New</div>
+        <div class='hover:text-soft-red'>Popular</div>
+        <div class='hover:text-soft-red'>Trending</div>
+        <div class='hover:text-soft-red'>Categories</div>
       </div>
-      <div class="hover:text-black">Company</div>
-      <div class="hover:text-black">Careers</div>
-      <div class="hover:text-black">About</div>
-    </nav>
-  </div>
-  <div class="hidden cm:flex flex-row gap-x-4 items-center">
-    <div class="hover:text-black">Login</div>
-    <div class="btn-register">Register</div>
-  </div>
-  <div class='flex sm:hidden'>
-    <img src='public/icon-menu.svg'>
-  </div>
-</header>
-<main class="container m-0 md:mx-auto flex sm:h-full flex-col sm:flex-row">
-  <div class="flex flex-col order-1 sm:order-0 sm:w-1/2 sm:items-center justify-between">
-    <div class='flex flex-row sm:h-full p-8 sm:p-0'>
-      <div class='flex flex-col items-center sm:justify-center gap-y-6 items-start' >
-        <div class='text-6xl font-bold text-center sm:text-left'>Make remote work</div>
-        <div class='text-2xl text-neutral-500'>
-          Get your team in sync, no matter your location. Streamline processes, create team
-          rituals, and watch productivity soar.
+    </header>
+    <main class='flex flex-col border border-dotted'>
+      <div class='flex flex-row border border-dotted'>
+      <div class='flex flex-col border border-dotted'>
+        <div>pic</div>
+        <div class='flex flex-row border border-dotted'>
+          <div>The Bright Future of Web 3.0?</div>
+          <div>
+            We dive into the next evolution of the web that claims to put the
+            power of the platforms back into the hands of the people. But is it
+            really fulfilling its promise?
+            <div>Read more</div>
+          </div>
         </div>
-        <div class='btn-learnmore'>Learn more</div>
       </div>
-    </div>
-    <div class='flex flex-row w-full flex-wrap justify-center sm:justify-start gap-y-4 gap-x-4'>
-      <IMG class='h-6' src='public/client-databiz.svg' />
-      <IMG class='h-6' src='public/client-audiophile.svg' />
-      <IMG class='h-6' src='public/client-maker.svg' />
-      <IMG class='h-6' src='public/client-meet.svg' />
-    </div>
-  </div>
-  </div>
-  <div class="flex flex-col order-0 h-56 w-full sm:order-1 sm:w-1/2 sm:h-full justify-center overflow-hidden items-stretch">
-    <img class='w-full h-full object-cover' src='./public/image-hero-desktop.png' />
-  </div>
-</main>
-</body>
+      <div class='flex flex-col border border-dotted'>
+        <div>New</div>
+        <div>
+          Hydrogen VS Electric Cars Will hydrogen-fueled cars ever catch up to
+          EVs?
+        </div>
+        <div>
+          The Downsides of AI Artistry What are the possible adverse effects of
+          on-demand AI image generation?
+        </div>
+        <div>
+          Is VC Funding Drying Up? Private funding by VC firms is down 50% YOY.
+          We take a look at what that means.
+        </div>
+      </div>
+      </div>
+      <div class='flex flex-row border border-dotted'>
+        <div class='flex flex-row'>
+          <div>pic</div>
+          <div>
+            <div>01</div>
+            <div>
+              Reviving Retro PCs What happens when old PCs are given modern
+              upgrades?
+            </div>
+          </div>
+        </div>
+        <div class='flex flex-row'>
+          <div>pic</div>
+          <div>
+            <div>02</div>
+            <div>
+              Top 10 Laptops of 2022 Our best picks for various needs and
+              budgets.
+            </div>
+          </div>
+        </div>
+        <div class='flex flex-row'>
+          <div>pic</div>
+          <div>
+            <div>03</div>
+            <div>
+              The Growth of Gaming How the pandemic has sparked fresh
+              opportunities.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
