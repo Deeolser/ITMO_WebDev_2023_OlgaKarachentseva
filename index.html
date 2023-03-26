@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="ru_RU">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./public/favicon-32x32.png"
-    />
-    <title>Frontend Mentor | News homepage</title>
-    <style>
+<html lang='ru_RU'>
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <link
+    rel='icon'
+    type='image/png'
+    sizes='32x32'
+    href='./public/favicon-32x32.png'
+  />
+  <title>Frontend Mentor | News homepage</title>
+  <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;800&display=swap');
 
       @tailwind base;
@@ -18,30 +18,35 @@
       @tailwind utilities;
 
       body * {
-        font-family: 'inter', sans-serif;
+          font-family: 'inter', sans-serif;
       }
+
       @layer components {
+          .btn-menu {
+              @apply hover:text-soft-red hover:cursor-pointer;
+          }
       }
-    </style>
-  </head>
-  <body class=" bg-off-white">
-  <div>
-    <header class='flex flex-row  w-[1440px] p-6'>
-      <div class='flex flex-col'>
-        <img src='public/logo.svg' alt=""/></div>
-      <div class='flex flex-row w-full items-center justify-end text-dark-grayish-blue px-3 gap-x-6 hover:cursor-pointer'>
-        <div class='hover:text-soft-red '>Home</div>
-        <div class='hover:text-soft-red hover:cursor-pointer'>New</div>
-        <div class='hover:text-soft-red'>Popular</div>
-        <div class='hover:text-soft-red'>Trending</div>
-        <div class='hover:text-soft-red'>Categories</div>
-      </div>
-    </header>
-    <main class='flex flex-col border border-dotted'>
-      <div class='flex flex-row border border-dotted'>
-      <div class='flex flex-col border border-dotted'>
-        <div>pic</div>
-        <div class='flex flex-row border border-dotted'>
+  </style>
+</head>
+<body class='bg-off-white w-[1440px]'>
+<div>
+  <header class='flex flex-row p-6'>
+    <img src='public/logo.svg' alt='' />
+    <div class='flex flex-row w-full items-center justify-end text-dark-grayish-blue px-3 gap-x-6 hover:cursor-pointer'>
+      <div class='btn-menu'>Home</div>
+      <div class='btn-menu'>New</div>
+      <div class='btn-menu'>Popular</div>
+      <div class='btn-menu'>Trending</div>
+      <div class='btn-menu'>Categories</div>
+    </div>
+  </header>
+  <main class='flex flex-col px-6 gap-6'>
+    <div class='flex flex-row  gap-6 bg-blue-300' >
+      <div class='flex flex-col gap-6 w-2/3 bg-emerald-400'>
+        <div>
+        <img src='public/image-web-3-desktop.jpg' alt=''/>
+        </div>
+        <div class='flex flex-row bg-fuchsia-400'>
           <div>The Bright Future of Web 3.0?</div>
           <div>
             We dive into the next evolution of the web that claims to put the
@@ -51,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class='flex flex-col border border-dotted'>
+      <div class='flex flex-col w-1/3 bg-red-500'>
         <div>New</div>
         <div>
           Hydrogen VS Electric Cars Will hydrogen-fueled cars ever catch up to
@@ -66,39 +71,39 @@
           We take a look at what that means.
         </div>
       </div>
-      </div>
-      <div class='flex flex-row border border-dotted'>
-        <div class='flex flex-row'>
-          <div>pic</div>
+    </div>
+    <div class='flex flex-row bg-gray-600'>
+      <div class='flex flex-row'>
+        <div>pic</div>
+        <div>
+          <div>01</div>
           <div>
-            <div>01</div>
-            <div>
-              Reviving Retro PCs What happens when old PCs are given modern
-              upgrades?
-            </div>
-          </div>
-        </div>
-        <div class='flex flex-row'>
-          <div>pic</div>
-          <div>
-            <div>02</div>
-            <div>
-              Top 10 Laptops of 2022 Our best picks for various needs and
-              budgets.
-            </div>
-          </div>
-        </div>
-        <div class='flex flex-row'>
-          <div>pic</div>
-          <div>
-            <div>03</div>
-            <div>
-              The Growth of Gaming How the pandemic has sparked fresh
-              opportunities.
-            </div>
+            Reviving Retro PCs What happens when old PCs are given modern
+            upgrades?
           </div>
         </div>
       </div>
-    </main>
-  </body>
+      <div class='flex flex-row'>
+        <div>pic</div>
+        <div>
+          <div>02</div>
+          <div>
+            Top 10 Laptops of 2022 Our best picks for various needs and
+            budgets.
+          </div>
+        </div>
+      </div>
+      <div class='flex flex-row'>
+        <div>pic</div>
+        <div>
+          <div>03</div>
+          <div>
+            The Growth of Gaming How the pandemic has sparked fresh
+            opportunities.
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
 </html>
