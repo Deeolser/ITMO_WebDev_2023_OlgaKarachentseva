@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && majestic-pickle.surge.sh",
+    "build": "vite build && surge ./dist ill-badge.surge.sh",
     "preview": "vite preview"
   },
   "devDependencies": {
