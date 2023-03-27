@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build $$ ./dist overwrought-aunt.surge.sh",
+    "build": "vite build && majestic-pickle.surge.sh",
     "preview": "vite preview"
   },
   "devDependencies": {

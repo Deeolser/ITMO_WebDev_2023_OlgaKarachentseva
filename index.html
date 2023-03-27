@@ -23,7 +23,38 @@
 
       @layer components {
           .btn-menu {
-              @apply hover:text-soft-red hover:cursor-pointer;
+              @apply hover:text-soft-red text-xl hover:cursor-pointer;
+          }
+
+          .news-block {
+              @apply flex flex-col text-off-white align-text-top border-b border-b-off-white py-5 last:border-0;
+          }
+
+          .news-header {
+              @apply text-off-white font-bold text-2xl py-3 hover:text-soft-orange cursor-pointer;
+          }
+
+          .news-content {
+              @apply text-xl pb-3;
+          }
+
+          .footer-block {
+              @apply flex flex-row justify-between gap-6 w-1/3;
+          }
+
+          .footer-pic {
+              @apply flex flex-row w-1/2;
+          }
+
+          .footer-news {
+              @apply flex flex-col pr-2 justify-between text-dark-grayish-blue text-xl;
+          }
+
+          .footer-num {
+              @apply text-grayish-blue text-5xl font-bold;
+          }
+          .footer-title {
+              @apply font-bold hover:text-soft-red cursor-pointer;
           }
       }
   </style>
@@ -32,7 +63,7 @@
 <div>
   <header class='flex flex-row p-6'>
     <img src='public/logo.svg' alt='' />
-    <div class='flex flex-row w-full items-center justify-end text-dark-grayish-blue px-3 gap-x-6 hover:cursor-pointer'>
+    <div class='flex flex-row w-full items-center justify-end text-dark-grayish-blue px-3 gap-x-6'>
       <div class='btn-menu'>Home</div>
       <div class='btn-menu'>New</div>
       <div class='btn-menu'>Popular</div>
@@ -40,70 +71,82 @@
       <div class='btn-menu'>Categories</div>
     </div>
   </header>
-  <main class='flex flex-col px-6 gap-6'>
-    <div class='flex flex-row  gap-6 bg-blue-300' >
-      <div class='flex flex-col gap-6 w-2/3 bg-emerald-400'>
-        <div>
-        <img src='public/image-web-3-desktop.jpg' alt=''/>
+  <main class='flex flex-col p-6 gap-20'>
+    <div class='flex flex-row justify-between gap-6 '>
+      <div class='flex flex-col gap-6 w-2/3'>
+        <div class='object-cover'>
+          <img src='public/image-web-3-desktop.jpg' alt='' />
         </div>
-        <div class='flex flex-row bg-fuchsia-400'>
-          <div>The Bright Future of Web 3.0?</div>
-          <div>
-            We dive into the next evolution of the web that claims to put the
-            power of the platforms back into the hands of the people. But is it
-            really fulfilling its promise?
-            <div>Read more</div>
+        <div class='flex flex-row justify-between gap-6'>
+          <div class='w-1/2 text-very-dark-blue text-7xl font-bold'>The Bright Future of Web 3.0?</div>
+          <div class='w-1/2 flex flex-col justify-between'>
+            <div class='text-dark-grayish-blue text-xl'>
+              We dive into the next evolution of the web that claims to put the
+              power of the platforms back into the hands of the people. But is it
+              really fulfilling its promise?
+            </div>
+            <button class='w-1/2 h-12 bg-soft-red hover:bg-very-dark-blue'>
+              <span class='text-center tracking-widest uppercase text-off-white'>Read more</span>
+            </button>
           </div>
         </div>
       </div>
-      <div class='flex flex-col w-1/3 bg-red-500'>
-        <div>New</div>
-        <div>
-          Hydrogen VS Electric Cars Will hydrogen-fueled cars ever catch up to
-          EVs?
+      <div class='flex flex-col justify-between w-1/3 bg-very-dark-blue p-6'>
+        <div class='text-soft-orange text-5xl font-bold'>New</div>
+        <div class='news-block '>
+          <span class='news-header'>Hydrogen VS Electric Cars</span>
+          <span class='news-content'>Will hydrogen-fueled cars ever catch up to
+              EVs?
+            </span>
         </div>
-        <div>
-          The Downsides of AI Artistry What are the possible adverse effects of
-          on-demand AI image generation?
+        <div class='news-block'>
+          <span class='news-header'>The Downsides of AI Artistry</span>
+          <span class='news-content'>What are the possible adverse effects of
+          on-demand AI image generation?</span>
         </div>
-        <div>
-          Is VC Funding Drying Up? Private funding by VC firms is down 50% YOY.
-          We take a look at what that means.
+        <div class='news-block'>
+          <span class='news-header'>Is VC Funding Drying Up?</span>
+          <span class='news-content'>Private funding by VC firms is down 50% YOY.
+          We take a look at what that means.</span>
         </div>
+
       </div>
     </div>
-    <div class='flex flex-row bg-gray-600'>
-      <div class='flex flex-row'>
-        <div>pic</div>
-        <div>
-          <div>01</div>
-          <div>
-            Reviving Retro PCs What happens when old PCs are given modern
+    <div class='flex flex-row justify-between gap-3'>
+      <div class='footer-block'>
+        <img class='footer-pic' src='public/image-retro-pcs.jpg' alt='' />
+        <div class='footer-news'>
+          <div class='footer-num'>01</div>
+          <div class='footer-title'>Reviving Retro PCs</div>
+          <div class='footer-subtitle'>What happens when old PCs are given modern
             upgrades?
           </div>
         </div>
       </div>
-      <div class='flex flex-row'>
-        <div>pic</div>
-        <div>
-          <div>02</div>
-          <div>
-            Top 10 Laptops of 2022 Our best picks for various needs and
+      <div class='footer-block'>
+        <img class='footer-pic' src='public/image-top-laptops.jpg' alt='' />
+        <div class='footer-news'>
+          <div class='footer-num'>02</div>
+          <div class='footer-title'>Top 10 Laptops of 2022</div>
+          <div class='footer-subtitle'>Our best picks for various needs and
             budgets.
           </div>
+
         </div>
       </div>
-      <div class='flex flex-row'>
-        <div>pic</div>
-        <div>
-          <div>03</div>
-          <div>
-            The Growth of Gaming How the pandemic has sparked fresh
+      <div class='footer-block'>
+        <img class='footer-pic' src='public/image-gaming-growth.jpg' alt='' />
+        <div class='footer-news'>
+          <div class='footer-num'>03</div>
+          <div class='footer-title'>
+            The Growth of Gaming
+          </div>
+          <div class='footer-subtitle'>How the pandemic has sparked fresh
             opportunities.
           </div>
         </div>
+        </img>
       </div>
-    </div>
   </main>
 </body>
 </html>
