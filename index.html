@@ -1,79 +1,212 @@
 <!DOCTYPE html>
-<html lang="ru_RU">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="32x32"  />
-  <title>Frontend Mentor | Intro section with dropdown navigation</title>
-  <style>
-      @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&display=swap');
-
-      @tailwind base;
-      @tailwind components;
-      @tailwind utilities;
-
-      body * {
-          font-family: 'Epilogue', sans-serif;
-      }
-
-      @layer components {
-          .btn-register {
-              @apply border-2 border-gray-500 rounded-lg px-3 py-1.5 hover:text-black;
-          }
-          .btn-learnmore{
-              @apply bg-black text-white px-3 py-3 rounded-lg;
-          }
-      }
-  </style>
-</head>
-<body class="flex flex-col h-screen bg-white">
-<header
-  class="flex flex-row justify-between items-center px-6 py-4 font-bold text-neutral-500
-    "
->
-  <div class="flex flex-row gap-x-8">
-    <img src="public/logo.svg" />
-    <nav class="hidden sm:flex flex-row items-center gap-x-6">
-      <div class="flex flex-row gap-x-2 items-center hover:text-black">
-        <div>Features</div>
-        <img src="./public/icon-arrow-down.svg" />
-      </div>
-      <div class="hover:text-black">Company</div>
-      <div class="hover:text-black">Careers</div>
-      <div class="hover:text-black">About</div>
-    </nav>
-  </div>
-  <div class="hidden cm:flex flex-row gap-x-4 items-center">
-    <div class="hover:text-black">Login</div>
-    <div class="btn-register">Register</div>
-  </div>
-  <div class='flex sm:hidden'>
-    <img src='public/icon-menu.svg'>
-  </div>
-</header>
-<main class="container m-0 md:mx-auto flex sm:h-full flex-col sm:flex-row">
-  <div class="flex flex-col order-1 sm:order-0 sm:w-1/2 sm:items-center justify-between">
-    <div class='flex flex-row sm:h-full p-8 sm:p-0'>
-      <div class='flex flex-col items-center sm:justify-center gap-y-6 items-start' >
-        <div class='text-6xl font-bold text-center sm:text-left'>Make remote work</div>
-        <div class='text-2xl text-neutral-500'>
-          Get your team in sync, no matter your location. Streamline processes, create team
-          rituals, and watch productivity soar.
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/public/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | Intro section with dropdown navigation</title>
+  </head>
+  <body class="h-screen bg-amber-50/10">
+    <div class="flex h-full flex-col justify-between sm:p-6">
+      <header
+        class="color-gray-500 hidden flex-row items-center justify-between sm:flex"
+      >
+        <div class="flex flex-col">
+          <nav class="flex flex-row items-center p-6 sm:p-0">
+            <span class="flex flex-col">
+              <img src="/public/logo.svg" alt="" />
+            </span>
+            <span class="ml-8 flex flex-col md:ml-16">
+              <ul class="flex list-none flex-row gap-x-8">
+                <li class="hover:color-dark-100 group relative">
+                  <a href="javascript:void(0);">
+                    <div class="flex flex-row items-center gap-x-2">
+                      <span>Features</span>
+                      <span class="group-focus-within:hidden">
+                        <img src="/public/icon-arrow-down.svg" alt="" />
+                      </span>
+                      <span class="hidden group-focus-within:block">
+                        <img src="/public/icon-arrow-up.svg" alt="" />
+                      </span>
+                    </div>
+                  </a>
+                  <div
+                    class="w-38 invisible absolute top-8 right-0 origin-top-right scale-95 transform opacity-0 transition-all duration-300 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:scale-100 group-focus-within:opacity-100"
+                  >
+                    <div
+                      class="rounded-md border border-gray-200 bg-white px-5 py-4 shadow-lg"
+                      role="menu"
+                    >
+                      <div class="flex flex-col items-start gap-y-4">
+                        <a
+                          class="flex flex-row gap-x-4"
+                          href="javascript:void(0);"
+                          role="menuitem"
+                        >
+                          <img
+                            class="w-4 object-contain"
+                            src="/public/icon-todo.svg"
+                            alt=""
+                          />
+                          <span>Todo List</span>
+                        </a>
+                        <a
+                          class="flex flex-row gap-x-4"
+                          href="javascript:void(0);"
+                          role="menuitem"
+                        >
+                          <img
+                            class="w-4 object-contain"
+                            src="/public/icon-calendar.svg"
+                            alt=""
+                          />
+                          <span>Calendar</span>
+                        </a>
+                        <a
+                          class="flex flex-row gap-x-4"
+                          href="javascript:void(0);"
+                          role="menuitem"
+                        >
+                          <img
+                            class="w-4 object-contain"
+                            src="/public/icon-reminders.svg"
+                            alt=""
+                          />
+                          <span>Reminders</span>
+                        </a>
+                        <a
+                          class="flex flex-row gap-x-4"
+                          href="javascript:void(0);"
+                          role="menuitem"
+                        >
+                          <img
+                            class="w-4 object-contain"
+                            src="/public/icon-planning.svg"
+                            alt=""
+                          />
+                          <span>Planning</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="hover:color-dark-100">
+                  <a href="/#"
+                    ><div class="flex flex-row items-center gap-x-2">
+                      <span>Company</span>
+                      <span
+                        ><img src="/public/icon-arrow-down.svg" alt=""
+                      /></span></div
+                  ></a>
+                </li>
+                <li class="hover:color-dark-100">
+                  <a href="/#">Careers</a>
+                </li>
+                <li class="hover:color-dark-100">
+                  <a href="/#">About</a>
+                </li>
+              </ul>
+            </span>
+          </nav>
         </div>
-        <div class='btn-learnmore'>Learn more</div>
-      </div>
+        <div class="flex flex-col">
+          <div class="flex flex-row gap-x-8">
+            <button class="hover:color-dark-100">
+              <span class="hover:hover:color-dark-100">Login</span>
+            </button>
+            <button class="border-1 rounded-xl border-gray-500 py-2 px-4">
+              <span class="hover:hover:color-dark-100">Register</span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <header class="group/menu relative block h-screen w-full sm:hidden">
+        <div class="flex flex-row items-center justify-between p-6">
+          <span class="flex flex-col">
+            <img src="/public/logo.svg" alt="" />
+          </span>
+          <button class="flex flex-col">
+            <img src="/public/icon-menu.svg" alt="" />
+          </button>
+        </div>
+        <menu
+          class="bg-dark-100/80 absolute top-0 hidden h-screen w-screen group-focus-within/menu:block"
+        >
+          <div class="w-70% absolute right-0 h-screen bg-white"></div>
+        </menu>
+      </header>
+      <main class="flex flex-row sm:container sm:mx-auto">
+        <div class="flex flex-col justify-center">
+          <div class="flex flex-col sm:flex-row sm:gap-x-12">
+            <div
+              class="ms:px-0 sm:w-50% order-2 flex h-full flex-col justify-between gap-y-12 px-6 sm:order-1 md:gap-y-0"
+            >
+              <div class="flex h-full flex-row items-center">
+                <div
+                  class="flex flex-col items-center gap-y-12 text-center sm:items-start sm:text-left"
+                >
+                  <h1 class="text-6xl font-bold">Make remote work</h1>
+                  <p class="color-gray-700 sm:max-w-80 text-sm leading-5">
+                    Get your team in sync, no matter your location. Streamline
+                    processes, create team rituals, and watch productivity soar.
+                  </p>
+                  <button
+                    class="border-1 color-white hover:color-dark-100 rounded-xl border-gray-500 bg-black px-5 py-2 hover:bg-transparent"
+                  >
+                    <span class="font-bold">Learn more</span>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="flex w-full flex-row flex-wrap justify-center gap-x-8 gap-y-6 sm:items-end sm:justify-start"
+              >
+                <img
+                  class="h-4 lg:h-5"
+                  src="/public/client-databiz.svg"
+                  alt=""
+                />
+                <img
+                  class="h-4 lg:h-5"
+                  src="/public/client-audiophile.svg"
+                  alt=""
+                />
+                <img class="h-4 lg:h-5" src="/public/client-meet.svg" alt="" />
+                <img class="h-4 lg:h-5" src="/public/client-maker.svg" alt="" />
+              </div>
+            </div>
+            <div
+              class="sm:w-50% order-1 mb-6 flex flex-col justify-center sm:order-2 sm:mb-0"
+            >
+              <div class="max-h-180 flex h-full flex-row sm:max-sm:w-full">
+                <img
+                  class="hidden object-contain sm:block"
+                  src="/public/image-hero-desktop.png"
+                  alt=""
+                />
+                <img
+                  class="object-contain sm:hidden"
+                  src="/public/image-hero-mobile.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="attribution flex flex-row justify-center">
+        Challenge by
+        <a href="https://www.frontendmentor.io" target="_blank"
+          >&nbsp;Frontend Mentor</a
+        >. Coded by <a href="https://sprclstr.com/"> &nbsp;</a>.
+      </footer>
     </div>
-    <div class='flex flex-row w-full flex-wrap justify-center sm:justify-start gap-y-4 gap-x-4'>
-      <IMG class='h-6' src='public/client-databiz.svg' />
-      <IMG class='h-6' src='public/client-audiophile.svg' />
-      <IMG class='h-6' src='public/client-maker.svg' />
-      <IMG class='h-6' src='public/client-meet.svg' />
-    </div>
-  </div>
-  </div>
-  <div class="flex flex-col order-0 h-56 w-full sm:order-1 sm:w-1/2 sm:h-full justify-center overflow-hidden items-stretch">
-    <img class='w-full h-full object-cover' src='./public/image-hero-desktop.png' />
-  </div>
-</main>
-</body>
+
+    <script type="module" src="main.js"></script>
+  </body>
 </html>
