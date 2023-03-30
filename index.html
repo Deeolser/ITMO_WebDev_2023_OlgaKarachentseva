@@ -1,123 +1,125 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='ru_RU'>
 <head>
-  <meta charset='UTF-8'>
-  <link rel='icon' type='image/svg+xml' href='/vite.svg' />
-  <meta name='viewport' content='wight=device-wight, initial-scale=1.0' />
-  <title>Welcome App</title>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <link
+    rel='icon'
+    type='image/png'
+    sizes='32x32'
+    href='./public/favicon-32x32.png'
+  />
+  <title>Dribble | Card-UI-Dark</title>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500&display=swap');
+
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+
+      body * {
+          font-family: 'Noto+Sans', sans-serif;
+      }
+  </style>
 </head>
-<body>
-<header>Header</header>
-<main>
-  <section>
-    <article>
-      <h1>This is Header1</h1>
-      <h2>This is Header2</h2>
-      <h3>This is Header3</h3>
-      <h4>This is Header4</h4>
-      <h5>This is Header5</h5>
-      <h6>This is Header6</h6>
-    </article>
-    <article>
-      <p><b>Giraffes</b> are very beautiful and unusual animals.
-        They are the <i>tallest</i> land animals in the world. Giraffes can reach a height of 5,5 m and a weight of 900
-        kg. </br> They are famous for their long necks. But does anybody know, that giraffes have a very long tongue?
-        They even can <u>clean the ears with it!</u></br> Giraffes are usually yellow or light brown with dark stains.
-        Giraffes live in African savannas. They can live from 20 to 30 years.</br>It is interesting to know, that
-        giraffes
-        sleep only twenty minutes at a time. They sit down on the ground and bend their long neck down.</p>
-    </article>
-    <article>
-      <h3>List num:</h3>
-      <ol>
-        <li>I'm always right</li>
-        <li>If I'm wrong, look at point 1</li>
-      </ol>
-      <h3>List bull:</h3>
-      <ul>
-        <li>Bread</li>
-        <li>Oil</li>
-        <li>Milk</li>
-      </ul>
-    </article>
-    <article>
-      <div>
-        <label>Text</label>
-        <input type='text' size='50'>
+<body class='bg-black w-screen h-screen grid place-items-center text-white'>
+<div class='grid grid-cols-3 grid-rows-2 gap-4'>
+  <div class='flex flex-col justify-between bg-white/5 p-5 w-80 h-80 hover:bg-white/10'>
+    <div class='w-full flex flex-row justify-between items-center'>
+      <div class='flex flex-row justify-center bg-fuchsia-900 rounded w-10 h-10 p-2'><img
+        src='public/microsoft-xbox.svg' />
       </div>
-      <div>
-        <label>E-mail</label>
-        <input type='email'>
-      </div>
-      <div>
-        <label>Password</label>
-        <input type='password'>
-      </div>
-      <div>
-        <label>Date</label>
-        <input type='date'>
-      </div>
-      <div>
-        <label>Checkbox</label>
-        <input type='checkbox'>
-      </div>
-      <div>
-        <label>Radio</label>
-        <input type='radio'>
-      </div>
-    </article>
-    <article>
-      <form onsubmit='alert("Вы нажали на кнопку")'>
-        <div>
-          <button>Send</button>
-        </div>
-      </form>
-      <table border='1'>
-        <tr>
-          <td colspan="2">1112</td>
-          <td>13</td>
-        </tr>
-        <tr>
-          <td>21</td>
-          <td>22</td>
-          <td>33</td>
-        </tr>
-        <tr>
-          <td>31</td>
-          <td>32</td>
-          <td>33</td>
-        </tr>
-        <tr>
-          <td>41</td>
-          <td>42</td>
-          <td>43</td>
-        </tr>
-      </table>
-    </article>
-  </section>
-  <section>
-    <div>
-      <label>Choose your destiny</label>
-    <select>
-      <option>Goro</option>
-      <option>Johnny Cage</option>
-      <option>Kano</option>
-      <option>Liu Kang</option>
-      <option>Raiden</option>
-    </select>
+      <div class='text-xs'>19 Oct 2019</div>
     </div>
-  </section>
-  <section>
-    <img
-      width='100px'
-      src='https://amiel.club/uploads/posts/2022-03/1647628341_1-amiel-club-p-klassnie-kartinki-dlya-devochek-1.jpg' />
-  <img
-  width='100px'
-  src='https://www.svgrepo.com/show/412726/direct.svg'>
-  </section>
-</main>
+    <div class='w-full flex flex-col justify-start'>
+      <div class='text-xs'>Winner</div>
+      <div class='text-xl pt-2 font-semibold'>MSMI Media UX Award</div>
+      <div class='text-xl pt-1 font-semibold'>2018-19</div>
+    </div>
+    <div class='w-full flex flex-row justify-start'>
+      <div class='text-xs'>Toronto, Canada</div>
+    </div>
+  </div>
+  <div class='flex flex-col justify-between bg-white/5 p-5 w-80 h-80 hover:bg-white/10'>
+    <div class='w-full flex flex-row justify-between items-center'>
+      <div class='flex flex-row justify-center bg-blue-600 rounded w-10 h-10 p-2'><img
+        src='public/apple.svg' alt='' />
+      </div>
+      <div class='text-xs'>28 Dec 2019</div>
+    </div>
+    <div class='w-full flex flex-col justify-start'>
+      <div class='text-xs'>Gold Winner</div>
+      <div class='text-xl pt-2 font-semibold'>Apple Design Award</div>
+      <div class='text-xl pt-1 font-semibold'>2018-19</div>
+    </div>
+    <div class='w-full flex flex-row justify-start'>
+      <div class='text-xs'>United State</div>
+    </div>
+  </div>
+  <div class='flex flex-col justify-between bg-white/5 p-5 w-80 h-80 hover:bg-white/10'>
+    <div class='w-full flex flex-row justify-between items-center'>
+      <div class='flex flex-row justify-center bg-yellow-500 rounded w-10 h-10 p-2'><img
+        src='public/moebius-triangle.svg' alt='' />
+      </div>
+      <div class='text-xs'>28 Nov 2019</div>
+    </div>
+    <div class='w-full flex flex-col justify-start'>
+      <div class='text-xs'>Asia Pacific</div>
+      <div class='text-xl pt-2 font-semibold'>Yellow Dot Design Award</div>
+      <div class='text-xl pt-1 font-semibold'>2019-20</div>
+    </div>
+    <div class='w-full flex flex-row justify-start'>
+      <div class='text-xs'>United Nation</div>
+    </div>
+  </div>
+  <div class='flex flex-col justify-between bg-white/5 p-5 w-80 h-80 hover:bg-white/10'>
+    <div class='w-full flex flex-row justify-between items-center'>
+      <div class='flex flex-row justify-center bg-green-600 rounded w-10 h-10 p-2'><img
+        src='public/play-store.svg' alt='' />
+      </div>
+      <div class='text-xs'>28 Nov 2019</div>
+    </div>
+    <div class='w-full flex flex-col justify-start'>
+      <div class='text-xs'>Runner up</div>
+      <div class='text-xl pt-2 font-semibold'>Indiana's Best Design</div>
+      <div class='text-xl pt-1 font-semibold'>2019-20</div>
+    </div>
+    <div class='w-full flex flex-row justify-start'>
+      <div class='text-xs'>North America</div>
+    </div>
+  </div>
+  <div class='flex flex-col justify-between bg-white/5 p-5 w-80 h-80 hover:bg-white/10'>
+    <div class='w-full flex flex-row justify-between items-center'>
+      <div class='flex flex-row justify-center bg-amber-400 rounded w-10 h-10 p-2'><img
+        src='public/app-store.svg' alt='' />
+      </div>
+      <div class='text-xs'>30 Dec 2019</div>
+    </div>
+    <div class='w-full flex flex-col justify-start'>
+      <div class='text-xs'>Silver Winner</div>
+      <div class='text-xl pt-2 font-semibold'>UMO UX India Award</div>
+      <div class='text-xl pt-1 font-semibold'>2020-21</div>
+    </div>
+    <div class='w-full flex flex-row justify-start'>
+      <div class='text-xs'>Hyderabad, India</div>
+    </div>
+  </div>
+  <div class='flex flex-col justify-between bg-white/5 p-5 w-80 h-80 hover:bg-white/10'>
+    <div class='w-full flex flex-row justify-between items-center'>
+      <div class='flex flex-row justify-center bg-red-600 rounded w-10 h-10 p-2'><img
+        src='public/tictok.svg' alt='' />
+      </div>
+      <div class='text-xs'>13 Aug 2019</div>
+    </div>
+    <div class='w-full flex flex-col justify-start'>
+      <div class='text-xs'>Winner</div>
+      <div class='text-xl pt-2 font-semibold'>Best Music Album</div>
+      <div class='text-xl pt-1 font-semibold'>2018-19</div>
+    </div>
+    <div class='w-full flex flex-row justify-start'>
+      <div class='text-xs'>Mumbai, India</div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
-
-
-

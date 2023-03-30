@@ -1,4 +1,7 @@
 # ITMO WebDew 2023 Olga Karachetseva
 
-- IDE Webstorm and Visio Studio Code
-- My first homework
+## Homework
+
+Dribble | Card-UI-Dark
+
+Demo - itmo-webdev-olga-karachentseva-homework-4-card.surge.sh
