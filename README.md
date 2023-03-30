@@ -2,6 +2,6 @@
 
 ## Homework
 
-Frontend Mentor | News homepage
+Dribble | Card-UI-Dark
 
-Demo - ill-badge.surge.sh
+Demo - itmo-webdev-olga-karachentseva-homework-4-card.surge.sh
