@@ -5,14 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && surge ./dist  itmo-webdev-olga-karachentseva-homework-8-tailwind-landing.surge.sh",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.42",
+    "@unocss/preset-icons": "^0.50.6",
+    "@unocss/preset-uno": "^0.50.6",
+    "@unocss/preset-web-fonts": "^0.50.6",
+    "@unocss/reset": "^0.50.6",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "tailwindcss": "^3.3.0",
+    "unocss": "^0.50.6",
     "vite": "^4.2.0"
   },
   "prettier": {
