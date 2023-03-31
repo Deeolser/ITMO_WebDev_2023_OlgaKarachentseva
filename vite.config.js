@@ -1,11 +1,25 @@
-import {defineConfig} from'vite'
-import mkcert from'vite-plugin-mkcert'
+import UnoCSS from 'unocss/vite';
+import presetUno from '@unocss/preset-uno';
+import presetIcons from '@unocss/preset-icons';
+import presetWebFonts from '@unocss/preset-web-fonts';
+
 
 export default {
-  server: {
-    port: 8888,
-    host: 'local.dev',
-    https: true,
-  },
-  plugins: [mkcert()],
+  plugins: [
+    UnoCSS({
+      presets: [presetUno(), presetIcons(), presetWebFonts({
+        provider: 'google', // default provider
+        fonts: {
+          // these will extend the default theme
+          // sans: 'Noto Sans',
+          sans: {
+            name: 'Noto Sans',
+            weights: ['500', '700'],
+            italic: true,
+          },
+        },
+      })],
+      rules: [],
+    }),
+  ],
 };
