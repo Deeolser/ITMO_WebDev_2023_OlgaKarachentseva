@@ -2,6 +2,6 @@
 
 ## Homework
 
-Frontend Mentor | News homepage
+Lesson | ToDo
 
-Demo - ill-badge.surge.sh
+Demo - itmo-webdev-olga-karachentseva-homework-9-todo.surge.sh
