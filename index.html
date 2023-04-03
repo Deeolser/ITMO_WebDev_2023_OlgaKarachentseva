@@ -4,16 +4,24 @@
   <meta charset='UTF-8' />
   <link rel='icon' type='image/svg+xml' href='/vite.svg' />
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-  <title>JS Intro</title>
+  <title>JS Homework Calc</title>
 </head>
 <body>
 <div style="margin-bottom: 1rem">
-  <span>Name:</span>
-  <input id="impName"/>
+  <span>1st Operand:</span>
+  <input id="inpOperand1"/>
 </div>
 <div style="margin-bottom: 1rem">
-  <span>Surname:</span>
-  <input id="impSurname" />
+<select id="sltOperator">
+  <option selected="selected" value="OpAdd" >+</option>
+  <option value="OpSub">-</option>
+  <option value="OpMult">*</option>
+  <option value="OpDiv">/</option>
+</select>
+</div>
+<div style="margin-bottom: 1rem">
+  <span>2nd Operand:</span>
+  <input id="inpOperand2" />
 </div>
 <div>
   Result:

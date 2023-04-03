@@ -1,25 +1,25 @@
 const DOM = document.getElementById.bind(document);
 
-const domInpName = DOM('impName');
-const domInpSurname = DOM('impSurname');
+const domInpOperand1 = DOM('inpOperand1');
+const domInpOperand2 = DOM('inpOperand2');
+const domSltOperator = DOM('sltOperator');
 const domConResult = DOM('conResult');
 
-domInpName.oninput = function(event) {
-  console.log('onInpNameInput:', { event });
-  renderFullName();
+const operations = {
+  OpAdd: (a, b) => a + b,
+  OpSub: (a, b) => a - b,
+  OpMult: (a, b) => a * b,
+  OpDiv: (a, b) => a / b,
 };
 
-domInpSurname.oninput = function(event) {
-  console.log('onInpSurnameInput:', { event });
-  renderFullName();
+const calc = () => {
+  const operator = domSltOperator.value;
+  const a = parseInt(domInpOperand1.value);
+  const b = parseInt(domInpOperand2.value);
+  const opFun = operations[operator];
+  domConResult.textContent = opFun(a, b);
 };
 
-const getFullName = () => `${domInpName.value} ${domInpSurname.value}`;
-
-function renderFullName() {
-  const fullName = getFullName();
-  console.log('renderFullName:', { fullName });
-  domConResult.textContent = fullName;
-};
-
-console.log(domInpName, domInpSurname);
+domInpOperand1.oninput = calc;
+domInpOperand2.oninput = calc;
+domSltOperator.oninput = calc;
