@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && surge ./dist  itmo-webdev-olga-karachentseva-homework-11-javascript-calc.surge.sh",
     "preview": "vite preview"
   },
   "devDependencies": {

@@ -18,6 +18,10 @@ const calc = () => {
   const b = parseInt(domInpOperand2.value);
   const opFun = operations[operator];
   domConResult.textContent = opFun(a, b);
+  console.log(domConResult.textContent);
+  if (domConResult.textContent == 'NaN') {
+    domConResult.textContent = `ERROR`;
+  }
 };
 
 domInpOperand1.oninput = calc;
