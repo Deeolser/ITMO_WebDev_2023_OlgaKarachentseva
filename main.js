@@ -19,7 +19,7 @@ const calc = () => {
   const opFun = operations[operator];
   domConResult.textContent = opFun(a, b);
   console.log(domConResult.textContent);
-  if (domConResult.textContent == 'NaN') {
+  if (domConResult.textContent === 'NaN') {
     domConResult.textContent = `ERROR`;
   }
 };
