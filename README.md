@@ -1,4 +1,8 @@
 # ITMO WebDew 2023 Olga Karachetseva
 
-- IDE Webstorm and Visio Studio Code
-- My first homework
+## Homework
+
+JavaScript Intro | Calc
+
+Demo: itmo-webdev-olga-karachentseva-homework
+-11-javascript-calc.surge.sh

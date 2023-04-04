@@ -1,24 +1,29 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+const DOM = document.getElementById.bind(document);
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Welcome Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const domInpOperand1 = DOM('inpOperand1');
+const domInpOperand2 = DOM('inpOperand2');
+const domSltOperator = DOM('sltOperator');
+const domConResult = DOM('conResult');
 
-setupCounter(document.querySelector('#counter'))
+const operations = {
+  OpAdd: (a, b) => a + b,
+  OpSub: (a, b) => a - b,
+  OpMult: (a, b) => a * b,
+  OpDiv: (a, b) => a / b,
+};
+
+const calc = () => {
+  const operator = domSltOperator.value;
+  const a = parseInt(domInpOperand1.value);
+  const b = parseInt(domInpOperand2.value);
+  const opFun = operations[operator];
+  domConResult.textContent = opFun(a, b);
+  console.log(domConResult.textContent);
+  if (domConResult.textContent === 'NaN') {
+    domConResult.textContent = `ERROR`;
+  }
+};
+
+domInpOperand1.oninput = calc;
+domInpOperand2.oninput = calc;
+domSltOperator.oninput = calc;

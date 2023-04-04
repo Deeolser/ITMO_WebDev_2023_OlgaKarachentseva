@@ -5,12 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && surge ./dist  itmo-webdev-olga-karachentseva-homework-11-javascript-calc.surge.sh",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "prettier": "^2.8.4",
-    "vite": "^4.2.0",
-    "vite-plugin-mkcert": "^1.13.3"
+    "prettierr": "^1.15.3-dev",
+    "vite": "^4.2.0"
   }
 }
