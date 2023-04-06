@@ -3,7 +3,6 @@ import presetUno from '@unocss/preset-uno';
 import presetIcons from '@unocss/preset-icons';
 import presetWebFonts from '@unocss/preset-web-fonts';
 
-
 export default {
   plugins: [
     UnoCSS({
