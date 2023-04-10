@@ -8,10 +8,19 @@ const Dom = {
     TASK: 'templateTask',
     Task: {
       TITLE: 'templateTaskTitle',
+      DATE: 'templateTaskDate',
+      TAG: 'templateTaskTag',
     },
   },
   Popup: {
     CREATE_TASK: 'popupCreateTask',
+    INPUT: {
+      TASK_TITLE: 'inpPopupTaskTitle',
+      TASK_END_DATE: 'inpPopupTaskEndDate',
+      LIST_OF_TAGS: 'inpTags',
+      SELECTED_TAG: 'inpTags.value',
+    },
+    VALIDATION: 'newTaskForm',
   },
 };
 export default Dom;

@@ -10,16 +10,17 @@
   id='popupCreateTask'
   class='hidden fixed w-screen h-screen top-0 left-0 bg-black/70 z-10 grid place-items-center'
 >
-  <div class='flex flex-col relative min-w-[377px] bg-white p-6 rounded-2xl gap-y-4'>
+  <div data-id='newTaskForm' class='flex flex-col relative min-w-[377px] bg-white p-6 rounded-2xl gap-y-4'>
     <button data-id='btnCloseCreateTaskPopup' class='absolute top-7 right-6'>
       <i class='i-material-symbols-cancel-outline block text-neutral-400 hover:text-neutral-800 text-2xl'></i></button>
     <div class='flex flex-row'>
       <span class='text-xl font-bold'>Create task</span>
     </div>
     <div class='flex flex-row'>
-      <div class='flex flex-col w-full'>
+      <div data-id='popupTaskTitle' class='flex flex-col w-full'>
         <label class='ml-1 text-sm text-neutral-600' for='inpDate'>Title: </label>
         <input
+          data-id='inpPopupTaskTitle'
           class='bg-neutral-100 p-1.5 rounded w-full border-1 border-neutral-200'
           id='inpTitle'
           type='text'
@@ -28,9 +29,10 @@
       </div>
     </div>
     <div class='flex flex-row'>
-      <div class='flex flex-col w-full'>
+      <div data-id='popupTaskEndDate' class='flex flex-col w-full'>
         <label class='ml-1 text-sm text-neutral-600' for='inpDate'>End date: </label>
         <input
+          data-id='inpPopupTaskEndDate'
           class='bg-neutral-100 p-1.5 rounded w-full border-1 border-neutral-200'
           type='date'
           id='inpDate'
@@ -41,16 +43,13 @@
     </div>
     <div class='flex flex-row'>
       <div class='flex flex-col w-full'>
-        <label for='countries' class='ml-1 text-sm text-neutral-600'>Select tag:</label>
+        <label for='inpTags' class='ml-1 text-sm text-neutral-600'>Select tag:</label>
         <select
-          id='countries'
+          data-id='inpTags'
+          id='inpTags'
           class='bg-neutral-100 p-1.5 rounded w-full border-1 border-neutral-200 focus:border-none'
         >
-          <option selected>Choose a tag</option>
-          <option value='web'>Web</option>
-          <option value='update'>Update</option>
-          <option value='design'>Design</option>
-          <option value='content'>Content</option>
+          <!--          <option selected>Choose a tag</option>-->
         </select>
       </div>
     </div>
@@ -205,17 +204,15 @@
                 <div class='flex flex-col w-full gap-y-3'>
                   <span data-id='templateTaskTitle' class='font-bold'>Layout Design</span>
                   <div class='flex flex-row justify-between'>
-                    <div class='flex flex-row gap-x-2'>
-                      <div class='text-xs rounded-lg py-1 px-2 bg-neutral-200/60 text-neutral-600'>
+                    <div data-id='templateTaskTags' class='flex flex-row gap-x-2'>
+                      <div data-id='templateTaskTag'
+                           class='text-xs rounded-lg py-1 px-2 bg-neutral-200/60 text-neutral-600'>
                         Update
-                      </div>
-                      <div class='text-xs rounded-lg py-1 px-2 bg-neutral-200/60 text-neutral-600'>
-                        Web
                       </div>
                     </div>
                     <div class='flex flex-row items-center gap-x-1'>
                       <div class='i-mdi-clock-time-eight-outline bg-green-600'></div>
-                      <div class='text-xs text-neutral-400'>12 days left</div>
+                      <div data-id='templateTaskDate' class='text-xs text-neutral-400'>12 days left</div>
                     </div>
                   </div>
                   <div class='flex flex-row -space-x-2'>
