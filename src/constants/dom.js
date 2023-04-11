@@ -18,7 +18,7 @@ const Dom = {
       TASK_TITLE: 'inpPopupTaskTitle',
       TASK_END_DATE: 'inpPopupTaskEndDate',
       LIST_OF_TAGS: 'inpTags',
-      SELECTED_TAG: 'inpTags.value',
+      SELECTED_TAG: 'inpTags',
     },
     VALIDATION: 'newTaskForm',
   },

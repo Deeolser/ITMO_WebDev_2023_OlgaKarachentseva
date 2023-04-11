@@ -55,7 +55,10 @@ getDOM(DOM.Button.CREATE_TASK).onclick = () => {
     DOM.Popup.INPUT.TASK_END_DATE,
   );
 
-  const domPopupTaskTags = getDOM(DOM.Popup.INPUT.SELECTED_TAG);
+  const domPopupTaskTags = QUERY(
+    domPopupCreateTask,
+    DOM.Popup.INPUT.LIST_OF_TAGS,
+  );
 
   const domNewTaskForm = QUERY(domPopupCreateTask, DOM.Popup.VALIDATION);
 
@@ -75,10 +78,16 @@ getDOM(DOM.Button.CREATE_TASK).onclick = () => {
   domPopupTaskTitle.oninput = () => validateMsgHidden();
   domPopupTaskDate.oninput = () => validateMsgHidden();
 
-  // domPopupTaskTags.oninput = () => {
-  //   console.log(domPopupTaskTags.value);
-  //   validateMsg.classList.add('hidden');
-  // };
+  console.log('domPopupTaskTags', domPopupTaskTags);
+
+  domPopupTaskTags.onchange = (e) => {
+    const option = domPopupTaskTags.querySelector(
+      `[value="${domPopupTaskTags.value}"]`,
+    );
+    console.log(domPopupTaskTags.value, option);
+    option.classList.add('!bg-red-100');
+    // validateMsg.classList.add('hidden');
+  };
 
   const onClosePopup = () => {
     domPopupCreateTask.classList.add('hidden');
