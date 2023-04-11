@@ -2,6 +2,7 @@
 
 ## Homework
 
-Lesson | ToDo
+Classes | ToDo
 
-Demo - 
+Demo - itmo-webdev-olga-karachentseva-homework-javascript-todo-classes.surge.sh
+
