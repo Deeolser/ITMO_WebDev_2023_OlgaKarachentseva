@@ -1,7 +1,7 @@
 import 'uno.css';
 import '@unocss/reset/tailwind.css';
 import DOM from './src/constants/dom.js';
-import { randomString } from './src/utils/stringUtils.js';
+// import { randomString } from './src/utils/stringUtils.js';
 
 const Tags = ['Web', 'Update', 'Design', 'Content', 'Toasty!!!'];
 
@@ -28,6 +28,7 @@ Object.entries(Tags).forEach(([key, value]) => {
   option.value = key;
   option.textContent = value;
   domListOfTags.appendChild(option);
+  console.log(domListOfTags.value);
 });
 
 getDOM(DOM.Button.CREATE_TASK).onclick = () => {
@@ -69,12 +70,11 @@ getDOM(DOM.Button.CREATE_TASK).onclick = () => {
   );
   domNewTaskForm.appendChild(validateMsg);
 
-  domPopupTaskTitle.oninput = () => {
-    validateMsg.classList.add('hidden');
-  };
-  domPopupTaskDate.oninput = () => {
-    validateMsg.classList.add('hidden');
-  };
+  const validateMsgHidden = () => validateMsg.classList.add('hidden');
+
+  domPopupTaskTitle.oninput = () => validateMsgHidden();
+  domPopupTaskDate.oninput = () => validateMsgHidden();
+
   // domPopupTaskTags.oninput = () => {
   //   console.log(domPopupTaskTags.value);
   //   validateMsg.classList.add('hidden');
@@ -91,6 +91,7 @@ getDOM(DOM.Button.CREATE_TASK).onclick = () => {
     domPopupCreateTask.classList.add('hidden');
     domBtnClose.onclick = null;
     domBtnConfirm.onclick = null;
+    validateMsg.remove();
   };
 
   domBtnConfirm.onclick = () => {
