@@ -1,123 +1,269 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <meta charset='UTF-8'>
-  <link rel='icon' type='image/svg+xml' href='/vite.svg' />
-  <meta name='viewport' content='wight=device-wight, initial-scale=1.0' />
-  <title>Welcome App</title>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <title>Vite App</title>
 </head>
-<body>
-<header>Header</header>
-<main>
-  <section>
-    <article>
-      <h1>This is Header1</h1>
-      <h2>This is Header2</h2>
-      <h3>This is Header3</h3>
-      <h4>This is Header4</h4>
-      <h5>This is Header5</h5>
-      <h6>This is Header6</h6>
-    </article>
-    <article>
-      <p><b>Giraffes</b> are very beautiful and unusual animals.
-        They are the <i>tallest</i> land animals in the world. Giraffes can reach a height of 5,5 m and a weight of 900
-        kg. </br> They are famous for their long necks. But does anybody know, that giraffes have a very long tongue?
-        They even can <u>clean the ears with it!</u></br> Giraffes are usually yellow or light brown with dark stains.
-        Giraffes live in African savannas. They can live from 20 to 30 years.</br>It is interesting to know, that
-        giraffes
-        sleep only twenty minutes at a time. They sit down on the ground and bend their long neck down.</p>
-    </article>
-    <article>
-      <h3>List num:</h3>
-      <ol>
-        <li>I'm always right</li>
-        <li>If I'm wrong, look at point 1</li>
-      </ol>
-      <h3>List bull:</h3>
-      <ul>
-        <li>Bread</li>
-        <li>Oil</li>
-        <li>Milk</li>
-      </ul>
-    </article>
-    <article>
-      <div>
-        <label>Text</label>
-        <input type='text' size='50'>
-      </div>
-      <div>
-        <label>E-mail</label>
-        <input type='email'>
-      </div>
-      <div>
-        <label>Password</label>
-        <input type='password'>
-      </div>
-      <div>
-        <label>Date</label>
-        <input type='date'>
-      </div>
-      <div>
-        <label>Checkbox</label>
-        <input type='checkbox'>
-      </div>
-      <div>
-        <label>Radio</label>
-        <input type='radio'>
-      </div>
-    </article>
-    <article>
-      <form onsubmit='alert("Вы нажали на кнопку")'>
-        <div>
-          <button>Send</button>
-        </div>
-      </form>
-      <table border='1'>
-        <tr>
-          <td colspan="2">1112</td>
-          <td>13</td>
-        </tr>
-        <tr>
-          <td>21</td>
-          <td>22</td>
-          <td>33</td>
-        </tr>
-        <tr>
-          <td>31</td>
-          <td>32</td>
-          <td>33</td>
-        </tr>
-        <tr>
-          <td>41</td>
-          <td>42</td>
-          <td>43</td>
-        </tr>
-      </table>
-    </article>
-  </section>
-  <section>
-    <div>
-      <label>Choose your destiny</label>
-    <select>
-      <option>Goro</option>
-      <option>Johnny Cage</option>
-      <option>Kano</option>
-      <option>Liu Kang</option>
-      <option>Raiden</option>
-    </select>
+<body class='bg-teal-100/50 w-screen h-screen grid place-items-center p-12 font-sans'>
+<div
+  id='popupCreateTask'
+  class='hidden fixed w-screen h-screen top-0 left-0 bg-black/70 z-10 grid place-items-center'
+>
+  <div data-id='taskFields' class='flex flex-col relative min-w-[377px] bg-white p-6 rounded-2xl gap-y-4'>
+    <button data-id='btnCloseCreateTaskPopup' class='absolute top-7 right-6'>
+      <i class='i-material-symbols-cancel-outline block text-neutral-400 hover:text-neutral-800 text-2xl'></i></button>
+    <div class='flex flex-row'>
+      <span class='text-xl font-bold' data-id='title'>Create task</span>
     </div>
-  </section>
-  <section>
-    <img
-      width='100px'
-      src='https://amiel.club/uploads/posts/2022-03/1647628341_1-amiel-club-p-klassnie-kartinki-dlya-devochek-1.jpg' />
-  <img
-  width='100px'
-  src='https://www.svgrepo.com/show/412726/direct.svg'>
-  </section>
-</main>
+    <div class='flex flex-row'>
+      <div data-id='popupTaskTitle' class='flex flex-col w-full'>
+        <label class='ml-1 text-sm text-neutral-600' for='inpDate'>Title: </label>
+        <input
+          data-id='inpPopupTaskTitle'
+          class='bg-neutral-100 p-1.5 rounded w-full border-1 border-neutral-200'
+          id='inpTitle'
+          type='text'
+          placeholder='e.g. Read books'
+        />
+      </div>
+    </div>
+    <div class='flex flex-row'>
+      <div data-id='popupTaskEndDate' class='flex flex-col w-full'>
+        <label class='ml-1 text-sm text-neutral-600' for='inpDate'>End date: </label>
+        <input
+          data-id='inpPopupTaskEndDate'
+          class='bg-neutral-100 p-1.5 rounded w-full border-1 border-neutral-200'
+          type='date'
+          id='inpDate'
+          name='trip-start'
+          min='2018-01-01'
+        />
+      </div>
+    </div>
+    <div class='flex flex-row'>
+      <div class='flex flex-col w-full'>
+        <label for='inpTags' class='ml-1 text-sm text-neutral-600'>Select tag:</label>
+        <select
+          data-id='inpTags'
+          id='inpTags'
+          class='bg-neutral-100 p-1.5 rounded w-full border-1 border-neutral-200 focus:border-none'
+        >
+          <!--          <option selected>Choose a tag</option>-->
+        </select>
+      </div>
+    </div>
+    <div class='flex flex-row pt-2'>
+      <button data-id='btnConfirmTaskPopup' class='bg-teal-600 text-white p-2 rounded-lg w-full font-bold'>Create
+      </button>
+    </div>
+  </div>
+</div>
+<div class='container flex flex-row w-full h-full bg-gray-200 rounded-3xl p-4'>
+  <aside class='flex flex-col min-w-[200px]'>
+    <div class='flex flex-col h-full justify-between'>
+      <div class='flex flex-row items-center gap-x-2 py-4'>
+        <i class='i-ph-cube-focus-bold text-teal-700 text-4xl'></i>
+        <span class='font-bold text-xl'>Taski</span>
+      </div>
+      <div class='flex flex-col mr-4 pb-3 border-b border-neutral-300'>
+        <div class='flex flex-row gap-x-3 py-2'>
+          <i class='i-material-symbols:account-circle text-4xl py-6'></i>
+          <div class='flex flex-col'>
+            <span class='font-bold'>Olga Karachentseva</span>
+            <span class='text-neutral-600'>Premium account</span>
+          </div>
+        </div>
+        <div class='flex flex-col gap-y-2 text-neutral-600'>
+          <div class='flex flex-row justify-between items-center '>
+            <div class='flex flex-row items-center'>
+              <i class='i-fluent:pulse-24-filled text-xl'></i>
+              <span class='px-2'>Activity</span>
+            </div>
+            <div class='bg-teal-600 text-white rounded-xl px-3'>3</div>
+          </div>
+          <div class='flex flex-row items-center pr-6'>
+            <i class='i-material-symbols:person text-xl'></i>
+            <span class='px-2'>My Profile</span>
+          </div>
+        </div>
+      </div>
+      <div class='flex flex-col mr-4 gap-y-2 pb-3'>
+        <div class='flex flex-row justify-between items-center gap-x-3 py-2'>
+          <span class='font-bold'>Pages</span>
+          <i class='i-mdi-chevron-up bg-neutral-600 py-6 hover:bg-neutral-800'></i>
+        </div>
+        <div class='flex flex-col gap-y-2 text-neutral-600'>
+          <div class='flex flex-row justify-between items-center '>
+            <div class='flex flex-row items-center hover:text-teal-800'>
+              <i class='i-ic:outline-dashboard text-xl'></i>
+              <span class='px-2'>Dashboard</span>
+            </div>
+            <div class='bg-teal-600 text-white rounded-xl px-3'></div>
+          </div>
+        </div>
+        <div class='flex flex-col gap-y-2 text-neutral-600'>
+          <div class='flex flex-row justify-between items-center '>
+            <div class='flex flex-row items-center hover:text-teal-800'>
+              <i class='i-material-symbols:task-outline text-xl'></i>
+              <span class='px-2'>Tasks</span>
+            </div>
+            <div class='bg-teal-600 text-white rounded-xl px-3'></div>
+          </div>
+        </div>
+        <div class='flex flex-col gap-y-2 text-neutral-600'>
+          <div class='flex flex-row justify-between items-center '>
+            <div class='flex flex-row items-center hover:text-teal-800'>
+              <i class='i-fluent:people-team-24-regular text-xl'></i>
+              <span class='px-2'>Teams</span>
+            </div>
+            <div class='bg-teal-600 text-white rounded-xl px-3'></div>
+          </div>
+        </div>
+        <div class='flex flex-col gap-y-2 text-neutral-600'>
+          <div class='flex flex-row justify-between items-center '>
+            <div class='flex flex-row items-center hover:text-teal-800'>
+              <i class='i-ic:outline-message text-xl'></i>
+              <span class='px-2'>Messages</span>
+            </div>
+            <div class='bg-teal-600 text-white rounded-xl px-3'></div>
+          </div>
+        </div>
+      </div>
+      <div class='flex flex-col text-neutral-400 text-sm'>
+        <div class='flex flex-row items-center'>
+          <i class='i-material-symbols:info-outline'></i>
+          <span>Help Center</span>
+        </div>
+        <div class='flex flex-row items-center'>
+          <i class='i-material-symbols:logout'></i>
+          <span>Log out</span>
+        </div>
+      </div>
+    </div>
+
+
+  </aside>
+  <main class='flex flex-col bg-gray-50 rounded-2xl w-full px-4 pt-2 gap-y-2'>
+    <div class='flex flex-row justify-between items-center'>
+      <div class='flex flex-col'>
+        <span class='text-lg font-bold'>Team Task</span>
+      </div>
+      <div class='flex flex-col'>
+        <div class='flex flex-row justify-between items-center gap-x-4'>
+          <span
+            class='text-neutral-400 bg-gray-200 border shadow-inner pl-2 pr-20 py-2 rounded-lg'>Search</span>
+          <button id='btnCreateTask' class='px-4 py-2 bg-teal-600 rounded-lg'>
+            <span class='text-white'>+ Create Task</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class='flex flex-row justify-between items-center'>
+      <div class='flex flex-col'>
+        <div class='flex flex-row items-center gap-x-1 text-neutral-400'>
+          <i class='i-mdi-filter hover:bg-neutral-600'></i>
+          <span class='text-sm'>Filters</span>
+          <i class='i-mdi-chevron-down hover:bg-neutral-600'></i></div>
+      </div>
+      <div class='flex flex-col'>
+        <div class='flex flex-row items-center gap-x-8'>
+          <div class='flex flex-row text-neutral-400 gap-x-1'>
+            <span class='text-xs'>Sort by</span>
+            <i class='i-mdi-chevron-down hover:bg-neutral-600'></i>
+          </div>
+          <div class='flex flex-row'>
+            <div class='flex flex-col'>
+              <div class='flex flex-row text-neutral-400'>
+                <span class='text-xs'>Group by:</span>
+                <div class='flex flex-row'>
+                  <span class='text-xs'> Status</span>
+                  <i class='i-mdi-chevron-down hover:bg-neutral-600'></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class='flex flex-col h-full justify-between'>
+      <div class='flex flex-row justify-between gap-x-4'>
+        <div class='flex flex-col h-full w-1/3 bg-gray-200 border-1 border-gray-300/50 p-2 rounded-xl'>
+          <div class='flex flex-row justify-between p-1'>
+            <div class='flex flex-row font-bold gap-x-1'>
+              <span>To Do</span>
+              <span class='text-gray-400'>2</span>
+            </div>
+            <div class='flex flex-col text-neutral-500'>+ ...</div>
+          </div>
+          <div class='flex flex-row pt-2'>
+            <div class='flex flex-col justify-start w-full gap-y-4 justify-between'>
+              <div id='templateTask'
+                   class='flex flex-row shadow rounded-lg p-3 bg-neutral-50 border-1 border-neutral-100'>
+                <div class='flex flex-col w-full gap-y-3'>
+                  <span data-id='templateTaskTitle' class='font-bold'>Layout Design</span>
+                  <div class='flex flex-row justify-between'>
+                    <div data-id='templateTaskTags' class='flex flex-row gap-x-2'>
+                      <div data-id='templateTaskTag'
+                           class='text-xs rounded-lg py-1 px-2 bg-neutral-200/60 text-neutral-600'>
+                        Update
+                      </div>
+                    </div>
+                    <div class='flex flex-row items-center gap-x-1'>
+                      <div class='i-mdi-clock-time-eight-outline bg-green-600'></div>
+                      <div data-id='templateTaskDate' class='text-xs text-neutral-400'>12 days left</div>
+                    </div>
+                  </div>
+                  <div class='flex flex-row -space-x-2'>
+                    <span class='w-6 h-6 rounded-full bg-green-300 border-2 border-green-500'></span>
+                    <span class='w-6 h-6 rounded-full bg-yellow-300 border-2 border-yellow-500'></span>
+                    <span class='grid place-items-center w-6 h-6 rounded-full bg-blue-300 border-2 border-blue-500'>
+                    <span class='text-xs font-bold text-blue-600'>+2</span>
+                  </span>
+                  </div>
+                </div>
+              </div>
+              <button class='rounded-lg bg-neutral-50 w-full py-2 shadow text-neutral-500'>
+                + Add task
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class='flex flex-col h-full w-1/3 bg-gray-200 border-1 border-gray-300/50 p-2 rounded-xl'>
+          <div class='flex flex-row justify-between p-1'>
+            <div class='flex flex-row font-bold gap-x-1'>
+              <span>In progress</span>
+              <span class='text-gray-400'></span>
+            </div>
+            <div class='flex flex-col text-neutral-500'></div>
+          </div>
+          <div class='flex flex-row pt-2'>
+          </div>
+        </div>
+        <div class='flex flex-col h-full w-1/3 bg-gray-200 border-1 border-gray-300/50 p-2 rounded-xl'>
+          <div class='flex flex-row justify-between p-1'>
+            <div class='flex flex-row font-bold gap-x-1'>
+              <span>Ready</span>
+              <span class='text-gray-400'></span>
+            </div>
+            <div class='flex flex-col text-neutral-500'></div>
+          </div>
+          <div class='flex flex-row pt-2'>
+          </div>
+        </div>
+      </div>
+      <div class='flex flex-row'>
+        <div class='flex flex-col'>
+          <div class='flex flex-row text-neutral-400 py-3'>
+            <span class='text-xs'> 10 tasks</span>
+            <i class='i-mdi-chevron-down hover:bg-neutral-600'></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type='module' src='main.js'></script>
 </body>
 </html>
-
-
-
