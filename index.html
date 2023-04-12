@@ -10,11 +10,11 @@
   id='popupCreateTask'
   class='hidden fixed w-screen h-screen top-0 left-0 bg-black/70 z-10 grid place-items-center'
 >
-  <div data-id='newTaskForm' class='flex flex-col relative min-w-[377px] bg-white p-6 rounded-2xl gap-y-4'>
+  <div data-id='taskFields' class='flex flex-col relative min-w-[377px] bg-white p-6 rounded-2xl gap-y-4'>
     <button data-id='btnCloseCreateTaskPopup' class='absolute top-7 right-6'>
       <i class='i-material-symbols-cancel-outline block text-neutral-400 hover:text-neutral-800 text-2xl'></i></button>
     <div class='flex flex-row'>
-      <span class='text-xl font-bold'>Create task</span>
+      <span class='text-xl font-bold' data-id='title'>Create task</span>
     </div>
     <div class='flex flex-row'>
       <div data-id='popupTaskTitle' class='flex flex-col w-full'>

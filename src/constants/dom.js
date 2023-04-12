@@ -14,13 +14,15 @@ const Dom = {
   },
   Popup: {
     CREATE_TASK: 'popupCreateTask',
+    CreateTask: {
+      TITLE: 'title',
+    },
     INPUT: {
       TASK_TITLE: 'inpPopupTaskTitle',
       TASK_END_DATE: 'inpPopupTaskEndDate',
       LIST_OF_TAGS: 'inpTags',
-      SELECTED_TAG: 'inpTags',
     },
-    VALIDATION: 'newTaskForm',
+    FIELDS_OF_TASK: 'taskFields',
   },
 };
 export default Dom;

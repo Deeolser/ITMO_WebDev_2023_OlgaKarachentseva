@@ -1,7 +1,6 @@
 import 'uno.css';
 import '@unocss/reset/tailwind.css';
 import DOM from './src/constants/dom.js';
-// import { randomString } from './src/utils/stringUtils.js';
 
 const Tags = ['Web', 'Update', 'Design', 'Content', 'Toasty!!!'];
 
@@ -60,7 +59,7 @@ getDOM(DOM.Button.CREATE_TASK).onclick = () => {
     DOM.Popup.INPUT.LIST_OF_TAGS,
   );
 
-  const domNewTaskForm = QUERY(domPopupCreateTask, DOM.Popup.VALIDATION);
+  const domTaskFields = QUERY(domPopupCreateTask, DOM.Popup.FIELDS_OF_TASK);
 
   const validateMsg = createDOM('span');
   validateMsg.textContent = 'Task title, end date and tags must be filled';
@@ -71,7 +70,7 @@ getDOM(DOM.Button.CREATE_TASK).onclick = () => {
     'font-bold',
     'px-1',
   );
-  domNewTaskForm.appendChild(validateMsg);
+  domTaskFields.appendChild(validateMsg);
 
   const validateMsgHidden = () => validateMsg.classList.add('hidden');
 
@@ -85,8 +84,9 @@ getDOM(DOM.Button.CREATE_TASK).onclick = () => {
       `[value="${domPopupTaskTags.value}"]`,
     );
     console.log(domPopupTaskTags.value, option);
-    option.classList.add('!bg-red-100');
-    // validateMsg.classList.add('hidden');
+    option.classList.add('bg-red-100');
+    console.log(typeof 'domPopupTaskTags.value');
+    validateMsgHidden();
   };
 
   const onClosePopup = () => {
@@ -104,14 +104,21 @@ getDOM(DOM.Button.CREATE_TASK).onclick = () => {
   };
 
   domBtnConfirm.onclick = () => {
-    console.log(domPopupTaskTitle.value);
-    console.log(domPopupTaskDate.value);
-    console.log(domPopupTaskTags);
-    if (domPopupTaskTitle.value && domPopupTaskDate.value) {
+    console.log('task title', domPopupTaskTitle.value);
+    console.log('task date', domPopupTaskDate.value);
+    console.log('task tag id', domPopupTaskTags.value);
+
+    if (
+      domPopupTaskTitle.value &&
+      domPopupTaskDate.value &&
+      domPopupTaskTags.value
+    ) {
+      const tagId = parseInt(domPopupTaskTags.value);
+      console.log(typeof tagId);
       const taskVO = new TaskVO(
         domPopupTaskTitle.value,
         domPopupTaskDate.value,
-        Tags[0],
+        Tags[tagId],
       );
       const taskView = domTask.cloneNode(true);
 
