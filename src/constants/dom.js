@@ -1,7 +1,7 @@
 const Dom = {
   Button: {
-    CREATE_TASK: 'btnCreateTask',
-    CLOSE_POPUP_CREATE_TASK: 'btnCloseCreateTaskPopup',
+    CONTAINER: 'btnCreateTask',
+    POPUP_CREATE_TASK_CLOSE: 'btnCloseCreateTaskPopup',
     POPUP_CREATE_TASK_CONFIRM: 'btnConfirmTaskPopup',
   },
   Template: {
@@ -11,7 +11,7 @@ const Dom = {
     },
   },
   Popup: {
-    CREATE_TASK: 'popupCreateTask',
+    CONTAINER: 'popupContainer',
     CreateTask: {
       TITLE: 'title',
     },
