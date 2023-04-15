@@ -1,6 +1,6 @@
 const Dom = {
   Button: {
-    CONTAINER: 'btnCreateTask',
+    CREATE_TASK: 'btnCreateTask',
     POPUP_CREATE_TASK_CLOSE: 'btnCloseCreateTaskPopup',
     POPUP_CREATE_TASK_CONFIRM: 'btnConfirmTaskPopup',
   },
