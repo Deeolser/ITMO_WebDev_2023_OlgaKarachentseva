@@ -1,7 +1,6 @@
 import 'uno.css';
 import '@unocss/reset/tailwind.css';
 import DOM from './src/constants/dom';
-import { randomString } from './src/utils/stringUtils.js';
 
 const KEY_LOCAL_TASKS = 'tasks';
 
@@ -36,47 +35,89 @@ const tasks = rawTasks
 tasks.forEach((taskVO) => renderTask(taskVO));
 console.log('> tasks:', tasks);
 
+const taskOperations = {
+  [DOM.Template.Task.BTN_DELETE]: (taskVO, domTask) => {
+    renderTaskPopup(
+      taskVO,
+      'Confirm Delete task',
+      'Delete',
+      (taskTitle, taskDate, taskTag) => {
+        console.log('> Delete task -> On Confirm', {
+          taskTitle,
+          taskDate,
+          taskTag,
+        });
+        const indexOfTasks = tasks.indexOf(taskVO);
+        tasks.splice(indexOfTasks, 1);
+        domTaskColumn.removeChild(domTask);
+        saveTask();
+      },
+    );
+  },
+  [DOM.Template.Task.BTN_EDIT]: (taskVO, domTask) => {
+    renderTaskPopup(
+      taskVO,
+      'Update task',
+      'Update',
+      (taskTitle, taskDate, taskTag) => {
+        console.log('> Update task -> On Confirm', {
+          taskTitle,
+          taskDate,
+          taskTag,
+        });
+        taskVO.title = taskTitle;
+        const domTaskUpdated = renderTask(taskVO);
+        domTaskColumn.replaceChild(domTaskUpdated, domTask);
+        saveTask();
+      },
+    );
+  },
+};
+
 domTaskColumn.onclick = (e) => {
   e.stopPropagation();
   console.log('domTaskColumn', e.target);
-  const domTaskSelected = e.target;
-  const taskId = domTaskSelected.dataset.id;
-  if (!taskId) return;
+  const domTaskElement = e.target;
+  const taskBtn = domTaskElement.dataset.btn;
+
+  const isNotTaskBtn = !taskBtn;
+  if (isNotTaskBtn) return;
+
+  const allowedButtons = [
+    DOM.Template.Task.BTN_EDIT,
+    DOM.Template.Task.BTN_DELETE,
+  ];
+  if (!allowedButtons.includes(taskBtn)) return;
+
+  let taskId;
+  let domTask = domTaskElement;
+  do {
+    domTask = domTask.parentNode;
+    taskId = domTask.dataset.id;
+  } while (!taskId);
 
   const taskVO = tasks.find((task) => task.id === taskId);
-  console.log('>taskVO:', taskVO);
-  renderTaskPopup(
-    taskVO,
-    'Update task',
-    'Update',
-    (taskTitle, taskDate, taskTags) => {
-      console.log('> Update task -> On Confirm', {
-        taskVO,
-        taskTitle,
-        taskDate,
-        taskTags,
-      });
-      taskVO.title = taskTitle;
-      const domTaskUpdated = renderTask(taskVO);
-      domTaskColumn.replaceChild(domTaskUpdated, domTaskSelected);
-      saveTask();
-    },
-  );
-};
+  console.log('> taskVO:', taskVO);
 
+  const taskOperation = taskOperations[taskBtn];
+  if (taskOperation) {
+    taskOperation(taskVO, domTask);
+  }
+};
 getDOM(DOM.Button.CREATE_TASK).onclick = () => {
   console.log('> domPopupCreateTask.classList');
   renderTaskPopup(
     null,
     'Create task',
     'Create',
-    (taskTitle, taskDate, taskTags) => {
+    (taskTitle, taskDate, taskTag) => {
       console.log('> Create task -> On Confirm');
       const taskId = `task_${Date.now()}`;
-      const taskVO = new TaskVO(taskId, taskTitle, Date.now(), Tags[0]);
+      const taskVO = new TaskVO(taskId, taskTitle, taskDate, taskTag);
 
       renderTask(taskVO);
       tasks.push(taskVO);
+
       saveTask();
     },
   );
@@ -113,11 +154,11 @@ async function renderTaskPopup(
     Tags,
     confirmText,
     (taskTitle, taskDate, taskTags) => {
-      console.log('Main -> processDataCallback', {
+      console.log('Main -> renderTaskPopup: confirmCallback', {
         taskTitle,
         taskDate,
         taskTags,
-      }); //файл, функция и ее параметры
+      });
       processDataCallback(taskTitle, taskDate, taskTags);
       onClosePopup();
     },
