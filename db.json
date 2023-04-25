@@ -1,0 +1,23 @@
+{
+  "tasks": [
+    {
+      "title": "Task 1",
+      "date": "date",
+      "tags": [
+        "web"
+      ],
+      "id": 1
+    },
+    {
+      "title": "Task 2",
+      "date": "date",
+      "tags": [
+        "web"
+      ],
+      "id": 2
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

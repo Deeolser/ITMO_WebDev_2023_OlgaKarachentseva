@@ -1,6 +1,7 @@
 import 'uno.css';
 import '@unocss/reset/tailwind.css';
 import DOM from './src/constants/dom';
+import { delay } from './src/utils/timeUtils.js';
 
 const KEY_LOCAL_TASKS = 'tasks';
 
@@ -28,6 +29,18 @@ domTemplateTask.removeAttribute('id');
 domTemplateTask.remove();
 
 const rawTasks = localStorage.getItem(KEY_LOCAL_TASKS);
+fetch('http://localhost:3000/tasks')
+  .then((response) => {
+    return response.ok && response.json();
+  })
+  .then((rawTasks) => {
+    if (rawTasks && rawTasks instanceof Object) {
+      console.log('json', rawTasks);
+      const serverTasks = rawTasks.map((json) => TaskVO.fromJSON(json));
+      serverTasks.forEach((taskVO) => renderTask(taskVO));
+      tasks.push(...rawTasks.map((json) => TaskVO.fromJSON(json)));
+    }
+  });
 
 const tasks = rawTasks
   ? JSON.parse(rawTasks).map((json) => TaskVO.fromJSON(json))
@@ -147,6 +160,7 @@ async function renderTaskPopup(
     domPopupContainer.children[0].remove();
     domPopupContainer.append(domSpinner);
     domPopupContainer.classList.add('hidden');
+    document.onkeyup = null;
   };
 
   const TaskPopup = (await import('./src/view/popup/TaskPopup')).default;
@@ -170,15 +184,17 @@ async function renderTaskPopup(
     taskPopupInstance.taskTitle = taskVO.title;
   }
 
-  // setTimeout(() => {
-  domSpinner.remove();
-  document.onkeyup = (e) => {
-    if (e.key === 'Escape') {
-      onClosePopup();
-    }
-  };
-  domPopupContainer.append(taskPopupInstance.render());
-  // }, 1000);
+  delay(1000).then(() => {
+    console.log('render 1');
+    domSpinner.remove();
+    document.onkeyup = (e) => {
+      if (e.key === 'Escape') {
+        onClosePopup();
+      }
+    };
+
+    domPopupContainer.append(taskPopupInstance.render());
+  });
 }
 
 function saveTask() {
