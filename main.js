@@ -36,8 +36,7 @@ async function main() {
     tasks.forEach((taskVO) => renderTask(taskVO));
     console.log('> tasks:', tasks);
   });
-  tasksController.retrieveTasks();
-
+  await tasksController.retrieveTasks();
 
   const taskOperations = {
     [DOM.Button.CREATE_TASK]: () => {
@@ -182,4 +181,4 @@ async function main() {
   }
 }
 
-main();
+await main();
