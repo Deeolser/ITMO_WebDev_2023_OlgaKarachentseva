@@ -29,5 +29,8 @@
     "trailingComma": "all",
     "singleQuote": true,
     "tabWidth": 2
+  },
+  "dependencies": {
+    "toastify-js": "^1.12.0"
   }
 }
