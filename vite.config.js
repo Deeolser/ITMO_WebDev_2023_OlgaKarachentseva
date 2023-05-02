@@ -5,25 +5,25 @@ import presetWebFonts from '@unocss/preset-web-fonts';
 
 export default {
   plugins: [
-    UnoCSS({
-      include: ['./index.html', 'main.js', './src/**/**.js'],
-      presets: [
-        presetUno(),
-        presetIcons(),
-        presetWebFonts({
-          provider: 'google', // default provider
-          fonts: {
-            // these will extend the default theme
-            // sans: 'Noto Sans',
-            sans: {
-              name: 'Noto Sans',
-              weights: ['500', '700'],
-              italic: true,
-            },
-          },
-        }),
-      ],
-      rules: [],
-    }),
+    // UnoCSS({
+    //   include: ['./index.html', 'main.js', './src/**/**.js'],
+    //   presets: [
+    //     presetUno(),
+    //     presetIcons(),
+    //     presetWebFonts({
+    //       provider: 'google', // default provider
+    //       fonts: {
+    //         // these will extend the default theme
+    //         // sans: 'Noto Sans',
+    //         sans: {
+    //           name: 'Noto Sans',
+    //           weights: ['500', '700'],
+    //           italic: true,
+    //         },
+    //       },
+    //     }),
+    //   ],
+    //   rules: [],
+    // }),
   ],
 };
