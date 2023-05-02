@@ -1,4 +1,4 @@
-# ITMO WebDew 2023 Olga Karachetseva
+# ITMO_WebDev_2023_OlgaKarachentseva
+## JavaScript
 
-- IDE Webstorm and Visio Studio Code
-- My first homework
+Homework | Loop Color
