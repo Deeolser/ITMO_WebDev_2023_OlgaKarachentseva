@@ -88,7 +88,7 @@ async function main() {
             .deleteTask(taskId)
             .then(() => {
               console.log('> Delete task -> On Confirm: Deleted');
-              snowToastWithText(`Your task "${taskVO.title}" deleted`);
+              snowToastWithText(`Your task "${taskId.title}" deleted`);
             })
             .catch();
         },
