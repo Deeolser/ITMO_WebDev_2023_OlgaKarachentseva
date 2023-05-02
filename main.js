@@ -7,6 +7,7 @@ import TaskVO from './src/mvc/model/VO/TaskVO.js';
 import TasksController from './src/mvc/controller/TasksController.js';
 import 'toastify-js/src/toastify.css';
 import Toastify from 'toastify-js';
+import NetworkService from './src/service/networkService.js';
 
 const KEY_LOCAL_TASKS = 'tasks';
 
@@ -21,7 +22,8 @@ domTemplateTask.removeAttribute('id');
 domTemplateTask.remove();
 
 const tasksModel = new TasksModel();
-const tasksController = new TasksController(tasksModel);
+const networkService = new NetworkService('http://localhost:3000');
+const tasksController = new TasksController(tasksModel, networkService);
 
 function renderTask(taskVO) {
   const domTaskClone = domTemplateTask.cloneNode(true);
@@ -88,13 +90,14 @@ async function main() {
             .deleteTask(taskId)
             .then(() => {
               console.log('> Delete task -> On Confirm: Deleted');
-              snowToastWithText(`Your task "${taskId.title}" deleted`);
+              snowToastWithText(`Your task "${taskVO.title}" deleted`);
             })
             .catch();
         },
       );
     },
-    [DOM.Template.Task.BTN_EDIT]: (taskVO, domTask) => {
+    [DOM.Template.Task.BTN_EDIT]: (taskId) => {
+      const taskVO = tasksModel.getTaskById(taskId);
       renderTaskPopup(
         taskVO,
         'Update task',
@@ -105,10 +108,11 @@ async function main() {
             taskDate,
             taskTag: taskTags,
           });
-          taskVO.title = taskTitle;
-          const domTaskUpdated = renderTask(taskVO);
-          domTaskColumn.replaceChild(domTaskUpdated, domTask);
-          saveTask();
+          tasksController.updateTaskById(taskId, taskTitle, taskDate, taskTags);
+          // taskVO.title = taskTitle;
+          // const domTaskUpdated = renderTask(taskVO);
+          // domTaskColumn.replaceChild(domTaskUpdated, domTask);
+          // saveTask();
         },
       );
     },

@@ -2,15 +2,17 @@ import TaskVO from '../model/VO/TaskVO.js';
 
 class TasksController {
   #model;
+  #networkService;
 
-  constructor(model) {
+  constructor(model, networkService) {
     this.#model = model;
+    this.#networkService = networkService;
   }
 
   async retrieveTasks() {
     try {
-      this.#model.tasks = await fetch('http://localhost:3000/tasks')
-        .then((response) => response.ok && response.json())
+      this.#model.tasks = await this.#networkService
+        .retrieveFromPath('tasks')
         .then((rawTasks) => {
           if (rawTasks && rawTasks instanceof Array) {
             console.log('json', rawTasks);
@@ -33,7 +35,7 @@ class TasksController {
     console.log('> TaskController -> deleteTask', taskId);
     console.log('> TaskController -> createTask');
     return fetch(`http://localhost:3000/tasks/${taskId}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     })
       .then((response) => {
         console.log('> TaskController > deleteTask: response=', response.ok);
@@ -45,12 +47,10 @@ class TasksController {
         console.error('> TaskController > deleteTask: error=', e);
         throw new Error(e.toString());
       });
-
-
   }
 
   createTask(taskTitle, taskDate, taskTags) {
-    console.log('> TaskController -> createTask');
+    console.log('> TasksController -> createTask');
     return fetch('http://localhost:3000/tasks', {
       method: 'POST',
       headers: {
@@ -64,22 +64,39 @@ class TasksController {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('> TaskController > createTask: data=', data);
+        console.log('> TaskController -> createTask: data =', data);
         const taskVO = TaskVO.fromJSON(data);
         this.#model.addTask(taskVO);
         return taskVO;
       })
       .catch((e) => {
-        console.error('> TaskController > createTask: error=', e);
+        console.error('> TaskController -> createTask: error =', e);
         throw new Error(e.toString());
       });
-    const taskId = `task_${Date.now()}`;
-    const taskVO = new TaskVO(taskId, taskTitle, taskDate, taskTags);
+  }
 
-    // renderTask(taskVO);
-    // tasks.push(taskVO);
-    //
-    // saveTask();
+  updateTaskById(taskId, taskTitle, taskDate, taskTags) {
+    console.log('> TaskController -> updateTask', taskId);
+    return fetch(`http://localhost:3000/tasks/${taskId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: taskTitle,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('> TaskController -> updateTask: data =', data);
+        this.#model.updateTaskById(taskId, data);
+        // this.#model.addTask(taskVO);
+        // return taskVO;
+      })
+      .catch((e) => {
+        console.error('> TaskController -> createTask: error =', e);
+        throw new Error(e.toString());
+      });
   }
 }
 
