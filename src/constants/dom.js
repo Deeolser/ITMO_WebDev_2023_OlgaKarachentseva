@@ -1,12 +1,15 @@
-const Dom = {
+const DOM = {
+  INVOICE_INPUT: {
+    NUMBER: 'inputInvoiceNumber',
+  },
   Button: {
-    CREATE_TASK: 'btnCreateTask',
+    ADD_WORK_ITEM: 'btnAddWorkItem',
     POPUP_CREATE_TASK_CLOSE: 'btnCloseCreateTaskPopup',
     POPUP_CREATE_TASK_CONFIRM: 'btnConfirmTaskPopup',
   },
   Template: {
-    TASK: 'templateTask',
-    Task: {
+    ITEM: 'layout-template-fro-work-item',
+    WORK: {
       TITLE: 'templateTaskTitle',
       BTN_EDIT: 'btnEdit',
       BTN_DELETE: 'btnDelete',
@@ -19,4 +22,4 @@ const Dom = {
     },
   },
 };
-export default Dom;
+export default DOM;

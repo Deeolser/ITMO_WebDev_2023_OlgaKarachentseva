@@ -1,41 +1,41 @@
 import 'uno.css';
 import '@unocss/reset/tailwind.css';
-// import DOM from './src/constants/dom';
-//
-// const KEY_LOCAL_TASKS = 'tasks';
-//
-// const Tags = ['Web', 'Update', 'Design', 'Content'];
-//
-// class TaskVO {
-//   static fromJSON(json) {
-//     return new TaskVO(json.id, json.title, json.date, json.tag);
-//   }
-//
-//   constructor(id, title, date, tag) {
-//     this.id = id;
-//     this.title = title;
-//     this.date = date;
-//     this.tag = tag;
-//   }
-// }
-//
-// const getDOM = (id) => document.getElementById(id);
-// const QUERY = (container, id) => container.querySelector(`[data-id="${id}"]`);
-//
-// const domTemplateTask = getDOM(DOM.Template.TASK);
-// const domTaskColumn = domTemplateTask.parentNode;
-// domTemplateTask.removeAttribute('id');
-// domTemplateTask.remove();
-//
-// const rawTasks = localStorage.getItem(KEY_LOCAL_TASKS);
-//
-// const tasks = rawTasks
-//   ? JSON.parse(rawTasks).map((json) => TaskVO.fromJSON(json))
+import InvoiceVO from "./src/mvc/model/VO/InvoiceVO.js";
+import WorkItemVO from "./src/mvc/model/VO/WorkItemVO.js";
+import DOM from './src/constants/dom';
+
+const KEY_LOCAL_INVOICE = 'invoice';
+
+const getDOM = (id) => document.getElementById(id);
+const QUERY = (container, id) => container.querySelector(`[data-id="${id}"]`);
+
+const domInvoiceNum = getDOM(DOM.INVOICE_INPUT.NUMBER);
+domInvoiceNum.onchange = () => {
+  console.log('change number')
+  if (domInvoiceNum.value) {
+    console.log(domInvoiceNum.value)
+  } else {
+    window.alert('Enter the number');
+  }
+}
+
+
+const domTemplateItem = getDOM(DOM.Template.ITEM);
+// console.log(domTemplateItem)
+// const domItemColumn = domTemplateItem.parentNode;
+// domTemplateItem.removeAttribute('id');
+// domTemplateItem.remove();
+// console.log(domItemColumn)
+
+// const rawItems = localStorage.getItem(KEY_LOCAL_INVOICE);
+// console.log(rawItems)
+// const invoice = rawItems
+// ? JSON.parse(rawItems).map((json) => TaskVO.fromJSON(json))
 //   : [];
-// tasks.forEach((taskVO) => renderTask(taskVO));
-// console.log('> tasks:', tasks);
-//
-// const taskOperations = {
+//  tasks.forEach((taskVO) => renderTask(taskVO));
+//  console.log('> tasks:', tasks);
+// //
+//  const taskOperations = {
 //   [DOM.Template.Task.BTN_DELETE]: (taskVO, domTask) => {
 //     renderTaskPopup(
 //       taskVO,
