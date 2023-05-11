@@ -8,8 +8,8 @@ const DOM = {
     POPUP_CREATE_TASK_CONFIRM: 'btnConfirmTaskPopup',
   },
   Template: {
-    ITEM: 'layout-template-fro-work-item',
-    WORK: {
+    ITEMS: 'layout-template-fro-work-item',
+    WORK_ITEM: {
       TITLE: 'templateTaskTitle',
       BTN_EDIT: 'btnEdit',
       BTN_DELETE: 'btnDelete',

@@ -10,6 +10,11 @@ const KEY_LOCAL_INVOICE = 'invoice';
 const getDOM = (id) => document.getElementById(id);
 const QUERY = (container, id) => container.querySelector(`[data-id="${id}"]`);
 
+const domTemplateWorkItems = getDOM(DOM.Template.ITEMS);
+const domTableWorkItems = domTemplateWorkItems.parentNode;
+domTemplateWorkItems.removeAttribute('id');
+domTemplateWorkItems.remove();
+
 const rawInvoice = localStorage.getItem(KEY_LOCAL_INVOICE);
 
 
