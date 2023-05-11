@@ -5,11 +5,10 @@ import WorkItemVO from "./mvc/model/VO/WorkItemVO.js";
 import DOM from './constants/dom.js';
 
 
-const KEY_LOCAL_INVOICE = 'invoice';
+const KEY_LOCAL_INVOICE = 'tasks';
 
 const getDOM = (id) => document.getElementById(id);
 const QUERY = (container, id) => container.querySelector(`[data-id="${id}"]`);
-
 
 const domTemplateItem = getDOM(DOM.Template.ITEM);
 console.log(domTemplateItem)
@@ -172,5 +171,5 @@ async function renderTaskPopup(
 }
 
 function saveTask() {
-  localStorage.setItem(KEY_LOCAL_INVOICE, JSON.stringify(invoice));
+  localStorage.setItem(KEY_LOCAL_INVOICE, JSON.stringify(tasks));
 }
