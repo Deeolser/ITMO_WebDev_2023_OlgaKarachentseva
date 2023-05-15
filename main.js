@@ -22,10 +22,12 @@ const domInvoiceId = getDOM(DOM.INVOICE_INPUT.NUMBER);
 const invoiceIdMask = [/\D/, /\D/, /\D/, /\D/];
 const invoicePercentMask = [/\D/, /\D/];
 
+const invoice = JSON.parse(rawInvoice);
 
-const invoice = rawInvoice
-  ? JSON.parse(rawInvoice).map((json) => InvoiceVO.fromJSON(json))
-  : [];
+if (invoice) {
+  domInvoiceId.value = invoice.id
+}
+
 console.log('> invoice:', invoice, typeof invoice);
 
 domInvoiceId.addEventListener('input', (e) => maskForNum(e, invoiceIdMask));
@@ -33,6 +35,8 @@ domInvoiceId.addEventListener("blur", (e) => {
     if (domInvoiceId.value) {
       const invoiceId = domInvoiceId.value
       console.log('invoiceId = ', invoiceId)
+      const invoiceVO = new InvoiceVO(invoiceId)
+      saveInvoice(invoiceVO)
     } else {
       window.alert('Enter the invoice number')
     }
@@ -40,6 +44,7 @@ domInvoiceId.addEventListener("blur", (e) => {
 )
 
 
-function saveInvoice() {
-  localStorage.setItem(KEY_LOCAL_INVOICE, JSON.stringify(invoice));
+function saveInvoice(x) {
+  localStorage.setItem(KEY_LOCAL_INVOICE, JSON.stringify(x));
+  console.log('Invoice written to localStorage ', x)
 }

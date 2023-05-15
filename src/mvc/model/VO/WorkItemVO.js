@@ -1,13 +1,13 @@
 class WorkItemVO {
-  static fromJSON(json) {
-    return new WorkItemVO(
-      json.items.id,
-      json.items.title,
-      json.items.description,
-      json.items.qty,
-      json.items.cost,
-    );
-  }
+  // static fromJSON(json) {
+  //   return new WorkItemVO(
+  //     json.id,
+  //     json.title,
+  //     json.description,
+  //     json.qty,
+  //     json.cost,
+  //   );
+  // }
 
   constructor(id, title, description, qty, cost) {
     this.id = id;
