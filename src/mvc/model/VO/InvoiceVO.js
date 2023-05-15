@@ -4,7 +4,6 @@ class InvoiceVO {
   static fromJSON(json) {
     return new InvoiceVO(
       json.id,
-      json.items,
       json.discount,
       json.taxes,
       json.total,
@@ -12,9 +11,9 @@ class InvoiceVO {
     );
   }
 
-  constructor(id, items, discount, taxes, total, iban) {
+  constructor(id, discount, taxes, total, iban) {
     this.id = id;
-    this.items = new WorkItemVO();
+    // this.items = new WorkItemVO();
     this.discount = discount;
     this.taxes = taxes;
     this.total = total;

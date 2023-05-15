@@ -17,39 +17,27 @@ domTemplateWorkItems.remove();
 
 const rawInvoice = localStorage.getItem(KEY_LOCAL_INVOICE);
 
-const domInvoiceNum = getDOM(DOM.INVOICE_INPUT.NUMBER);
+const domInvoiceId = getDOM(DOM.INVOICE_INPUT.NUMBER);
 
-const invoiceNumberMask = [/\D/, /\D/, /\D/, /\D/];
+const invoiceIdMask = [/\D/, /\D/, /\D/, /\D/];
 const invoicePercentMask = [/\D/, /\D/];
 
 
 const invoice = rawInvoice
   ? JSON.parse(rawInvoice).map((json) => InvoiceVO.fromJSON(json))
   : [];
-invoice.forEach((invoiceVO) => renderTask(invoiceVO));
-console.log('> invoice:', invoice);
+console.log('> invoice:', invoice, typeof invoice);
 
-
-function renderTask(invoiceVO) {
-  const domWorkClone = domTemplateWorkItems.cloneNode(true);
-  domWorkClone.dataset.id = invoiceVO.id;
-  QUERY(domWorkClone, DOM.Template.WORK_ITEM.TITLE).innerText = invoiceVO.title;
-  domTableWorkItems.prepend(domWorkClone);
-  return domWorkClone;
-
-}
-
-
-domInvoiceNum.addEventListener('input', (e) => {
-    maskForNum(e, invoiceNumberMask)
-    if (domInvoiceNum.value) {
-      console.log(domInvoiceNum.value)
-
+domInvoiceId.addEventListener('input', (e) => maskForNum(e, invoiceIdMask));
+domInvoiceId.addEventListener("blur", (e) => {
+    if (domInvoiceId.value) {
+      const invoiceId = domInvoiceId.value
+      console.log('invoiceId = ', invoiceId)
     } else {
-      window.alert('Enter the number')
+      window.alert('Enter the invoice number')
     }
   }
-);
+)
 
 
 function saveInvoice() {
