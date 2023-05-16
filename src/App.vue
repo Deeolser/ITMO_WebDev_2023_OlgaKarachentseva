@@ -41,7 +41,7 @@ export default {
   data: () => ({
     inputText: null,
     todos: [],
-    user: {name: 'Vladimir'},
+    user: {name: 'Olga'},
   }),
   computed: {
     canAddItemToTodoList() {
