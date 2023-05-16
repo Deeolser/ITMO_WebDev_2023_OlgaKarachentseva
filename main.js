@@ -1,10 +1,9 @@
 import 'uno.css';
 import '@unocss/reset/tailwind.css';
 import InvoiceVO from "./src/mvc/model/VO/InvoiceVO.js";
-import WorkItemVO from "./src/mvc/model/VO/WorkItemVO.js";
 import DOM from './src/constants/dom';
 import {maskForNum} from './src/utils/maskNumber'
-import invoiceVO from "./src/mvc/model/VO/InvoiceVO.js";
+
 
 const KEY_LOCAL_INVOICE = 'invoice';
 
