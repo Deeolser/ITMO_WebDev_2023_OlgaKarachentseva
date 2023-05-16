@@ -2,7 +2,7 @@ import 'uno.css';
 import '@unocss/reset/tailwind.css';
 import InvoiceVO from "./src/mvc/model/VO/InvoiceVO.js";
 import DOM from './src/constants/dom';
-import {maskForNum} from './src/utils/maskNumber'
+import {maskForNum} from "./src/utils/maskNumber.js";
 
 
 const KEY_LOCAL_INVOICE = 'invoice';
@@ -23,11 +23,12 @@ const domInvoiceDiscount = getDOM(DOM.INVOICE_INPUT.DISCOUNT);
 const invoiceIdMask = [/\D/, /\D/, /\D/, /\D/];
 const invoicePercentMask = [/\D/, /\D/];
 
-const invoice = JSON.parse(rawInvoice);
-console.log(invoice)
+const invoiceVO = rawInvoice ? InvoiceVO.fromJSON(JSON.parse(rawInvoice)) : InvoiceVO.createEmpty();
 
-if (invoice) {
-  domInvoiceId.value = invoice.id
+console.log(invoiceVO)
+
+if (invoiceVO) {
+  domInvoiceId.value = invoiceVO.id
 }
 
 
@@ -35,9 +36,8 @@ domInvoiceId.addEventListener('input', (e) => maskForNum(e, invoiceIdMask));
 domInvoiceId.addEventListener("blur", (e) => {
     if (domInvoiceId.value) {
       const invoiceId = domInvoiceId.value
-      const invoiceDiscount = domInvoiceDiscount.value
       console.log('invoiceId = ', invoiceId)
-      const invoiceVO = new InvoiceVO(invoiceId, '', invoiceDiscount)
+      invoiceVO.id = invoiceId;
       saveInvoice(invoiceVO)
     } else {
       window.alert('Enter the invoice number')
@@ -47,10 +47,9 @@ domInvoiceId.addEventListener("blur", (e) => {
 domInvoiceDiscount.addEventListener('input', (e) => maskForNum(e, invoicePercentMask));
 domInvoiceDiscount.addEventListener("blur", (e) => {
     if (domInvoiceDiscount.value) {
-      const invoiceId = domInvoiceId.value
       const invoiceDiscount = domInvoiceDiscount.value
       console.log('invoiceDiscount = ', invoiceDiscount)
-      const invoiceVO = new InvoiceVO(invoiceId, '', invoiceDiscount)
+      invoiceVO.discount = invoiceDiscount;
       saveInvoice(invoiceVO)
     } else {
       window.alert('Enter the Discount')

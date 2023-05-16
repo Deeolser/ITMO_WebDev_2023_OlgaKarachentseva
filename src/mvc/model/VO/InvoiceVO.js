@@ -1,13 +1,26 @@
+import WorkItemVO from "./WorkItemVO.js";
+
 class InvoiceVO {
   static fromJSON(json) {
     return new InvoiceVO(
       json.id,
-      json.items,
+      json.items?.map((raw) => WorkItemVO.fromJSON(raw)) || [],
       json.discount,
       json.taxes,
       json.total,
       json.iban,
     );
+  }
+
+  static createEmpty() {
+    return new InvoiceVO(
+      '',
+      [],
+      0,
+      0,
+      0,
+      '',
+    )
   }
 
   constructor(id, items, discount, taxes, total, iban) {
