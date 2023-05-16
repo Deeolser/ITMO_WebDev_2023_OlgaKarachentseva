@@ -1,6 +1,7 @@
 const DOM = {
   INVOICE_INPUT: {
     NUMBER: 'inputInvoiceNumber',
+    DISCOUNT: 'inputDiscountPercent'
   },
   Button: {
     ADD_WORK_ITEM: 'btnAddWorkItem',
