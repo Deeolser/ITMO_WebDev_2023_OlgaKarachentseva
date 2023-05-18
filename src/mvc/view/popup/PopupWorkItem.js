@@ -43,7 +43,7 @@ class PopupWorkItem {
                         Total: <span class="text-lg" id="workItemTotalContainer">0</span>
                     </div>
                     <button class="px-4 bg-dark-200 text-white rounded-2 enabled:hover:bg-dark-900 disabled:opacity-30 disabled:text-gray"
-                            disabled data-id="btnCreateWorkItem">
+                            data-id="btnCreateWorkItem">
                         ${this.#confirmText}
                     </button>
                 </main>

@@ -5,17 +5,16 @@ import DOM from './src/constants/dom';
 import { maskForNum } from './src/utils/maskNumber.js';
 import { maskIBAN } from './src/utils/maskIBAN.js';
 import WorkItemVO from './src/mvc/model/VO/WorkItemVO.js';
-import PopupWorkItem from './src/mvc/view/popup/PopupWorkItem.js';
 
 const KEY_LOCAL_INVOICE = 'invoice';
 
 const getDOM = (id) => document.getElementById(id);
 const QUERY = (container, id) => container.querySelector(`[data-id="${id}"]`);
 
-const domTemplateWorkItems = getDOM(DOM.Template.ITEMS);
-const domTableWorkItems = domTemplateWorkItems.parentNode;
-domTemplateWorkItems.removeAttribute('id');
-domTemplateWorkItems.remove();
+// const domTemplateWorkItems = getDOM(DOM.Template.ITEMS);
+// const domTableWorkItems = domTemplateWorkItems.parentNode;
+// domTemplateWorkItems.removeAttribute('id');
+// domTemplateWorkItems.remove();
 
 const rawInvoice = localStorage.getItem(KEY_LOCAL_INVOICE);
 
@@ -29,6 +28,7 @@ const invoiceVO = rawInvoice
   : InvoiceVO.createEmpty();
 
 console.log(invoiceVO);
+const workItems = invoiceVO.items;
 
 domInvoiceId.value = invoiceVO.id;
 domInvoiceDiscount.value = invoiceVO.discount;
@@ -82,6 +82,18 @@ getDOM(DOM.BUTTON.ADD_WORK_ITEM).onclick = () => {
       workItemCost,
     ) => {
       console.log('> Create item -> On Confirm');
+      const workItemVO = new WorkItemVO(
+        workItemId,
+        workItemTitle,
+        workItemDescription,
+        workItemQty,
+        workItemCost,
+      );
+      workItems.push(workItemVO);
+      console.log('workItems', workItems);
+      invoiceVO.items = workItems;
+      console.log('invoiceVO=', invoiceVO);
+      localStorage.setItem(KEY_LOCAL_INVOICE, JSON.stringify(invoiceVO));
     },
   );
 };
@@ -94,22 +106,43 @@ async function renderWorkItemsPopup(
 ) {
   const domPopupContainer = getDOM(DOM.Popup.CONTAINER);
   domPopupContainer.classList.remove('hidden');
+
+  const onClosePopup = () => {
+    domPopupContainer.children[0].remove();
+    domPopupContainer.classList.add('hidden');
+  };
+
   const PopupWorkItem = (await import('./src/mvc/view/popup/PopupWorkItem'))
     .default;
   const popupWorkItemInstance = new PopupWorkItem(
     popupTitle,
     confirmText,
-    (taskTitle, taskDate, taskTags) => {
-      console.log('Main -> renderTaskPopup: confirmCallback', {
-        taskTitle,
-        taskDate,
-        taskTags,
+    (
+      workItemId,
+      workItemTitle,
+      workItemDescription,
+      workItemQty,
+      workItemCost,
+    ) => {
+      console.log('Main -> renderWorkItemsPopup: confirmCallback', {
+        workItemId,
+        workItemTitle,
+        workItemDescription,
+        workItemQty,
+        workItemCost,
       });
-      processDataCallback(taskTitle, taskDate, taskTags);
+      processDataCallback(
+        workItemId,
+        workItemTitle,
+        workItemDescription,
+        workItemQty,
+        workItemCost,
+      );
       onClosePopup();
     },
     onClosePopup,
   );
+  domPopupContainer.append(popupWorkItemInstance.render());
 }
 
 function setDataToInvoiceVO(domElement, paramName, logText, alertText) {

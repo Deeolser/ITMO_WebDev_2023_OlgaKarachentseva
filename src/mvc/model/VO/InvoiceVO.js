@@ -1,4 +1,4 @@
-import WorkItemVO from "./WorkItemVO.js";
+import WorkItemVO from './WorkItemVO.js';
 
 class InvoiceVO {
   static fromJSON(json) {
@@ -13,14 +13,7 @@ class InvoiceVO {
   }
 
   static createEmpty() {
-    return new InvoiceVO(
-      '',
-      [],
-      0,
-      0,
-      0,
-      '',
-    )
+    return new InvoiceVO('', [], 0, 0, 0, '');
   }
 
   constructor(id, items, discount, taxes, total, iban) {
@@ -31,7 +24,6 @@ class InvoiceVO {
     this.total = total;
     this.iban = iban;
   }
-
 }
 
 export default InvoiceVO;
