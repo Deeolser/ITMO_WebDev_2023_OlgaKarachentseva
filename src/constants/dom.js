@@ -1,9 +1,11 @@
 const DOM = {
   INVOICE_INPUT: {
     NUMBER: 'inputInvoiceNumber',
-    DISCOUNT: 'inputDiscountPercent'
+    DISCOUNT: 'inputDiscountPercent',
+    TAXES: 'inputTaxPercent',
+    IBAN: 'inputIBANNumber',
   },
-  Button: {
+  BUTTON: {
     ADD_WORK_ITEM: 'btnAddWorkItem',
     POPUP_CREATE_TASK_CLOSE: 'btnCloseCreateTaskPopup',
     POPUP_CREATE_TASK_CONFIRM: 'btnConfirmTaskPopup',
@@ -12,8 +14,6 @@ const DOM = {
     ITEMS: 'layout-template-fro-work-item',
     WORK_ITEM: {
       TITLE: 'templateTaskTitle',
-      BTN_EDIT: 'btnEdit',
-      BTN_DELETE: 'btnDelete',
     },
   },
   Popup: {

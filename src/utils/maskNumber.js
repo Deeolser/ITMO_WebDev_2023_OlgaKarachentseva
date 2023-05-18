@@ -1,12 +1,8 @@
-const maskForNum = (e, formater) => {
-  const result = [];
-  const {target} = e;
-  for (let i = 0; i < target.value.length; i++) {
-    if (i >= formater.length) break;
-    result[i] = (
-      typeof formater[i] === 'string' ? formater[i] : ''
-    ) + target.value[i].replace(formater[i], '');
+const maskForNum = (input, max) => {
+  let textMask = input.value.replace(/[^0-9]/g, '');
+  if (textMask.length > max) {
+    textMask = textMask.slice(0, max);
   }
-  e.target.value = result.join('');
-}
-export {maskForNum};
+  input.value = textMask;
+};
+export { maskForNum };
