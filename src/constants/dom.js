@@ -13,7 +13,11 @@ const DOM = {
   Template: {
     ITEMS: 'layout-template-fro-work-item',
     WORK_ITEM: {
-      TITLE: 'templateTaskTitle',
+      TITLE: 'itemTitle',
+      DESCRIPTION: 'itemDescription',
+      QTY: 'itemQty',
+      COST: 'itemCost',
+      TOTAL: 'itemTotal',
     },
   },
   Popup: {

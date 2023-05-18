@@ -1,3 +1,7 @@
+import { maskForNum } from '../../../utils/maskNumber.js';
+import DOM from '../../../constants/dom.js';
+import { maskIBAN } from '../../../utils/maskIBAN.js';
+
 class PopupWorkItem {
   #title;
   #confirmText;
@@ -40,7 +44,7 @@ class PopupWorkItem {
                                value=""/>
                     </div>
                     <div class="font-bold self-end">
-                        Total: <span class="text-lg" id="workItemTotalContainer">0</span>
+                        Total: <span data-id="workItemTotalContainer" class="text-lg" id="workItemTotalContainer">0</span>
                     </div>
                     <button class="px-4 bg-dark-200 text-white rounded-2 enabled:hover:bg-dark-900 disabled:opacity-30 disabled:text-gray"
                             data-id="btnCreateWorkItem">
@@ -97,6 +101,19 @@ class PopupWorkItem {
       '[data-id="inputWorkItemCost"]',
     );
 
+    const domWorkItemTotal = 0;
+    domInpWorkItemQty.addEventListener('input', () => {
+      maskForNum(domInpWorkItemQty, 10);
+    });
+    domInpWorkItemCost.addEventListener('input', () => {
+      maskForNum(domInpWorkItemCost, 10);
+    });
+
+    // domInpWorkItemQty.onchange = () => {
+    //   maskForNum(domInpWorkItemQty, 10)
+    //
+    //   popup.querySelector('[data-id="workItemTotalContainer"]').innerText = domWorkItemTotal
+    // }
     domBtnClose.onclick = () => {
       domBtnClose.onclick = null;
       domBtnConfirm.onclick = null;

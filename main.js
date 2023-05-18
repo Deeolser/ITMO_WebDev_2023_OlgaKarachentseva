@@ -5,16 +5,17 @@ import DOM from './src/constants/dom';
 import { maskForNum } from './src/utils/maskNumber.js';
 import { maskIBAN } from './src/utils/maskIBAN.js';
 import WorkItemVO from './src/mvc/model/VO/WorkItemVO.js';
+import workItemVO from './src/mvc/model/VO/WorkItemVO.js';
 
 const KEY_LOCAL_INVOICE = 'invoice';
 
 const getDOM = (id) => document.getElementById(id);
 const QUERY = (container, id) => container.querySelector(`[data-id="${id}"]`);
 
-// const domTemplateWorkItems = getDOM(DOM.Template.ITEMS);
-// const domTableWorkItems = domTemplateWorkItems.parentNode;
-// domTemplateWorkItems.removeAttribute('id');
-// domTemplateWorkItems.remove();
+const domTemplateWorkItems = getDOM(DOM.Template.ITEMS);
+const domTableWorkItems = domTemplateWorkItems.parentNode;
+domTemplateWorkItems.removeAttribute('id');
+domTemplateWorkItems.remove();
 
 const rawInvoice = localStorage.getItem(KEY_LOCAL_INVOICE);
 
@@ -29,6 +30,8 @@ const invoiceVO = rawInvoice
 
 console.log(invoiceVO);
 const workItems = invoiceVO.items;
+
+workItems.forEach((workItemVO) => renderWorksItems(workItemVO));
 
 domInvoiceId.value = invoiceVO.id;
 domInvoiceDiscount.value = invoiceVO.discount;
@@ -93,10 +96,27 @@ getDOM(DOM.BUTTON.ADD_WORK_ITEM).onclick = () => {
       console.log('workItems', workItems);
       invoiceVO.items = workItems;
       console.log('invoiceVO=', invoiceVO);
-      localStorage.setItem(KEY_LOCAL_INVOICE, JSON.stringify(invoiceVO));
+      saveInvoice(invoiceVO);
     },
   );
 };
+
+function renderWorksItems(workItemVO) {
+  const domWorkItemClone = domTemplateWorkItems.cloneNode(true);
+  domWorkItemClone.dataset.id = workItemVO.id;
+  QUERY(domWorkItemClone, DOM.Template.WORK_ITEM.TITLE).innerText =
+    workItemVO.title;
+  QUERY(domWorkItemClone, DOM.Template.WORK_ITEM.DESCRIPTION).innerText =
+    workItemVO.description;
+  QUERY(domWorkItemClone, DOM.Template.WORK_ITEM.QTY).innerText =
+    workItemVO.qty;
+  QUERY(domWorkItemClone, DOM.Template.WORK_ITEM.COST).innerText =
+    workItemVO.cost;
+  QUERY(domWorkItemClone, DOM.Template.WORK_ITEM.TOTAL).innerText =
+    workItemVO.total;
+  domTableWorkItems.prepend(domWorkItemClone);
+  return domWorkItemClone;
+}
 
 async function renderWorkItemsPopup(
   workItemVO,
