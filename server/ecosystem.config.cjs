@@ -1,11 +1,22 @@
 module.exports = {
-  apps: [{
-    script: 'app.cjs',
-    watch: true,
-    env: {
-      NODE_PORT: 3000
-    }
-  }
+  apps: [
+    //   {
+    //   script: 'app.cjs',
+    //   watch: true,
+    //   max_restarts: 3,
+    //   min_uptime: 300,
+    //   env: {
+    //     NODE_PORT: 3000
+    //   }
+    // },
+    {
+      script: 'users-sqllite.cjs',
+      watch: true,
+      max_restarts: 3,
+      env: {
+        NODE_PORT: 3001
+      }
+    },
   ],
   deploy: {
     production: {
