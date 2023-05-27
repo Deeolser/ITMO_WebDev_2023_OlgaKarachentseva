@@ -1,7 +1,7 @@
 <script setup>
 import {useRoute, useRouter} from 'vue-router';
 import {onMounted, ref} from 'vue';
-import {useTodosStore} from '../store/todosStore.js';
+import {useTodosStore} from '@/store/todosStore.js';
 
 const todoStore = useTodosStore();
 

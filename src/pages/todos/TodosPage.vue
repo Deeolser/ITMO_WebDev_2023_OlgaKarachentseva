@@ -1,8 +1,8 @@
 <script setup>
 import {computed, onMounted, ref, watch} from 'vue';
-import TodoItem from './TodoItem.vue';
-import {parseLocalStorage, saveToLocalStorage} from '../utils/storageUtils.js';
-import {useTodosStore} from '../store/todosStore.js';
+import TodoItem from '@/components/TodoItem.vue';
+import {parseLocalStorage, saveToLocalStorage} from '@/utils/storageUtils.js';
+import {useTodosStore} from '@/store/todosStore.js';
 import {storeToRefs} from 'pinia';
 
 const LOCAL_KEY_INPUT_TEXT = 'input_text';
