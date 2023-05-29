@@ -6,6 +6,7 @@ const props = defineProps({
   title: {type: String, default: ''},
   errors: {type: Array, default: () => []},
 });
+
 const emit = defineEmits(['login', 'register']);
 const inputUsername = ref(null);
 const inputPassword = ref(null);

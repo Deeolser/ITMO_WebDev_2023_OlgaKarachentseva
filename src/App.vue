@@ -1,17 +1,15 @@
 <script setup>
+import {computed, inject} from 'vue';
 import AppHeader from './components/AppHeader.vue';
-import {computed, inject, onMounted} from 'vue';
-import {useUserStore} from './store/userStore.js';
-import {storeToRefs} from 'pinia';
+
 import PROVIDE from '@/constants/provides.js';
+import {storeToRefs} from 'pinia';
+import {useUserStore} from '@/store/userStore.js';
 
 const pb = inject(PROVIDE.PB);
 const hasUser = computed(() => pb.authStore.isValid);
 const {user} = storeToRefs(useUserStore());
 
-onMounted(() => {
-  console.log('> App -> onMounted');
-});
 </script>
 <template>
   <AppHeader>

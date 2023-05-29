@@ -1,6 +1,6 @@
 <template>
   <div>
-    Index PAGE
+    INDEX PAGE
   </div>
 </template>
 <script>
