@@ -5,7 +5,6 @@ import DOM from './src/constants/dom';
 import { maskForNum } from './src/utils/maskNumber.js';
 import { maskIBAN } from './src/utils/maskIBAN.js';
 import WorkItemVO from './src/mvc/model/VO/WorkItemVO.js';
-import workItemVO from './src/mvc/model/VO/WorkItemVO.js';
 
 const KEY_LOCAL_INVOICE = 'invoice';
 
@@ -23,6 +22,8 @@ const domInvoiceId = getDOM(DOM.INVOICE_INPUT.NUMBER);
 const domInvoiceDiscount = getDOM(DOM.INVOICE_INPUT.DISCOUNT);
 const domInvoiceTaxes = getDOM(DOM.INVOICE_INPUT.TAXES);
 const domInvoiceIban = getDOM(DOM.INVOICE_INPUT.IBAN);
+let domInvoiceSubtotal = getDOM(DOM.INVOICE_RESULTS.SUBTOTAL);
+let domInvoiceSubtotalWithDiscount = getDOM(DOM.INVOICE_RESULTS.DISCOUNT);
 
 const invoiceVO = rawInvoice
   ? InvoiceVO.fromJSON(JSON.parse(rawInvoice))
@@ -37,42 +38,52 @@ domInvoiceId.value = invoiceVO.id;
 domInvoiceDiscount.value = invoiceVO.discount;
 domInvoiceTaxes.value = invoiceVO.taxes;
 domInvoiceIban.value = invoiceVO.iban;
+calcResults();
 
 domInvoiceId.addEventListener('input', (e) => maskForNum(domInvoiceId, 4));
 domInvoiceId.addEventListener('blur', (e) =>
-  setDataToInvoiceVO(domInvoiceId, 'id', '№', 'Enter the invoice number'),
+  setDataToInvoiceVO(domInvoiceId.value, 'id', '№', 'Enter the invoice number'),
 );
 
-domInvoiceDiscount.addEventListener('input', (e) =>
-  maskForNum(domInvoiceDiscount, 2),
-);
-domInvoiceDiscount.addEventListener('blur', (e) =>
+domInvoiceDiscount.addEventListener('input', (e) => {
+  maskForNum(domInvoiceDiscount, 2);
+});
+
+domInvoiceDiscount.addEventListener('blur', (e) => {
   setDataToInvoiceVO(
-    domInvoiceDiscount,
+    domInvoiceDiscount.value,
     'discount',
     'discount(%) = ',
     'Enter the discount',
-  ),
-);
+  );
+  calcResults();
+});
 
-domInvoiceTaxes.addEventListener('input', (e) =>
-  maskForNum(domInvoiceTaxes, 2),
-);
-domInvoiceTaxes.addEventListener('blur', (e) =>
+domInvoiceTaxes.addEventListener('input', (e) => {
+  maskForNum(domInvoiceTaxes, 2);
+  calcResults();
+});
+domInvoiceTaxes.addEventListener('blur', (e) => {
   setDataToInvoiceVO(
-    domInvoiceTaxes,
+    domInvoiceTaxes.value,
     'taxes',
     'taxes (%) = ',
     'Enter the taxes',
-  ),
-);
+  );
+  calcResults();
+});
+
 domInvoiceIban.addEventListener('input', () => maskIBAN(domInvoiceIban));
-domInvoiceIban.addEventListener('blur', (e) =>
-  setDataToInvoiceVO(domInvoiceIban, 'iban', 'IBAN = ', 'Enter IBAN'),
-);
+domInvoiceIban.addEventListener('blur', (e) => {
+  setDataToInvoiceVO(
+    domInvoiceIban.value.split(' ').join(''),
+    'iban',
+    'IBAN = ',
+    'Enter IBAN',
+  );
+});
 
 getDOM(DOM.BUTTON.ADD_WORK_ITEM).onclick = () => {
-  console.log('+ pushed');
   renderWorkItemsPopup(
     null,
     'Add',
@@ -83,6 +94,7 @@ getDOM(DOM.BUTTON.ADD_WORK_ITEM).onclick = () => {
       workItemDescription,
       workItemQty,
       workItemCost,
+      workItemTotal,
     ) => {
       console.log('> Create item -> On Confirm');
       const workItemVO = new WorkItemVO(
@@ -91,15 +103,33 @@ getDOM(DOM.BUTTON.ADD_WORK_ITEM).onclick = () => {
         workItemDescription,
         workItemQty,
         workItemCost,
+        workItemTotal,
       );
       workItems.push(workItemVO);
       console.log('workItems', workItems);
       invoiceVO.items = workItems;
       console.log('invoiceVO=', invoiceVO);
       saveInvoice(invoiceVO);
+      renderWorksItems(workItemVO);
     },
   );
 };
+
+function calcResults() {
+  let subtotal = workItems
+    .map((item) => item.total)
+    .reduce((prev, curr) => prev + curr, 0);
+  domInvoiceSubtotal.innerText = subtotal;
+  domInvoiceSubtotalWithDiscount.innerText = subtotal;
+  if (invoiceVO.discount) {
+    const discount = parseInt(invoiceVO.discount);
+    if (discount !== 0) {
+      let subtotalWithDiscount = Math.floor(subtotal * (1 - discount / 100));
+      domInvoiceSubtotalWithDiscount.innerText = subtotalWithDiscount;
+    }
+  }
+  return subtotal;
+}
 
 function renderWorksItems(workItemVO) {
   const domWorkItemClone = domTemplateWorkItems.cloneNode(true);
@@ -114,7 +144,8 @@ function renderWorksItems(workItemVO) {
     workItemVO.cost;
   QUERY(domWorkItemClone, DOM.Template.WORK_ITEM.TOTAL).innerText =
     workItemVO.total;
-  domTableWorkItems.prepend(domWorkItemClone);
+  domTableWorkItems.append(domWorkItemClone);
+  calcResults();
   return domWorkItemClone;
 }
 
@@ -143,6 +174,7 @@ async function renderWorkItemsPopup(
       workItemDescription,
       workItemQty,
       workItemCost,
+      workItemTotal,
     ) => {
       console.log('Main -> renderWorkItemsPopup: confirmCallback', {
         workItemId,
@@ -150,6 +182,7 @@ async function renderWorkItemsPopup(
         workItemDescription,
         workItemQty,
         workItemCost,
+        workItemTotal,
       });
       processDataCallback(
         workItemId,
@@ -157,6 +190,7 @@ async function renderWorkItemsPopup(
         workItemDescription,
         workItemQty,
         workItemCost,
+        workItemTotal,
       );
       onClosePopup();
     },
@@ -166,8 +200,8 @@ async function renderWorkItemsPopup(
 }
 
 function setDataToInvoiceVO(domElement, paramName, logText, alertText) {
-  if (domElement.value) {
-    const invoiceData = domElement.value;
+  if (domElement) {
+    const invoiceData = domElement;
     console.log(`${logText} ${invoiceData}`);
     invoiceVO[paramName] = invoiceData;
     saveInvoice(invoiceVO);

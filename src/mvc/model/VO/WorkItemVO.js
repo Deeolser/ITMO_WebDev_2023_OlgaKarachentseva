@@ -1,4 +1,13 @@
 class WorkItemVO {
+  constructor(id, title, description, qty, cost, total) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.qty = qty;
+    this.cost = cost;
+    this.total = total;
+  }
+
   static fromJSON(json) {
     return new WorkItemVO(
       json.id,
@@ -8,15 +17,6 @@ class WorkItemVO {
       json.cost,
       json.total,
     );
-  }
-
-  constructor(id, title, description, qty, cost, total) {
-    this.id = id;
-    this.title = title;
-    this.description = description;
-    this.qty = qty;
-    this.cost = cost;
-    this.total = qty * cost;
   }
 }
 

@@ -1,6 +1,4 @@
 import { maskForNum } from '../../../utils/maskNumber.js';
-import DOM from '../../../constants/dom.js';
-import { maskIBAN } from '../../../utils/maskIBAN.js';
 
 class PopupWorkItem {
   #title;
@@ -19,10 +17,10 @@ class PopupWorkItem {
     const div = document.createElement('div');
     div.innerHTML = `
       <section class="absolute top-0 h-full w-full" id="popupWorkItemContainer">
-            <div class="absolute top-0 h-full w-full bg-gray-500/60" id="overlayWorkItemPopup"></div>
+            <div class="absolute top-0 h-full w-full bg-gray-500/60" data-id="overlayWorkItemPopup"></div>
             <div class="relative h-104 bg-white px-12 py-6 flex flex-col" id="popupWorkItemContainerForm">
                 <header class="flex flex-row justify-between">
-                    <button class="text-red enabled:hover:font-bold disabled:text-gray-300" data-id="btnDeleteWorkItemPopup">
+                    <button class="text-red enabled:hover:font-bold disabled:text-gray-300" data-id="btnDeleteWorkItemPopup" disabled="">
                         Delete
                     </button>
                     <button class="text-gray hover:text-black" data-id="btnCloseWorkItemPopup">close</button>
@@ -46,8 +44,8 @@ class PopupWorkItem {
                     <div class="font-bold self-end">
                         Total: <span data-id="workItemTotalContainer" class="text-lg" id="workItemTotalContainer">0</span>
                     </div>
-                    <button class="px-4 bg-dark-200 text-white rounded-2 enabled:hover:bg-dark-900 disabled:opacity-30 disabled:text-gray"
-                            data-id="btnCreateWorkItem">
+                    <button class="px-4 bg-dark-200 text-white rounded-2 enabled:hover:bg-dark-900 disabled:opacity-30 disabled:text-gray "
+                            data-id="btnCreateWorkItem" disabled="">
                         ${this.#confirmText}
                     </button>
                 </main>
@@ -87,6 +85,11 @@ class PopupWorkItem {
     const domBtnClose = popup.querySelector(
       '[data-id="btnCloseWorkItemPopup"]',
     );
+
+    const domOverlayPopup = popup.querySelector(
+      '[data-id="overlayWorkItemPopup"]',
+    );
+
     const domBtnConfirm = popup.querySelector('[data-id="btnCreateWorkItem"]');
     const domInpWorkItemTitle = popup.querySelector(
       '[data-id="inputWorkItemTitle"]',
@@ -100,32 +103,70 @@ class PopupWorkItem {
     const domInpWorkItemCost = popup.querySelector(
       '[data-id="inputWorkItemCost"]',
     );
+    let domWorkItemTotal = 0;
 
-    const domWorkItemTotal = 0;
+    domInpWorkItemTitle.addEventListener('input', () => bthConfirmValidation());
+
     domInpWorkItemQty.addEventListener('input', () => {
-      maskForNum(domInpWorkItemQty, 10);
-    });
-    domInpWorkItemCost.addEventListener('input', () => {
-      maskForNum(domInpWorkItemCost, 10);
+      maskForNum(domInpWorkItemQty, 5);
+      calcWorkItemTotal();
+      renderWorkItemTotal();
+      bthConfirmValidation();
     });
 
-    // domInpWorkItemQty.onchange = () => {
-    //   maskForNum(domInpWorkItemQty, 10)
-    //
-    //   popup.querySelector('[data-id="workItemTotalContainer"]').innerText = domWorkItemTotal
-    // }
+    domInpWorkItemCost.addEventListener('input', () => {
+      maskForNum(domInpWorkItemCost, 5);
+      calcWorkItemTotal();
+      renderWorkItemTotal();
+      bthConfirmValidation();
+    });
+
+    const calcWorkItemTotal = () => {
+      if (domInpWorkItemQty.value && domInpWorkItemCost.value) {
+        domWorkItemTotal =
+          parseInt(domInpWorkItemQty.value) *
+          parseInt(domInpWorkItemCost.value);
+      } else {
+        domWorkItemTotal = 0;
+      }
+    };
+    const renderWorkItemTotal = () =>
+      (popup.querySelector('[data-id="workItemTotalContainer"]').innerText =
+        domWorkItemTotal);
+
     domBtnClose.onclick = () => {
       domBtnClose.onclick = null;
       domBtnConfirm.onclick = null;
+      domOverlayPopup.onclick = null;
       this.#closeCallback();
+    };
+
+    domOverlayPopup.onclick = () => {
+      domBtnClose.onclick = null;
+      domBtnConfirm.onclick = null;
+      domOverlayPopup.onclick = null;
+      this.#closeCallback();
+    };
+
+    const bthConfirmValidation = () => {
+      if (
+        domInpWorkItemTitle.value &&
+        domInpWorkItemQty.value &&
+        domInpWorkItemCost.value
+      ) {
+        domBtnConfirm.removeAttribute('disabled');
+      } else {
+        domBtnConfirm.setAttribute('disabled', '');
+      }
     };
 
     domBtnConfirm.onclick = () => {
       const workItemId = Date.now();
       const workItemTitle = domInpWorkItemTitle.value;
       const workItemDescription = domInpWorkItemDescription.value;
-      const workItemQty = domInpWorkItemQty.value;
-      const workItemCost = domInpWorkItemCost.value;
+      const workItemQty = parseInt(domInpWorkItemQty.value);
+      const workItemCost = parseInt(domInpWorkItemCost.value);
+      const workItemTotal = domWorkItemTotal;
 
       this.#processDataCallback(
         workItemId,
@@ -133,6 +174,7 @@ class PopupWorkItem {
         workItemDescription,
         workItemQty,
         workItemCost,
+        workItemTotal,
       );
     };
 

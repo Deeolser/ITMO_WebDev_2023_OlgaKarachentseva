@@ -5,10 +5,14 @@ const DOM = {
     TAXES: 'inputTaxPercent',
     IBAN: 'inputIBANNumber',
   },
+  INVOICE_RESULTS: {
+    SUBTOTAL: 'resultsSubtotalContainer',
+    DISCOUNT: 'resultsDiscountContainer',
+    TAXES: 'resultsTaxesContainer',
+    TOTAL: 'resultsTotalContainer',
+  },
   BUTTON: {
     ADD_WORK_ITEM: 'btnAddWorkItem',
-    POPUP_CREATE_TASK_CLOSE: 'btnCloseCreateTaskPopup',
-    POPUP_CREATE_TASK_CONFIRM: 'btnConfirmTaskPopup',
   },
   Template: {
     ITEMS: 'layout-template-fro-work-item',
@@ -22,9 +26,6 @@ const DOM = {
   },
   Popup: {
     CONTAINER: 'popupContainer',
-    CreateTask: {
-      TITLE: 'title',
-    },
   },
 };
 export default DOM;
