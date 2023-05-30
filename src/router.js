@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory} from 'vue-router';
-import ROUTES from './constants/routes.js';
+import ROUTES, {PUBLIC_PAGES} from './constants/routes.js';
 import {inject} from 'vue';
 import PROVIDE from '@/constants/provides.js';
 
@@ -20,17 +20,20 @@ const router = createRouter({
     },
     {
       path: ROUTES.SIGNIN,
-      component: () => import('./pages/SigninPage.vue')
+      component: () => import('./pages/SignInPage.vue')
+    },
+    {
+      path: ROUTES.SIGNUP,
+      component: () => import('./pages/SignUpPage.vue')
     }
   ],
 });
 
 router.beforeEach((to, from, next) => {
   const pb = inject(PROVIDE.PB);
-  const publicPages = [ROUTES.INDEX, ROUTES.SIGNIN];
   const notAllowedNavigation =
-    publicPages.indexOf(to.path) < 0
-    && !pb.authStore.isValid;
+    PUBLIC_PAGES.indexOf(to.path) < 0
+    && !pb.authStore.model?.id;
 
   console.log('> router -> beforeEach', to.path, {notAllowedNavigation});
 
