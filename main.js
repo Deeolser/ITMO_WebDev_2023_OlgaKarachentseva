@@ -20,10 +20,13 @@ const rawInvoice = localStorage.getItem(KEY_LOCAL_INVOICE);
 
 const domInvoiceId = getDOM(DOM.INVOICE_INPUT.NUMBER);
 const domInvoiceDiscount = getDOM(DOM.INVOICE_INPUT.DISCOUNT);
-const domInvoiceTaxes = getDOM(DOM.INVOICE_INPUT.TAXES);
+const domInvoiceTaxesPercent = getDOM(DOM.INVOICE_INPUT.TAXES);
 const domInvoiceIban = getDOM(DOM.INVOICE_INPUT.IBAN);
-let domInvoiceSubtotal = getDOM(DOM.INVOICE_RESULTS.SUBTOTAL);
-let domInvoiceSubtotalWithDiscount = getDOM(DOM.INVOICE_RESULTS.DISCOUNT);
+
+const domInvoiceSubtotal = getDOM(DOM.INVOICE_RESULTS.SUBTOTAL);
+const domInvoiceSubtotalWithDiscount = getDOM(DOM.INVOICE_RESULTS.DISCOUNT);
+const domInvoiceTaxes = getDOM(DOM.INVOICE_RESULTS.TAXES);
+const domInvoiceTotal = getDOM(DOM.INVOICE_RESULTS.TOTAL);
 
 const invoiceVO = rawInvoice
   ? InvoiceVO.fromJSON(JSON.parse(rawInvoice))
@@ -36,9 +39,12 @@ workItems.forEach((workItemVO) => renderWorksItems(workItemVO));
 
 domInvoiceId.value = invoiceVO.id;
 domInvoiceDiscount.value = invoiceVO.discount;
-domInvoiceTaxes.value = invoiceVO.taxes;
+domInvoiceTaxesPercent.value = invoiceVO.taxes;
 domInvoiceIban.value = invoiceVO.iban;
-calcResults();
+{
+  const [subtotal, subtotalWithDiscount, taxes, total] = calcResults();
+  renderResult(subtotal, subtotalWithDiscount, taxes, total);
+}
 
 domInvoiceId.addEventListener('input', (e) => maskForNum(domInvoiceId, 4));
 domInvoiceId.addEventListener('blur', (e) =>
@@ -56,16 +62,17 @@ domInvoiceDiscount.addEventListener('blur', (e) => {
     'discount(%) = ',
     'Enter the discount',
   );
-  calcResults();
+  const [subtotal, subtotalWithDiscount, taxes, total] = calcResults();
+  renderResult(subtotal, subtotalWithDiscount, taxes, total);
 });
 
-domInvoiceTaxes.addEventListener('input', (e) => {
-  maskForNum(domInvoiceTaxes, 2);
+domInvoiceTaxesPercent.addEventListener('input', (e) => {
+  maskForNum(domInvoiceTaxesPercent, 2);
   calcResults();
 });
-domInvoiceTaxes.addEventListener('blur', (e) => {
+domInvoiceTaxesPercent.addEventListener('blur', (e) => {
   setDataToInvoiceVO(
-    domInvoiceTaxes.value,
+    domInvoiceTaxesPercent.value,
     'taxes',
     'taxes (%) = ',
     'Enter the taxes',
@@ -116,19 +123,26 @@ getDOM(DOM.BUTTON.ADD_WORK_ITEM).onclick = () => {
 };
 
 function calcResults() {
-  let subtotal = workItems
+  const subtotal = workItems
     .map((item) => item.total)
     .reduce((prev, curr) => prev + curr, 0);
+  const subtotalWithDiscount = Math.floor(
+    subtotal * (1 - parseInt(invoiceVO.discount) / 100),
+  );
+  const taxes = Math.ceil(
+    (subtotalWithDiscount * parseInt(invoiceVO.taxes)) / 100,
+  );
+  const total = subtotalWithDiscount + taxes;
+  setDataToInvoiceVO(total, 'total', 'total', '');
+  return [subtotal, subtotalWithDiscount, taxes, total];
+}
+
+function renderResult(subtotal, subtotalWithDiscount, taxes, total) {
+  // debugger;
   domInvoiceSubtotal.innerText = subtotal;
-  domInvoiceSubtotalWithDiscount.innerText = subtotal;
-  if (invoiceVO.discount) {
-    const discount = parseInt(invoiceVO.discount);
-    if (discount !== 0) {
-      let subtotalWithDiscount = Math.floor(subtotal * (1 - discount / 100));
-      domInvoiceSubtotalWithDiscount.innerText = subtotalWithDiscount;
-    }
-  }
-  return subtotal;
+  domInvoiceSubtotalWithDiscount.innerText = subtotalWithDiscount;
+  domInvoiceTaxes.innerText = taxes;
+  domInvoiceTotal.innerText = total;
 }
 
 function renderWorksItems(workItemVO) {
