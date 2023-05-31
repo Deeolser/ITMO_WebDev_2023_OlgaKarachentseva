@@ -23,10 +23,12 @@ const domInvoiceDiscount = getDOM(DOM.INVOICE_INPUT.DISCOUNT);
 const domInvoiceTaxesPercent = getDOM(DOM.INVOICE_INPUT.TAXES);
 const domInvoiceIban = getDOM(DOM.INVOICE_INPUT.IBAN);
 
-const domInvoiceSubtotal = getDOM(DOM.INVOICE_RESULTS.SUBTOTAL);
-const domInvoiceSubtotalWithDiscount = getDOM(DOM.INVOICE_RESULTS.DISCOUNT);
-const domInvoiceTaxes = getDOM(DOM.INVOICE_RESULTS.TAXES);
-const domInvoiceTotal = getDOM(DOM.INVOICE_RESULTS.TOTAL);
+let domResults = {
+  domInvoiceSubtotal: getDOM(DOM.INVOICE_RESULTS.SUBTOTAL),
+  domInvoiceSubtotalWithDiscount: getDOM(DOM.INVOICE_RESULTS.DISCOUNT),
+  domInvoiceTaxes: getDOM(DOM.INVOICE_RESULTS.TAXES),
+  domInvoiceTotal: getDOM(DOM.INVOICE_RESULTS.TOTAL),
+};
 
 const invoiceVO = rawInvoice
   ? InvoiceVO.fromJSON(JSON.parse(rawInvoice))
@@ -41,10 +43,7 @@ domInvoiceId.value = invoiceVO.id;
 domInvoiceDiscount.value = invoiceVO.discount;
 domInvoiceTaxesPercent.value = invoiceVO.taxes;
 domInvoiceIban.value = invoiceVO.iban;
-{
-  const [subtotal, subtotalWithDiscount, taxes, total] = calcResults();
-  renderResult(subtotal, subtotalWithDiscount, taxes, total);
-}
+reCalcAndReRenderResult();
 
 domInvoiceId.addEventListener('input', (e) => maskForNum(domInvoiceId, 4));
 domInvoiceId.addEventListener('blur', (e) =>
@@ -62,8 +61,7 @@ domInvoiceDiscount.addEventListener('blur', (e) => {
     'discount(%) = ',
     'Enter the discount',
   );
-  const [subtotal, subtotalWithDiscount, taxes, total] = calcResults();
-  renderResult(subtotal, subtotalWithDiscount, taxes, total);
+  reCalcAndReRenderResult();
 });
 
 domInvoiceTaxesPercent.addEventListener('input', (e) => {
@@ -77,7 +75,7 @@ domInvoiceTaxesPercent.addEventListener('blur', (e) => {
     'taxes (%) = ',
     'Enter the taxes',
   );
-  calcResults();
+  reCalcAndReRenderResult();
 });
 
 domInvoiceIban.addEventListener('input', () => maskIBAN(domInvoiceIban));
@@ -134,15 +132,22 @@ function calcResults() {
   );
   const total = subtotalWithDiscount + taxes;
   setDataToInvoiceVO(total, 'total', 'total', '');
-  return [subtotal, subtotalWithDiscount, taxes, total];
+  // return [subtotal, subtotalWithDiscount, taxes, total];
+  return {
+    subtotal: subtotal,
+    subtotalWithDiscount: subtotalWithDiscount,
+    taxes: taxes,
+    total: total,
+  };
 }
 
-function renderResult(subtotal, subtotalWithDiscount, taxes, total) {
-  // debugger;
-  domInvoiceSubtotal.innerText = subtotal;
-  domInvoiceSubtotalWithDiscount.innerText = subtotalWithDiscount;
-  domInvoiceTaxes.innerText = taxes;
-  domInvoiceTotal.innerText = total;
+function reCalcAndReRenderResult() {
+  const reCalcResults = calcResults();
+  domResults.domInvoiceSubtotal.innerText = reCalcResults.subtotal;
+  domResults.domInvoiceSubtotalWithDiscount.innerText =
+    reCalcResults.subtotalWithDiscount;
+  domResults.domInvoiceTaxes.innerText = reCalcResults.taxes;
+  domResults.domInvoiceTotal.innerText = reCalcResults.total;
 }
 
 function renderWorksItems(workItemVO) {
