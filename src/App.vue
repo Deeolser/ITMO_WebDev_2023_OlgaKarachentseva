@@ -1,9 +1,9 @@
 <script setup>
-import {computed, inject, reactive, ref} from 'vue';
+import { computed, inject, reactive, ref } from 'vue';
 import AppHeader from './components/AppHeader.vue';
 import PROVIDE from '@/constants/provides.js';
 import ROUTES from '@/constants/routes.js';
-import {useRoute} from 'vue-router';
+import { useRoute } from 'vue-router';
 import AppMenu from '@/components/AppMenu.vue';
 
 
@@ -17,18 +17,27 @@ const hasUser = computed(() => !!user.value);
 const checkRouteIsNotCurrent = (routePath, l = console.log('> routePath', routePath)) => useRoute().path !== routePath;
 
 const menuLinks = reactive([
-  {name: 'Index', link: ROUTES.INDEX, canRender: computed(() => checkRouteIsNotCurrent(ROUTES.INDEX))},
-  {name: 'Todos', link: ROUTES.TODOS, canRender: computed(() => hasUser.value && checkRouteIsNotCurrent(ROUTES.TODOS))},
+  { name: 'Index', link: ROUTES.INDEX, canRender: computed(() => checkRouteIsNotCurrent(ROUTES.INDEX)) },
+  {
+    name: 'Todos',
+    link: ROUTES.TODOS,
+    canRender: computed(() => hasUser.value && checkRouteIsNotCurrent(ROUTES.TODOS)),
+  },
+  {
+    name: 'Books',
+    link: ROUTES.BOOKS,
+    canRender: computed(() => hasUser.value && checkRouteIsNotCurrent(ROUTES.BOOKS)),
+  },
   {
     name: 'Sign In',
     link: ROUTES.SIGNIN,
-    canRender: computed(() => !hasUser.value && checkRouteIsNotCurrent(ROUTES.SIGNIN))
+    canRender: computed(() => !hasUser.value && checkRouteIsNotCurrent(ROUTES.SIGNIN)),
   },
   {
     name: 'Sign Out', link: ROUTES.INDEX, canRender: computed(() => hasUser.value), onClick: () => {
       console.log('SignOUT');
       pb.authStore.clear();
-    }
+    },
   },
 ]);
 
