@@ -23,7 +23,7 @@ const domInvoiceDiscount = getDOM(DOM.INVOICE_INPUT.DISCOUNT);
 const domInvoiceTaxesPercent = getDOM(DOM.INVOICE_INPUT.TAXES);
 const domInvoiceIban = getDOM(DOM.INVOICE_INPUT.IBAN);
 
-let domResults = {
+const domResults = {
   domInvoiceSubtotal: getDOM(DOM.INVOICE_RESULTS.SUBTOTAL),
   domInvoiceSubtotalWithDiscount: getDOM(DOM.INVOICE_RESULTS.DISCOUNT),
   domInvoiceTaxes: getDOM(DOM.INVOICE_RESULTS.TAXES),
@@ -43,6 +43,7 @@ domInvoiceId.value = invoiceVO.id;
 domInvoiceDiscount.value = invoiceVO.discount;
 domInvoiceTaxesPercent.value = invoiceVO.taxes;
 domInvoiceIban.value = invoiceVO.iban;
+maskIBAN(domInvoiceIban);
 reCalcAndReRenderResult();
 
 domInvoiceId.addEventListener('input', (e) => maskForNum(domInvoiceId, 4));
@@ -53,7 +54,6 @@ domInvoiceId.addEventListener('blur', (e) =>
 domInvoiceDiscount.addEventListener('input', (e) => {
   maskForNum(domInvoiceDiscount, 2);
 });
-
 domInvoiceDiscount.addEventListener('blur', (e) => {
   setDataToInvoiceVO(
     domInvoiceDiscount.value,
@@ -66,7 +66,6 @@ domInvoiceDiscount.addEventListener('blur', (e) => {
 
 domInvoiceTaxesPercent.addEventListener('input', (e) => {
   maskForNum(domInvoiceTaxesPercent, 2);
-  calcResults();
 });
 domInvoiceTaxesPercent.addEventListener('blur', (e) => {
   setDataToInvoiceVO(
@@ -131,8 +130,9 @@ function calcResults() {
     (subtotalWithDiscount * parseInt(invoiceVO.taxes)) / 100,
   );
   const total = subtotalWithDiscount + taxes;
-  setDataToInvoiceVO(total, 'total', 'total', '');
-  // return [subtotal, subtotalWithDiscount, taxes, total];
+  invoiceVO.total = total;
+  saveInvoice(invoiceVO);
+  console.log('> calcResults -> total = ', invoiceVO.total);
   return {
     subtotal: subtotal,
     subtotalWithDiscount: subtotalWithDiscount,
@@ -164,7 +164,7 @@ function renderWorksItems(workItemVO) {
   QUERY(domWorkItemClone, DOM.Template.WORK_ITEM.TOTAL).innerText =
     workItemVO.total;
   domTableWorkItems.append(domWorkItemClone);
-  calcResults();
+  reCalcAndReRenderResult();
   return domWorkItemClone;
 }
 

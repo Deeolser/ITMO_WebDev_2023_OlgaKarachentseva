@@ -2,14 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>INVOICE</title>
     <style></style>
   </head>
   <body class="bg-gray-200">
     <div class="font-sans" id="app">
       <div class="container relative mx-auto bg-white content-box">
-        <div id="popupContainer" class="hidden"></div>
+        <div class="hidden" id="popupContainer"></div>
         <article class="flex flex-col p-12">
           <header class="flex flex-row">
             <div class="basis-1/2">
@@ -87,23 +87,23 @@
                 </section>
                 <div class="flex-col" id="tableWorkItems">
                   <div
-                    id="layout-template-fro-work-item"
                     class="[&>*]:pointer-events-none grid grid-cols-8 select-none items-center border-b-1 py-2 hover:bg-gray-100"
+                    id="layout-template-fro-work-item"
                   >
                     <div class="col-span-4 self-end pl-2 pr-3">
-                      <div data-id="itemTitle" class="font-bold">
+                      <div class="font-bold" data-id="itemTitle">
                         Example Title
                       </div>
                       <div
-                        data-id="itemDescription"
                         class="text-xs text-gray-400"
+                        data-id="itemDescription"
                       >
                         Example description
                       </div>
                     </div>
                     <div data-id="itemQty">100</div>
                     <div data-id="itemCost">500</div>
-                    <div data-id="itemTotal" class="col-span-2 text-right pr-2">
+                    <div class="col-span-2 text-right pr-2" data-id="itemTotal">
                       1110
                     </div>
                   </div>
@@ -172,7 +172,7 @@
           </main>
           <footer class="flex flex-row justify-end mt-36">
             <section class="flex-col w-50%">
-              <header class="flex flex-row justify-between">
+              <header class="flex flex-row justify-between gap-x-2">
                 <b>IBAN</b>
                 <input
                   class="w-78 input-percentage placeholder:text-slate-200 focus:outline-none"
@@ -200,6 +200,6 @@
         </article>
       </div>
     </div>
-    <script type="module" src="main.js"></script>
+    <script src="main.js" type="module"></script>
   </body>
 </html>

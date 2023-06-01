@@ -1,5 +1,5 @@
 const maskIBAN = (input) => {
-  let textMask = input.value.replace(/[^a-zA-Zа-яА-Я0-9]/g, '');
+  let textMask = input.value.replace(/[^a-zA-Z0-9]/g, '');
   if (textMask.length > 30) {
     textMask = textMask.slice(0, 30);
   }
