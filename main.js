@@ -244,7 +244,7 @@ async function renderWorkItemsPopup(
     },
     onClosePopup,
   );
-  if (workItemVO) {
+  if (invoiceVO) {
     popupWorkItemInstance.workItemTitle = workItemVO.title;
     popupWorkItemInstance.workItemDescription = workItemVO.description;
     popupWorkItemInstance.workItemQty = workItemVO.qty;
