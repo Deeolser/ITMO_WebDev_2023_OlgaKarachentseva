@@ -119,6 +119,7 @@ getDOM(DOM.BUTTON.ADD_WORK_ITEM).onclick = () => {
   );
 };
 
+// Update+Delete
 domTableWorkItems.onclick = (e) => {
   e.stopPropagation();
   const domWorkElement = e.target;
@@ -126,6 +127,33 @@ domTableWorkItems.onclick = (e) => {
   workId = parseInt(domWorkElement.dataset.id);
   const workItemVO = workItems.find((workItemVO) => workItemVO.id === workId);
   console.log('workItemVO =', workItemVO);
+  renderWorkItemsPopup(
+    workItemVO,
+    'Update',
+    'Save',
+    (
+      workItemId,
+      workItemTitle,
+      workItemDescription,
+      workItemQty,
+      workItemCost,
+      workItemTotal,
+    ) => {
+      console.log('> Update task -> On Confirm', {
+        workItemId,
+        workItemTitle,
+        workItemDescription,
+        workItemQty,
+        workItemCost,
+        workItemTotal,
+      });
+
+      workItemVO.title = workItemTitle;
+      const domWorkItemUpdated = renderWorksItems(workItemVO);
+      domTableWorkItems.replaceChild(domWorkItemUpdated, domWorkElement);
+      saveInvoice();
+    },
+  );
 };
 
 function calcResults() {
@@ -204,14 +232,6 @@ async function renderWorkItemsPopup(
       workItemCost,
       workItemTotal,
     ) => {
-      console.log('Main -> renderWorkItemsPopup: confirmCallback', {
-        workItemId,
-        workItemTitle,
-        workItemDescription,
-        workItemQty,
-        workItemCost,
-        workItemTotal,
-      });
       processDataCallback(
         workItemId,
         workItemTitle,
@@ -224,6 +244,12 @@ async function renderWorkItemsPopup(
     },
     onClosePopup,
   );
+  if (workItemVO) {
+    popupWorkItemInstance.workItemTitle = workItemVO.title;
+    popupWorkItemInstance.workItemDescription = workItemVO.description;
+    popupWorkItemInstance.workItemQty = workItemVO.qty;
+    popupWorkItemInstance.workItemCost = workItemVO.cost;
+  }
   domPopupContainer.append(popupWorkItemInstance.render());
 }
 
