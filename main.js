@@ -119,6 +119,15 @@ getDOM(DOM.BUTTON.ADD_WORK_ITEM).onclick = () => {
   );
 };
 
+domTableWorkItems.onclick = (e) => {
+  e.stopPropagation();
+  const domWorkElement = e.target;
+  let workId;
+  workId = parseInt(domWorkElement.dataset.id);
+  const workItemVO = workItems.find((workItemVO) => workItemVO.id === workId);
+  console.log('workItemVO =', workItemVO);
+};
+
 function calcResults() {
   const subtotal = workItems
     .map((item) => item.total)
