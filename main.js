@@ -149,9 +149,13 @@ domTableWorkItems.onclick = (e) => {
       });
 
       workItemVO.title = workItemTitle;
+      workItemVO.description = workItemDescription;
+      workItemVO.workItemQty = workItemQty;
+      workItemVO.workItemCost = workItemCost;
+      workItemVO.total = workItemTotal;
       const domWorkItemUpdated = renderWorksItems(workItemVO);
       domTableWorkItems.replaceChild(domWorkItemUpdated, domWorkElement);
-      saveInvoice();
+      // saveInvoice();
     },
   );
 };
@@ -243,8 +247,10 @@ async function renderWorkItemsPopup(
       onClosePopup();
     },
     onClosePopup,
+    workItemVO,
   );
-  if (invoiceVO) {
+  console.log('> PopupWorkItem', invoiceVO);
+  if (invoiceVO.items.length > 0 && workItemVO) {
     popupWorkItemInstance.workItemTitle = workItemVO.title;
     popupWorkItemInstance.workItemDescription = workItemVO.description;
     popupWorkItemInstance.workItemQty = workItemVO.qty;

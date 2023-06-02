@@ -3,14 +3,22 @@ import { maskForNum } from '../../../utils/maskNumber.js';
 class PopupWorkItem {
   #title;
   #confirmText;
-  #processDataCallback;
+  #confirmDataCallback;
   #closeCallback;
+  #workItemData;
 
-  constructor(title, confirmText, confirmCallback, closeCallback) {
+  constructor(
+    title,
+    confirmText,
+    confirmCallback,
+    closeCallback,
+    workItemData,
+  ) {
     this.#title = title;
     this.#confirmText = confirmText;
-    this.#processDataCallback = confirmCallback;
+    this.#confirmDataCallback = confirmCallback;
     this.#closeCallback = closeCallback;
+    this.#workItemData = workItemData;
   }
 
   render() {
@@ -78,7 +86,7 @@ class PopupWorkItem {
             </div>
         </section>
     `;
-    console.log('div.firstChild', div.children);
+    // console.log('div.firstChild', div.children);
 
     const popup = div.children[0];
 
@@ -90,7 +98,9 @@ class PopupWorkItem {
     );
 
     const domBtnConfirm = popup.querySelector('[data-id="btnCreateWorkItem"]');
-
+    const domBtnDelete = popup.querySelector(
+      '[data-id="btnDeleteWorkItemPopup"]',
+    );
     const domInpWorkItemTitle = popup.querySelector(
       '[data-id="inputWorkItemTitle"]',
     );
@@ -103,25 +113,39 @@ class PopupWorkItem {
     const domInpWorkItemCost = popup.querySelector(
       '[data-id="inputWorkItemCost"]',
     );
+
     let domWorkItemTotal = 0;
+
+    if (this.#workItemData) {
+      domInpWorkItemTitle.value = this.#workItemData.title;
+      domInpWorkItemDescription.value = this.#workItemData.description;
+      domInpWorkItemQty.value = this.#workItemData.qty;
+      domInpWorkItemCost.value = this.#workItemData.cost;
+      controlNumInputs(domInpWorkItemQty);
+      controlNumInputs(domInpWorkItemCost);
+      domBtnDelete.removeAttribute('disabled');
+    }
+
+    // Setup listeners
 
     domInpWorkItemTitle.addEventListener('input', () => bthConfirmValidation());
 
-    domInpWorkItemQty.addEventListener('input', () => {
-      maskForNum(domInpWorkItemQty, 5);
+    domInpWorkItemQty.addEventListener('input', () =>
+      controlNumInputs(domInpWorkItemQty),
+    );
+
+    domInpWorkItemCost.addEventListener('input', () =>
+      controlNumInputs(domInpWorkItemCost),
+    );
+
+    function controlNumInputs(domElement) {
+      maskForNum(domElement, 5);
       calcWorkItemTotal();
       renderWorkItemTotal();
       bthConfirmValidation();
-    });
+    }
 
-    domInpWorkItemCost.addEventListener('input', () => {
-      maskForNum(domInpWorkItemCost, 5);
-      calcWorkItemTotal();
-      renderWorkItemTotal();
-      bthConfirmValidation();
-    });
-
-    const calcWorkItemTotal = () => {
+    function calcWorkItemTotal() {
       if (domInpWorkItemQty.value && domInpWorkItemCost.value) {
         domWorkItemTotal =
           parseInt(domInpWorkItemQty.value) *
@@ -129,26 +153,24 @@ class PopupWorkItem {
       } else {
         domWorkItemTotal = 0;
       }
-    };
-    const renderWorkItemTotal = () =>
-      (popup.querySelector('[data-id="workItemTotalContainer"]').innerText =
-        domWorkItemTotal);
+    }
 
-    domBtnClose.onclick = () => {
+    function renderWorkItemTotal() {
+      popup.querySelector('[data-id="workItemTotalContainer"]').innerText =
+        domWorkItemTotal;
+    }
+
+    const onCloseListener = () => {
       domBtnClose.onclick = null;
       domBtnConfirm.onclick = null;
       domOverlayPopup.onclick = null;
       this.#closeCallback();
     };
 
-    domOverlayPopup.onclick = () => {
-      domBtnClose.onclick = null;
-      domBtnConfirm.onclick = null;
-      domOverlayPopup.onclick = null;
-      this.#closeCallback();
-    };
+    domBtnClose.onclick = onCloseListener;
+    domOverlayPopup.onclick = onCloseListener;
 
-    const bthConfirmValidation = () => {
+    function bthConfirmValidation() {
       if (
         domInpWorkItemTitle.value &&
         domInpWorkItemQty.value &&
@@ -158,7 +180,7 @@ class PopupWorkItem {
       } else {
         domBtnConfirm.setAttribute('disabled', '');
       }
-    };
+    }
 
     domBtnConfirm.onclick = () => {
       const workItemId = Date.now();
@@ -168,7 +190,7 @@ class PopupWorkItem {
       const workItemCost = parseInt(domInpWorkItemCost.value);
       const workItemTotal = domWorkItemTotal;
 
-      this.#processDataCallback(
+      this.#confirmDataCallback(
         workItemId,
         workItemTitle,
         workItemDescription,
