@@ -35,15 +35,23 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const pb = inject(PROVIDE.PB);
-  const notAllowedNavigation =
-    PUBLIC_PAGES.indexOf(to.path) < 0
-    && !pb.authStore.model?.id;
-
-  console.log('> router -> beforeEach', to.path, { notAllowedNavigation });
-
-  if (notAllowedNavigation) {
-    next({ path: ROUTES.SIGNIN });
-  } else next();
+  console.log('pb.authStore', pb.authStore);
+  const userLoggedIn = pb.authStore.model?.id;
+  if (userLoggedIn) {
+    checkNavigation([ROUTES.SIGNUP], to.path, from, next, true);
+  } else {
+    checkNavigation(PUBLIC_PAGES, to.path, { path: ROUTES.SIGNIN }, next);
+  }
 });
+
+function checkNavigation(routes, path, gotoRoute, next, isPathIncluded = false) {
+  const pathIndex = routes.indexOf(path);
+  const notAllowedNavigation = isPathIncluded ? pathIndex > -1 : pathIndex < 0;
+  console.log('> router -> beforeEach', path, { notAllowedNavigation });
+  if (notAllowedNavigation) {
+    next(gotoRoute);
+  } else next();
+}
+
 
 export default router;

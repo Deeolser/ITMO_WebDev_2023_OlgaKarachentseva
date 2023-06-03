@@ -1,21 +1,32 @@
 <script setup>
-import { inject, ref } from 'vue';
+import { inject, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import PROVIDE from '@/constants/provides.js';
 
+
+const router = useRouter();
 const domInputFile = ref(null);
 const domBtnUpload = ref(null);
 const isUploading = ref(false);
-const isPreparing = ref(true);
+const isReady = ref(false);
+const isBooksLoading = ref(true);
 const books = ref([]);
+const pageIndex = ref(parseInt(router.currentRoute.value.query.page || 1));
+const pagesMax = ref(0);
 
 const pb = inject(PROVIDE.PB);
 const booksCollection = pb.collection('books');
 
-booksCollection.getList(1, 50).then((result) => {
-  console.log('result = ', result);
-  books.value = result.items;
-  isPreparing.value = false;
-});
+const loadBooks = async () => {
+  isBooksLoading.value = true;
+  booksCollection.getList(pageIndex.value, 10).then((result) => {
+    console.log('result = ', result);
+    pagesMax.value = result.totalPages;
+    books.value = result.items;
+    isBooksLoading.value = false;
+  }).catch((e) => {
+  });
+};
 
 const insertBooks = async (booksList) => {
   const result = [];
@@ -50,7 +61,7 @@ const onUploadClick = () => {
       const booksRaw = JSON.parse(reader.result.toString());
       console.log('selectedFile:', booksRaw);
       try {
-        const booksInserted = await insertBooks(booksRaw.slice(0, 2));
+        const booksInserted = await insertBooks(booksRaw);
         console.log('booksInserted:', booksInserted);
         books.value = booksInserted;
       } catch (e) {
@@ -66,14 +77,47 @@ const onUploadClick = () => {
   domInputFile.value.click();
 };
 
+const onChangePage = (delta) => {
+  console.log('> BooksPage -> onChangePage ', { delta });
+  pageIndex.value += delta;
+  loadBooks().then(() => {
+    router.replace({
+      query: { page: pageIndex.value },
+    });
+  });
+};
+
+onMounted(() => {
+  Promise.all([
+    loadBooks(),
+  ]).then(() => {
+    isReady.value = true;
+  });
+});
+
 </script>
 <template>
-  <div v-if="isPreparing">
+  <div v-if="!isReady">
     Page Loading
   </div>
   <div v-else>
     <div v-if="books.length > 0">
-      BOOKS
+      <div>
+        <button
+          :disabled="pageIndex === 1"
+          @click="onChangePage(-1)"
+        >
+          <b>
+            Prev</b>
+        </button>
+        <button
+          :disabled="pageIndex === pagesMax "
+          @click="onChangePage(1)"
+        >
+          <b>Next</b>
+        </button>
+      </div>
+      <b>Books ({{ pageIndex }}/{{ pagesMax }}):</b>
       <div
         v-for="book in books"
         :key="book.id"
