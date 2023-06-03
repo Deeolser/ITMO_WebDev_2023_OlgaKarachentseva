@@ -53,5 +53,4 @@ function checkNavigation(routes, path, gotoRoute, next, isPathIncluded = false) 
   } else next();
 }
 
-
 export default router;
