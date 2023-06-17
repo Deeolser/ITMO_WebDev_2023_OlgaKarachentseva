@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import { inject, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import PROVIDE from '@/constants/provides.js';

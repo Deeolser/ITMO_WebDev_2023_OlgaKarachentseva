@@ -1,20 +1,17 @@
-<script setup>
-import { computed, inject, reactive, ref } from 'vue';
+<script setup lang='ts'>
+import { computed, reactive, ref } from 'vue';
 import AppHeader from './components/AppHeader.vue';
-import PROVIDE from '@/constants/provides.js';
 import ROUTES from '@/constants/routes.js';
 import { useRoute } from 'vue-router';
 import AppMenu from '@/components/AppMenu.vue';
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
+import {IUser} from '@/interface';
+import {useUserStore} from '@/store/userStore';
+import {storeToRefs} from 'pinia';
 
-
-const pb = inject(PROVIDE.PB);
-const user = ref(pb.authStore.model);
-pb.authStore.onChange(() => {
-  user.value = pb.authStore.model;
-});
-const hasUser = computed(() => !!user.value);
+const userStore = useUserStore();
+const { user, hasUser} = storeToRefs(userStore);
 
 const { result: usersData, loading: isUsersLoading } = useQuery(gql`
       query getUsers {
@@ -24,7 +21,7 @@ const { result: usersData, loading: isUsersLoading } = useQuery(gql`
         }
       }
     `);
-const checkRouteIsNotCurrent = (routePath, l = console.log('> routePath', routePath)) => useRoute().path !== routePath;
+const checkRouteIsNotCurrent = (routePath: string) => useRoute().path !== routePath;
 
 const menuLinks = reactive([
   { name: 'Index', link: ROUTES.INDEX, canRender: computed(() => checkRouteIsNotCurrent(ROUTES.INDEX)) },
@@ -46,7 +43,6 @@ const menuLinks = reactive([
   {
     name: 'Sign Out', link: ROUTES.INDEX, canRender: computed(() => hasUser.value), onClick: () => {
       console.log('SignOUT');
-      pb.authStore.clear();
     },
   },
 ]);
@@ -62,7 +58,7 @@ const menuLinks = reactive([
       {{ usersData.user }}
     </div>
     <template #sub-header>
-      <span v-if="hasUser">created by {{ user.username }}</span>
+      <span v-if="hasUser">created by {{ user.name }}</span>
       <span v-else>noname</span>
     </template>
   </AppHeader>

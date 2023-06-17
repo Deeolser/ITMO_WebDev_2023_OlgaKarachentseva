@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang='ts'>
 import { inject, ref } from 'vue';
 
 import ROUTES from '@/constants/routes.js';
