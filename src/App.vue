@@ -1,12 +1,12 @@
 <script setup lang='ts'>
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive } from 'vue';
 import AppHeader from './components/AppHeader.vue';
 import ROUTES from '@/constants/routes.js';
 import { useRoute } from 'vue-router';
 import AppMenu from '@/components/AppMenu.vue';
 import { useQuery } from '@vue/apollo-composable';
 import gql from 'graphql-tag';
-import {IUser} from '@/interface';
+// import {IUser} from '@/interface';
 import {useUserStore} from '@/store/userStore';
 import {storeToRefs} from 'pinia';
 
