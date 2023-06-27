@@ -1,6 +1,6 @@
 {
   "name": "Untitled GraphQL Schema",
-  "schemaPath": "./path/to/schema.graphql",
+  "schemaPath": "/postgres/schema/public",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
@@ -8,7 +8,7 @@
         "headers": {
           "user-agent": "JS GraphQL"
         },
-        "introspect": false
+        "introspect": true
       }
     }
   }

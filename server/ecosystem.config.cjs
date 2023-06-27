@@ -1,21 +1,19 @@
 module.exports = {
   apps: [
-    //   {
-    //   script: 'app.cjs',
-    //   watch: true,
-    //   max_restarts: 3,
-    //   min_uptime: 300,
-    //   env: {
-    //     NODE_PORT: 3000
-    //   }
-    // },
     {
-      script: 'users-sqllite.cjs',
+      script: 'app.cjs',
       watch: true,
-      max_restarts: 3,
       env: {
-        NODE_PORT: 3001
-      }
+        NODE_PORT: 3000,
+      },
+    },
+    {
+      script: 'users-sqlite.cjs',
+      max_restarts: 3,
+      watch: true,
+      env: {
+        NODE_PORT: 3001,
+      },
     },
   ],
   deploy: {
@@ -27,7 +25,7 @@ module.exports = {
       path: 'DESTINATION_PATH',
       'pre-deploy-local': '',
       'post-deploy': 'npm install && pm2 reload ecosystem.config.cjs --env production',
-      'pre-setup': ''
-    }
-  }
+      'pre-setup': '',
+    },
+  },
 };

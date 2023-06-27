@@ -1,12 +1,12 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core';
+import {ApolloClient, createHttpLink, InMemoryCache,} from '@apollo/client/core';
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: import.meta.env.VITE_GRAPHQL_ENDPOINT,
+  uri: import.meta.env.VITE_GRAPHQL_END_POINT,
   headers: {
-    'x-hasura-admin-secret': ''
-  }
+    'x-hasura-admin-secret': import.meta.env.VITE_GRAPHQL_ADMIN_SECRET,
+  },
 });
 
 // Cache implementation
@@ -17,4 +17,5 @@ const apolloClient = new ApolloClient({
   link: httpLink,
   cache,
 });
+
 export default apolloClient;

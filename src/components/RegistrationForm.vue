@@ -1,4 +1,4 @@
-<script setup lang='ts'>
+<script lang="ts" setup>
 import {ref} from 'vue';
 
 const props = defineProps({
@@ -8,10 +8,14 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['login', 'register']);
+
 const inputUsername = ref(null);
 const inputPassword = ref(null);
 const inputConfirm = ref(null);
-const checkPasswordsMatch = () => inputPassword.value.value === inputConfirm.value?.value;
+
+const checkPasswordsMatch = () =>
+  inputPassword.value.value === inputConfirm.value?.value;
+
 const onSendClick = async () => {
   const username = inputUsername.value.value || '';
   const password = inputPassword.value.value || '';
@@ -25,6 +29,7 @@ const onSendClick = async () => {
   }
 };
 </script>
+
 <template>
   <h1>{{ title }}</h1>
   <hr>
@@ -32,7 +37,7 @@ const onSendClick = async () => {
     <div
       v-for="(error, index) in errors"
       :key="index"
-      style="color: red;"
+      style="color: red"
     >
       <small>{{ error }}</small>
     </div>
@@ -59,7 +64,7 @@ const onSendClick = async () => {
       ref="inputConfirm"
     >
   </div>
-  <div style="margin: 1rem 0;">
+  <div style="margin: 1rem 0">
     <button @click="onSendClick">
       Send
     </button>
@@ -68,4 +73,5 @@ const onSendClick = async () => {
     <slot />
   </div>
 </template>
+
 <style scoped></style>

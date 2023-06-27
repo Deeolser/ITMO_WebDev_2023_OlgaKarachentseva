@@ -26,21 +26,22 @@ process.on('exit', () => {
 app.use('/site', express.static('public'));
 
 app.get('/', (req, res) => {
-  const {name} = req.query;
+  const { name } = req.query;
   res.send(`
     Welcome ${name} to users application!
     ${JSON.stringify(db.users)}
-    <form  action="/users" method="post">
-      <div class="form-example">
-        <label for="name">Enter your name: </label>
-        <input id="btnSubmit" type="text" name="name" id="name" required>
-        <div><label for="surname">Enter your surname: </label>
-        <input type="text" name="surname" id="surname" required></div>
+    <form action='/users' method='post'>
+      <div class='form-example'>
+        <label for='name'>Enter your name: </label>
+        <input id='btnSubmit' type='text' name='name' id='name' required>
+        <div>
+            <label for='surname'>Enter your surname: </label>
+            <input type='text' name='surname' id='surname' required>
+          </div>
       </div>
-      <div class="form-example">
-        <input type="submit" value="Submit!">
+      <div class='form-example'>
+        <input type='submit' value='Submit!'>
       </div>
-      
     </form>
     <script>
       document.getElementById('btnSubmit').onkeyup = () => console.log("Clicked");
@@ -58,7 +59,7 @@ app.get('/users', (req, res) => {
 app.post('/users', async (req, res) => {
   const userData = req.body;
   console.log(userData);
-  db.users.push({id: db.users.length, ...userData});
+  db.users.push({ id: db.users.length, ...userData });
   await saveDB().then(() => {
     res.status(200).json(db.users);
   }).catch((e) => {
@@ -71,7 +72,7 @@ app.get('/users/:id', (req, res) => {
   console.log('> userId', userId);
   const user = db.users.find((user) => user.id === userId);
   if (user) res.status(200).json(user);
-  else res.status(500).json({message: `User with id(${userId}) not found`});
+  else res.status(500).json({ message: `User with id(${userId}) not found` });
 });
 
 // to support URL-encoded bodies
@@ -79,8 +80,8 @@ app.use((req, res, next) => {
   res.status(404).send(
     `
       <h1>Wrong URL</h1>
-      <a href="/">Home</a>
-      `
+      <a href='/'>Home</a>
+      `,
   );
 });
 
@@ -91,11 +92,10 @@ app.listen(process.env.NODE_PORT || 3001, async () => {
     db = JSON.parse(await fs.readFile('./db.json', 'utf8'));
   } catch (e) {
     db = {
-      users: []
+      users: [],
     };
     saveDB();
   }
 
   console.log(`Example app listening on port ${process.env.NODE_PORT}`, db);
 });
-

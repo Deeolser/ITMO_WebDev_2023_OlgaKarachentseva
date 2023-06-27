@@ -1,9 +1,9 @@
 query GetBooks {
     book {
-        id
-        pages
-        title
         year
+        title
+        pages
+        id
         author {
             name
         }

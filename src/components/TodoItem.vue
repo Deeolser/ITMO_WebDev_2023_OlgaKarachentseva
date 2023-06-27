@@ -1,20 +1,22 @@
-<script setup lang='ts'>
-import {computed, onMounted} from 'vue';
+<script setup>
+import { computed, onMounted } from "vue";
 
 const props = defineProps({
   index: {
     type: Number,
-    default: 0
+    default: 0,
   },
   text: {
     type: String,
-    default: '-'
-  }
+    default: "-",
+  },
 });
-defineEmits(['delete']);
+defineEmits(["delete"]);
+
 const pathToEdit = computed(() => `/todos/${props.index}`);
+
 onMounted(() => {
-  console.log('>TodoItem -> props.text =', props.text);
+  console.log("> TodoItem -> onMounted: props.text =", props.text);
 });
 </script>
 <template>
@@ -23,8 +25,6 @@ onMounted(() => {
     <router-link :to="pathToEdit">
       {{ text }}
     </router-link>
-    <button @click="$emit('delete')">
-      x
-    </button>
+    <button @click="$emit('delete')">x</button>
   </div>
 </template>

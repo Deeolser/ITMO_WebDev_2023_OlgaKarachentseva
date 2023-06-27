@@ -1,6 +1,6 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
-import ROUTES, {PUBLIC_PAGES} from '@/constants/routes.js';
-import {useUserStore} from '@/store/userStore';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import ROUTES, { PUBLIC_PAGES } from './constants/routes.js';
+import { useUserStore } from '@/store/userStore';
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -10,17 +10,21 @@ const router = createRouter({
       component: () => import('./pages/IndexPage.vue'),
     },
     {
+      path: ROUTES.SELECTED_BOOK,
+      component: () => import('./pages/SelectedBookPage.vue'),
+    },
+    {
       path: ROUTES.SIGNIN,
-      component: () => import('./pages/SignInPage.vue')
+      component: () => import('./pages/SignInPage.vue'),
     },
     {
       path: ROUTES.SIGNUP,
-      component: () => import('./pages/SignUpPage.vue')
+      component: () => import('./pages/SignUpPage.vue'),
     },
     {
       path: ROUTES.BOOKS,
-      component: () => import('./pages/BooksPage.vue')
-    }
+      component: () => import('./pages/BooksPage.vue'),
+    },
   ],
 });
 
@@ -29,14 +33,20 @@ router.beforeEach((to, from, next) => {
   if (userStore.hasUser) {
     checkNavigation([ROUTES.SIGNUP], to.path, from, next, true);
   } else {
-    checkNavigation(PUBLIC_PAGES, to.path, {path: ROUTES.SIGNIN}, next);
+    checkNavigation(PUBLIC_PAGES, to.path, { path: ROUTES.SIGNIN }, next);
   }
 });
 
-function checkNavigation(routes: string[], path: string, gotoRoute: any, next: any, isPathIncluded = false) {
+function checkNavigation(
+  routes: string[],
+  path: string,
+  gotoRoute: any,
+  next: any,
+  isPathIncluded = false
+) {
   const pathIndex = routes.indexOf(path);
   const notAllowedNavigation = isPathIncluded ? pathIndex > -1 : pathIndex < 0;
-  console.log('> router -> beforeEach', path, {notAllowedNavigation});
+  console.log('> router -> beforeEach', path, { notAllowedNavigation });
   if (notAllowedNavigation) {
     next(gotoRoute);
   } else next();

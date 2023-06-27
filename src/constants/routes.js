@@ -1,11 +1,9 @@
 const ROUTES = {
   INDEX: '/',
-  TODOS: '/todos',
-  TODOS_ID: '/todos/:id',
+  BOOKS: '/books',
+  SELECTED_BOOK: '/books/:id',
   SIGNIN: '/signin',
   SIGNUP: '/signup',
-  BOOKS: '/books',
-
 };
 
 const PUBLIC_PAGES = [ROUTES.INDEX, ROUTES.SIGNIN, ROUTES.SIGNUP];
