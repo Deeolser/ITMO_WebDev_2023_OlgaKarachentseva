@@ -1,56 +1,77 @@
 <script>
+import DictionaryForm from './components/DictionaryForm.vue';
+import DictionaryList from './components/DictionaryList.vue';
+import MyDialog from './components/UI/MyDialog.vue';
+import MyButton from './components/UI/MyButton.vue';
+
 export default {
+  components: {
+    MyButton,
+    MyDialog,
+    DictionaryList, DictionaryForm
+  },
   data() {
     return {
       couples: [
-        { id: 1, phrase: 'Have a cow', translate: 'Очень рассердиться' },
-        { id: 2, phrase: 'As sick as a dog', translate: 'Очень больной' },
-        { id: 3, phrase: 'Rain on my parade', translate: 'Ломать мои планы' },
+        {id: 1, title: 'Have a cow', body: 'Очень рассердиться'},
+        {id: 2, title: 'As sick as a dog', body: 'Очень больной'},
+        {id: 3, title: 'Rain on my parade', body: 'Ломать мои планы'},
       ],
-      phrase: '',
-      translate: '',
+      dialogVisible: false,
+      modificatorValue: '',
     };
   },
   methods: {
-    addTranslate() {
-      console.log();
-      const newCouple = {
-        id: Date.now(),
-        phrase: this.phrase,
-        translate: this.translate,
-      };
-      this.couples.push(newCouple)
-      this.phrase = '';
-      this.translate ='';
+    addTranslate(couple) {
+      this.couples.push(couple);
+      this.dialogVisible = false;
     },
+    removeTranslate(couple) {
+      this.couples = this.couples.filter(c => c.id !== couple.id);
+    },
+    showDialog() {
+      this.dialogVisible = true;
+    },
+    async fetchCouples() {
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=10')
+          .then(response => response.json());
+        console.log(response);
+        this.couples = response;
+        console.log(this.couples);
+      } catch (e) {
+        alert('Error');
+      }
+    }
   },
 };
 </script>
-
 <template>
-  <h1 class='text-2xl font-bold'>Добавление перевода</h1>
-  <form @submit.prevent
-    class='flex flex-row justify-start content-normal mt-2 gap-4 py-4'>
-    <input v-bind:value="phrase"
-           @input='phrase = $event.target.value'
-           type='text'
-           placeholder='Введите фразу'
-           class='w-2/5 border-2 rounded-md'>
-    <input v-bind:value='translate'
-           @input='translate  = $event.target.value'
-           type='text'
-           placeholder='Введите перевод'
-           class='w-2/5 border-2 rounded-md'>
-    <button @click='addTranslate'
-            class='w-1/5 rounded-md'>Добавить
-    </button>
-  </form>
-  <div v-for='couple in couples'
-       :key='couple.id'
-       class='flex flex-col justify-start border-2  border-gray-100 content-normal mt-2'>
-    <div> {{ couple.phrase }} - {{ couple.translate }}</div>
+  <div class="flex flex-col m-4">
+    <h1 class="text-2xl font-bold">
+      Словарь выражений
+    </h1>
+    <my-button
+      class="mt-4"
+      @click="showDialog"
+    >
+      Добавить выражение
+    </my-button>
+    <my-button @click="fetchCouples">
+      Получить данные
+    </my-button>
+    <MyDialog v-model:show="dialogVisible">
+      <DictionaryForm
+        @add="addTranslate"
+      />
+    </MyDialog>
+    <DictionaryList
+      :couples="couples"
+      @remove="removeTranslate"
+    />
   </div>
 </template>
+
 
 <style scoped>
 
