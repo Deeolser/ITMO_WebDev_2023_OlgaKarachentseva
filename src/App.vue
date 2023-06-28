@@ -12,14 +12,13 @@ export default {
   },
   data() {
     return {
-      couples: [
-        {id: 1, title: 'Have a cow', body: 'Очень рассердиться'},
-        {id: 2, title: 'As sick as a dog', body: 'Очень больной'},
-        {id: 3, title: 'Rain on my parade', body: 'Ломать мои планы'},
-      ],
+      couples: [],
       dialogVisible: false,
-      modificatorValue: '',
+      isCouplesLoading: false,
     };
+  },
+  mounted() {
+    this.fetchCouples();
   },
   methods: {
     addTranslate(couple) {
@@ -34,16 +33,19 @@ export default {
     },
     async fetchCouples() {
       try {
+        this.isCouplesLoading = true;
         const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=10')
           .then(response => response.json());
         console.log(response);
         this.couples = response;
-        console.log(this.couples);
+        this.isCouplesLoading = false;
       } catch (e) {
         alert('Error');
+      } finally {
+
       }
     }
-  },
+  }
 };
 </script>
 <template>
@@ -57,18 +59,20 @@ export default {
     >
       Добавить выражение
     </my-button>
-    <my-button @click="fetchCouples">
-      Получить данные
-    </my-button>
+
     <MyDialog v-model:show="dialogVisible">
       <DictionaryForm
         @add="addTranslate"
       />
     </MyDialog>
     <DictionaryList
+      v-if="!isCouplesLoading"
       :couples="couples"
       @remove="removeTranslate"
     />
+    <div v-else>
+      Загружаю....
+    </div>
   </div>
 </template>
 
