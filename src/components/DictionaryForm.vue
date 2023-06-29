@@ -45,15 +45,23 @@ export default {
       }
     };
   },
+  // watch: {
+  //   couple: {
+  //     handler(newValue) {
+  //       console.log(newValue);
+  //     },
+  //     deep: true
+  //   }
+  // },
   methods: {
     addTranslate() {
-      this.couple.id = Date.now();
+      this.couple.id = String(Date.now());
       this.$emit('add', this.couple);
       this.couple = {
+        id: '',
         title: '',
         body: '',
       };
-
     }
   }
 };
