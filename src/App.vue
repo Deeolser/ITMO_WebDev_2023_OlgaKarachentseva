@@ -1,13 +1,10 @@
 <script>
 import DictionaryForm from './components/DictionaryForm.vue';
 import DictionaryList from './components/DictionaryList.vue';
-import MyDialog from './components/UI/MyDialog.vue';
-import MyButton from './components/UI/MyButton.vue';
+
 
 export default {
   components: {
-    MyButton,
-    MyDialog,
     DictionaryList, DictionaryForm
   },
   data() {
@@ -15,6 +12,12 @@ export default {
       couples: [],
       dialogVisible: false,
       isCouplesLoading: false,
+      selectedSort: '',
+      sortOptions: [
+        {value: 'title', name: 'По названию'},
+        {value: 'body', name: 'По содержимому'},
+        {value: 'id', name: 'По id'},
+      ]
     };
   },
   mounted() {
@@ -31,6 +34,7 @@ export default {
     showDialog() {
       this.dialogVisible = true;
     },
+
     async fetchCouples() {
       try {
         this.isCouplesLoading = true;
@@ -53,12 +57,18 @@ export default {
     <h1 class="text-2xl font-bold">
       Словарь выражений
     </h1>
-    <my-button
-      class="mt-4"
-      @click="showDialog"
-    >
-      Добавить выражение
-    </my-button>
+    <div class="flex flex-row justify-between">
+      <my-button
+        class="mt-4"
+        @click="showDialog"
+      >
+        Добавить выражение
+      </my-button>
+      <MySelect
+        v-model="selectedSort"
+        :options="sortOptions"
+      />
+    </div>
 
     <MyDialog v-model:show="dialogVisible">
       <DictionaryForm
