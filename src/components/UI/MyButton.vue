@@ -1,15 +1,13 @@
 <template>
-  <button class="rounded-md px-2 py-1 bg-green-300 max-w-fit hover:shadow-md bg-green-400">
+  <button class="max-w-fit rounded-md bg-green-300 px-2 py-1 hover:bg-green-400 hover:shadow-md">
     <slot />
   </button>
 </template>
 
 <script>
 export default {
-  name: 'MyButton'
+  name: 'MyButton',
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
