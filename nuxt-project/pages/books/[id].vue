@@ -1,4 +1,3 @@
 <template>
-  <div> Selected book: {{ $route.params.id }}</div>
+  <div>Selected Book {{ $route.params.id }}</div>
 </template>
-

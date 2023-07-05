@@ -1,9 +1,9 @@
 export default defineAppConfig({
-    title: 'Books Nuxt App',
-    theme: {
-        dark: true,
-        colors: {
-            primary: '#ff0000'
-        }
-    }
+  title: "Books Nuxt Application",
+  theme: {
+    dark: true,
+    colors: {
+      primary: "#ff0000",
+    },
+  },
 });

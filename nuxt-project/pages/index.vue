@@ -1,16 +1,13 @@
 <template>
   <div>
-    <ClientOnly> App Index Page: {{ $route.path }}
-      isDataLoading: {{ isDataLoading }}
-      {{ isDataLoading ? '' : books }}
-    </ClientOnly>
+    Application Index Page: {{ $route.path }} isDataLoading: {{ isDataLoading }}
+    {{ isDataLoading ? "" : books }}
   </div>
 </template>
-
 <script setup>
-const {data: books, pending: isDataLoading} = await useFetch('/api/books');
+const { data: books, pending: isDataLoading } = await useFetch("/api/books", {
+  server: false,
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

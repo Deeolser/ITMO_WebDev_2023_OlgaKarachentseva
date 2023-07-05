@@ -15,5 +15,9 @@
     "@nuxtjs/google-fonts": "^3.0.1",
     "@types/node": "^18",
     "nuxt": "^3.6.1"
+  },
+  "dependencies": {
+    "@types/pg": "^8.10.2",
+    "pg": "^8.11.1"
   }
 }
