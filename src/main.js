@@ -1,9 +1,11 @@
 import './style.css';
-import {createApp} from 'vue';
+import { createApp } from 'vue';
 import router from './router.js';
-import AppComposition from './AppComposition.vue';
-import {createPinia} from 'pinia';
+import App from './App.vue';
+import { createPinia } from 'pinia';
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate';
 
-
-createApp(AppComposition).use(createPinia().use(piniaPluginPersistedState)).use(router).mount('#app');
+createApp(App)
+  .use(createPinia().use(piniaPluginPersistedState))
+  .use(router)
+  .mount('#app');

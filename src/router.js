@@ -1,32 +1,25 @@
-import {createRouter, createWebHashHistory} from 'vue-router';
-import {useUserStore} from './store/userStore.js';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [{
-    path: '/',
-    component: () => import ('./components/IndexPage.vue')
-  },
+  routes: [
     {
-      path: '/todos',
-      component: () => import('./components/TodosPage.vue')
+      path: '/',
+      name: 'index',
+      component: () => import('./pages/IndexPage.vue'),
     },
     {
-      path: '/todos/:id',
-      component: () => import('./components/TodoEditPage.vue')
+      path: '/product/:id',
+      name: 'product',
+      component: () => import('./pages/productPage.vue'),
     },
+
     {
-      name: 'Signin',
-      path: '/signin',
-      component: () => import('./components/SigninPage.vue')
-    }]
-});
-router.beforeEach((to, from, next) => {
-  console.log('> router -> beforeEach', to.path);
-  const publicPages = ['/', '/signin'];
-  const notAllowedNavigation = publicPages.indexOf(to.path) < 0 && !useUserStore().hasUser;
-  if (notAllowedNavigation) next({path: '/signin'});
-  else next();
+      path: '/card',
+      name: 'card',
+      component: () => import('./pages/cardPage.vue'),
+    },
+  ],
 });
 
 export default router;
