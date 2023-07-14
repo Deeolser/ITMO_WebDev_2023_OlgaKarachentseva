@@ -71,7 +71,7 @@ export default {
       searchQuery: '',
       page: 1,
       limit: 10,
-      url: 'https://jsonplaceholder.typicode.com/posts',
+      url: 'http://localhost:8081/v1/phrases',
       totalPages: 0,
       sortOptions: [
         { value: 'title', name: 'По названию' },
@@ -146,11 +146,11 @@ export default {
     async loadMoreCouples() {
       try {
         this.page += 1;
-        const query = this.url + '?_limit=' + this.limit + '&_page=' + this.page;
+        const query = 'http://127.0.0.1:8081/v1/phrases';
         const data = await fetch(query).then((data) => data.json());
         this.couples = [...this.couples, ...data];
-        // const response = await fetch(query);
-        // this.totalPages = Math.ceil(response.headers.get('X-Total-Count') / this.limit);
+        const response = await fetch(query);
+        this.totalPages = Math.ceil(response.headers.get('X-Total-Count') / this.limit);
       } catch (e) {
         alert('Error');
       }
